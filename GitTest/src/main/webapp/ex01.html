@@ -3,29 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <title>함박 스테이크</title>
-    <meta charset="UTF-8">
-    <meta name="description" content="웹 페이지 설명">
-    <meta name="keywords" content="키워드1, 키워드2, 키워드3">
-    <style>
-      body {
-        font-family: "Nanum Gothic", sans-serif;
-        background-color: #f2f2f2;
-        color: #333;
-        line-height: 1.5;
-      }
-      h1 {
-        font-size: 36px;
-        text-align: center;
-        margin-top: 50px;
-      }
-      p {
-        font-size: 18px;
-        text-align: justify;
-        margin: 20px 0;
-      }
-    </style>
-    
-    
+<meta charset="UTF-8">
+<meta name="description" content="웹 페이지 설명">
+<meta name="keywords" content="키워드1, 키워드2, 키워드3">
+<style>
+body {
+	font-family: "Nanum Gothic", sans-serif;
+	background-color: #f2f2f2;
+	color: #333;
+	line-height: 1.5;
+}
+
+h1 {
+	font-size: 36px;
+	text-align: center;
+	margin-top: 50px;
+}
+
+p {
+	font-size: 18px;
+	text-align: justify;
+	margin: 20px 0;
+}
+
+.highlight {
+	background-color: yellow;
+}
+</style>
+
+
 </head>
 <body>
 	<h1>팀장 첫번째 커밋</h1>
@@ -39,6 +45,13 @@
 	<p>함박 스테이크 맛있겠다</p>
 	<p>오늘은 큐브인가요 ?</p>
 	<p>함박났다</p>
+	<script>
+		function highlight() {
+			var element = document.getElementsByClassName("highlight");
+			element[0].style.backgroundColor = "green";
+		}
+	</script>
+	<button onclick="highlight()">하이라이트 색 변경</button>
 
 </body>
 </html>
