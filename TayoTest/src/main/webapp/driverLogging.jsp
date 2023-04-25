@@ -17,11 +17,6 @@
 		<div>
 			<form action="Login" method="post">
 				<table>
-					<tr>
-						<td colspan="2">555
-						</td>
-					
-					</tr>
 					
 					<tr>
 						<td colspan="2"><input type="text" placeholder="ID"
