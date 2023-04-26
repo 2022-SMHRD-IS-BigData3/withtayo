@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -200,16 +202,16 @@
                             <th style=" font-weight: bold;">예약 정보</th>
                     </tr>
                     <tr>
-                        <td style="font-size: 12px;">버스번호: <span style="font-weight: bold;">송원09</span></td>
+                        <td style="font-size: 12px;">노선번호: <span style="font-weight: bold;">${bookedInfo.routeno}</span></td>
                     </tr>
                     <tr>
-                        <td style="font-size: 12px;">예약자 ID : 칼퇴는 어떤 기분일까</td>
+                        <td style="font-size: 12px;">예약자 ID : ${bookedInfo.p_id}</td>
                     </tr>
+               <!--      <tr>
+                        <td style="font-size: 12px;">버스기사 ID : ㅎㅇㅇ</td>
+                    </tr>  -->
                     <tr>
-                        <td style="font-size: 12px;">버스기사 ID : Ax8042Re</td>
-                    </tr>
-                    <tr>
-                        <td style="font-size: 12px;">예약시간 : 23-04-13 17:23</td>
+                        <td style="font-size: 12px;">예약시간 : ${bookedInfo.booktime})</td>
                     </tr>
                     </table>
                 </div>
@@ -229,11 +231,11 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td>송원대 <span>정류장</span></td>
+                            <td>${bookedInfo.dprtname} <span>정류장</span></td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td>광주 남구 남가좌동 72-0</td>
+                            <td>주소 보류</td>
                         </tr>
                     </table>
                     <i class="material-icons"
@@ -246,11 +248,11 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td>조선대 <span>정류장</span></td>
+                            <td>${bookedInfo.arrvname} <span>정류장</span></td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td>광주 남구 남가좌동 72-0</td>
+                            <td>주소 보류</td>
                         </tr>
                     </table>
                 </div>
@@ -263,8 +265,7 @@
                     <div id="btnTbl">
                                 <button type="button" class="btn btn-secondary" id="button"
                                     style="background-color: rgb(192, 190, 190); border: 0;">취 소</button>
-                                <button type="submit" class="btn btn-warning" id="buttonb" style="            color: white;
-                            background-color: rgb(231, 177, 10);">예 약</button>
+                                <button type="submit" class="btn btn-warning" id="bookingBtn" style="color: white;background-color: rgb(231, 177, 10);">예 약</button>
                     </div>
                 </div>
             </div>
@@ -277,7 +278,7 @@
     </div>
     <script>
                 $(document).ready(function () {
-            $('#buttonb').click(function () {
+            $('#bookingBtn').click(function () {
                 window.location.href = '대기화면.html';
             });
         });

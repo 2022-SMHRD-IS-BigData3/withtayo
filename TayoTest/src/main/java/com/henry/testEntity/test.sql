@@ -78,3 +78,32 @@ add routeno varchar(100);
 
 select * from b_stop;
 select * from recent;
+
+rename r_log to book_log;
+select * from book_log;
+alter table book_log
+rename column r_id to blog_id;
+alter table book_log
+rename column r_date to book_date;
+create table book_info (
+	blog_id varchar2(100) primary key,
+	routeid varchar2(100),
+	routeno varchar2(100),
+	nodeid varchar2(100),
+	nodenm varchar2(100)s
+)
+select * from book_info;
+insert into book_info
+(blog_id, routeid, routeno, dprtnode, arrvnode, p_id)
+values('a001', 'KJB43', '송암72', 'KJB3430', 'KJB1068', 'test001');
+
+alter table book_info
+add  p_id varchar2(100);
+
+update book_info set p_id='test001' where blog_id='a001';
+
+alter table book_info
+add booktime date default sysdate;
+alter table book_info
+add arrvname varchar2(100);
+update book_info set arrvname='운천저수지' where p_id='test001';

@@ -59,4 +59,8 @@
   <select id="getRecent" parameterType="java.lang.String" resultType="com.henry.testEntity.Recent">
   	select * from recent where p_id=#{p_id}
   </select>
+  
+  <select id="tempGetBooking" resultType="com.henry.testEntity.Book_Info">
+  	select * from Book_Info where p_id='test001'
+  </select>
 </mapper>

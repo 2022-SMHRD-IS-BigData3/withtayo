@@ -206,6 +206,23 @@ public class UniversalDAO {
 		return resultList;
 	}
 	
+	// 예약정보 가데이터 사용 (임시)
+	public Book_Info getBookingInfo() {
+		SqlSession sesh = null;
+		Book_Info resultInfo = null;
+		
+		try {
+			
+			sesh = seshFac.openSession();
+			resultInfo = sesh.selectOne("tempGetBooking");
+			
+		}finally {
+			sesh.close();
+		}
+		
+		return resultInfo;
+	}
+	
 	// 노선 크롤링용 !
 	public int crawlAndInsert(R_Info route) {
 		
