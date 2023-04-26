@@ -352,7 +352,8 @@
 						resRsps = rsps99;
 						// 리스트로 수정중 ########(02)######## 
 			//			<c:set var="theJson" value="${resRsps}"/>
-						for(let p = 0 ; p < resRsps.length ; p++){
+			//			for(let p = 0 ; p < resRsps.length ; p++){ (ORIGINAL)
+						for(let p = 0 ; p < 2 ; p++){
 							$("#searchResultTable").append('<table class="resTables" id="srchIdx'+resRsps[p].routeid+'"><tr><td class="resRoute">'+resRsps[p].routeno+'</td><td class="resRouteId">'+resRsps[p].routeid+'</td><td></td><td><input type="button" value="예약"></td></tr><tr><td colspan="4" id="infoIdx'+resRsps[p].routeid+'" class="arrvInfo"></td></tr><tr><td class="dprtNode">출발 정류장</td><td class="arrvNode">도착 정류장</td><td></td><td><input class="favBtn" type="button" value="즐겨찾기"></td></tr></table><hr>');
 						}
 				//		$("#resRoute").text(resRsps.routeno); // DEPRECATED!!!!!
@@ -437,8 +438,8 @@
 		// TODO : 
 		// 리스트로 뽑을 때 수정할거 (클래스로 바꾸고 알고리즘 추가)
 		$(".favBtn").on("click", function(){
-			let routeToSend = $("#resRouteId").text();
-			let routeNameToSend = $("#resRoute").text();
+			let routeToSend = $(this).parent().find(".resRouteId").text();
+			let routeNameToSend = $(this).parent().find(".resRoute").text();
 			$.ajax({
 				method : 'GET',
 				url : 'AddFav',
@@ -449,8 +450,8 @@
 			//		console.log("insert result:"+favRsps);
 					if(parseInt(favRsps)==1){
 						// 또는 숨기던지
-						$("#favBtn").attr("value", "추가완료!");
-						$("#favBtn").attr("disabled");
+						$(this).attr("value", "추가완료!");
+						$(this).attr("disabled");
 					}
 				},
 				error : function(error){
