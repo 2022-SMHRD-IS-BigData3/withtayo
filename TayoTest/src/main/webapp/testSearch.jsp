@@ -975,20 +975,12 @@ hr {
             window.location.href = '대기화면.html';
         });
         // 뉴스 끝
-        const buttonbb = document.getElementById('buttonbb');
-
-        buttonbb.addEventListener('click', function () {
-            window.location.href = '노선검색결과창.html';
-        });
-
-        // 즐겨찾기 숨기기
-
-        searchBtn.addEventListener('click', function () {
-            if (listsDiv.style.display === 'none') {
-                listsDiv.style.display = 'block';
-            } else {
-                listsDiv.style.display = 'none';
-            }
+        const lists = document.querySelectorAll(".lists");
+        const srchBtn = document.getElementById("srchBtn");
+        srchBtn.addEventListener("click", function () {
+            lists.forEach(function (box) {
+                box.style.display = "none";
+            });
         });
 
     </script>
