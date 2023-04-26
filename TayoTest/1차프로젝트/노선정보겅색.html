@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .container {
+            width: 9cm;
+            height: 16cm;
+            border: 1px solid black;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            width: 100%;
+            height: 1.8cm;
+            background-color: rgb(255, 204, 0);
+            padding: 0;
+        }
+
+        .section {
+            height: 6cm;
+            width: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .jumbotron {
+            background-color: gray;
+            width: 100%;
+            height: 1.5cm;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .big {
+            height: 12.7cm;
+        }
+
+        .jumbotron>.container {
+            max-width: unset;
+        }
+
+        /* Font를 적용할 클래스를 지정합니다. */
+        /* * {
+            font-family: "gg";
+        } */
+
+        @font-face {
+            font-family: "gg";
+            src: url("../빛고을광주_Medium.ttf");
+        }
+
+        #navbarNavAltMarkup {
+            position: fixed;
+            top: 70px;
+            z-index: 999;
+            width: 100%;
+        }
+
+        .show #navbarNavAltMarkup {
+            display: block;
+        }
+
+        .btn_switch {
+            user-select: none;
+            border: 0;
+            padding: 0;
+            appearance: none;
+            background-color: transparent;
+            cursor: pointer;
+            line-height: inherit;
+            border-radius: 0;
+            background-image: url(https://ssl.pstatic.net/static/maps/v5/pc/20230216150825/directions.png);
+            background-size: 196px 164px;
+            background-position: -76px 0;
+            position: absolute;
+            top: 0;
+            right: 17px;
+            bottom: 360px;
+            z-index: 20;
+            margin: auto 0;
+            overflow: hidden;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            font-size: 0;
+            color: transparent;
+            vertical-align: top;
+        }
+
+        .News_area {
+            margin-top: 5px;
+            margin-left: 10px;
+            margin-bottom: 5px;
+            background-color: #f7f9fa;
+            border: 1px solid #dae1e6;
+            margin-right: 10px;
+            color-scheme: light;
+            font-size: 12px;
+            color: #202020;
+            padding: 1px 1px 1px 10px;
+            border-radius: 6px;
+        }
+
+        .searchFull {
+            margin-left: 7px;
+            margin-right: 7px;
+        }
+
+        #btnTbl {
+            margin-top: 5px;
+            margin-left: 5px;
+            margin-right: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        #insert_srch {
+            margin-top: 10px;
+        }
+
+        .link_place {
+            user-select: none;
+            list-style: none;
+            margin: 0;
+            border: 0;
+            appearance: none;
+            background-color: transparent;
+            cursor: pointer;
+            font-size: inherit;
+            line-height: inherit;
+            color: inherit;
+            border-radius: 0;
+            display: block;
+            padding: 5px 8px 5px 5px;
+            height: 28px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .lists {
+            margin-top: -25px;
+            margin-left: 20px;
+            font-size: 14px;
+        }
+
+        ul {
+            padding: 0px;
+        }
+
+        #loginip {
+            user-select: none;
+            font-family: notosanskr, Malgun Gothic, 맑은 고딕, Dotum, 돋움, sans-serif;
+            font-size: 12px;
+            color: #767676;
+            letter-spacing: -.2px;
+            line-height: 20px;
+            padding-top: 4px;
+        }
+
+        hr {
+            margin-top: 3px;
+            margin-bottom: 0px;
+            margin-right: 0px;
+        }
+
+        .card-head {
+            height: 375px;
+        }
+
+        #plzlog {
+            margin-top: 5px;
+        }
+
+        .btn-warning {
+            color: white;
+            background-color: rgb(231, 177, 10);
+        }
+
+        .offcanvas {
+            max-width: 250px;
+            max-height: 450px;
+            position: absolute;
+            left: 150px;
+            background-color: #fff8f8;
+        }
+
+        .aaarr {
+            font-size: 12px;
+            padding: 4px;
+        }
+
+        .nav-link {
+            font-size: 14px;
+        }
+
+        #offcanvas-header {
+            padding: 12px;
+        }
+
+        #offcanvas-body {
+            padding: 14px;
+        }
+
+        /*뉴스 시작*/
+        .News_area {
+            margin-top: 5px;
+            margin-left: 10px;
+            margin-bottom: 5px;
+            background-color: #f7f9fa;
+            border: 1px solid #dae1e6;
+            margin-right: 10px;
+            color-scheme: light;
+            font-size: 12px;
+            color: #202020;
+            padding: 1px 1px 1px 10px;
+            border-radius: 6px;
+        }
+
+
+        .News_area,
+        #news-header {
+            display: inline;
+        }
+
+        .News {
+            width: 100%;
+        }
+
+        .News_area {
+            display: flex;
+            /* 영역 가운데 정렬을 위해 flex를 사용 */
+            align-items: center;
+        }
+
+        #news-header {
+            margin-left: 10px;
+            text-align: center;
+            transition: all 0.5s ease-out;
+        }
+
+        #news-header:hover {
+            cursor: pointer;
+        }
+
+        /*뉴스 끝*/
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar" style="font-family: gg;">
+            <nav class="navbar"> <!-- navbar 시작 -->
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                        <span class="navbar-toggler-icon"></span> <!-- navbar 토글 버튼 아이콘 -->
+                    </button>
+                    <div class="col-9 d-flex  align-items-center" style="font-size:large">basic</div>
+                    <div class="container offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+                        aria-labelledby="offcanvasNavbarLabel"> <!-- Offcanvas 시작 -->
+                        <div class="offcanvas-header" id="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">withTAYO</h5> <!-- Offcanvas 헤더 -->
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                            <!-- Offcanvas 닫기 버튼 -->
+                        </div>
+                        <div class="offcanvas-body" id="offcanvas-body"> <!-- Offcanvas 내용 -->
+                            <div class="navbar-nav">
+                                <a class="nav-link active" href="#">공지 사항</a>
+                                <hr>
+                                <a class="nav-link active" href="../1차프로젝트/노선정보겅색.html">길찾기</a>
+                                <a class="nav-link active" href="../1차프로젝트/예약확인.html">현재 예약 정보</a>
+                                <a class="nav-link active" href="#">예약내역</a>
+                                <hr>
+                                <li class="nav-item dropdown">
+                                <li><a class="nav-link active" href="#">개인정보 변경</a>
+                                    <a class="nav-link active" href="#">고객센터</a>
+                                    <a class="nav-link active" href="#"></a>
+                                    <a class="nav-link active" href="#">로그아웃</a>
+                            </div>
+                        </div>
+                    </div> <!-- Offcanvas 끝 -->
+                </div>
+            </nav> <!-- navbar 끝 -->
+        </div>
+
+        <div class="section big">
+            <!-- 중앙 컨텐츠 -->
+            <div class="News">
+                <div class="News_area">
+                    <span><strong> Event > </strong></span>
+                    <div id="news-header"></div>
+                </div>
+            </div>
+            <!-- 복사 컨텐츠 -->
+
+            <div id="pageWrapper">
+                <div class="card">
+                    <div class="card-head">
+                        <form action="" class="searchFull">
+                            <div class="form-group" id="searchArea">
+                                <input type="text" class="form-control srch " id="insert_srch" placeholder="출발지를 입력하세요">
+                                <div id="switchBtnArea">
+                                    <button _ngcontent-isv-c99="" type="button" class="btn_switch ng-star-inserted"
+                                        title="출발지/도착지 전환"></button>
+                                </div>
+                                <input type="text" class="form-control srch" placeholder="도착지를 입력하세요">
+                            </div>
+                            <div>
+                                <div id="btnTbl">
+                                    <button type="submit" class="btn btn-secondary btn-sm" id="button"
+                                        style="background-color: rgb(192, 190, 190); border: 0;">다시
+                                        입력</button>
+                                    <div id="buttonbb">
+                                        <button type="button" class="btn btn-warning btn-sm" id="buttonb" style="            color: white;
+                                            background-color: rgb(231, 177, 10);">검
+                                            색
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr style="margin-top: 10px; margin-bottom: 10px;">
+                        </form>
+                        <br>
+                        <div class="lists">
+                            <div class="instant_box">
+                                <div class="title-box">
+                                    <strong class="instant_tilte">즐겨찾기</strong>
+                                </div>
+                            </div>
+                            <ul>
+                                <li class="link_place">
+                                    <button class="link_place">
+                                        <span class="place_text" style="color: gray;"> + 자주 가는 곳 등록</span>
+                                    </button>
+                                </li>
+                            </ul>
+                            <div class="instant_box">
+                                <div class="title-box">
+                                    <strong class="instant_tilte" id="in_ti_c">최근 검색</strong>
+                                </div>
+                            </div>
+                            <ul>
+                                <li class="link_place">
+                                    <button class="link_place">
+                                        <span class="place_text" style="color: gray;">검색 내역이 없습니다.</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body" id="loginip">
+                        <hr>
+                        로그인 하면 저장한 경로를 빠르게 확인할 수 있습니다.
+                        <div>
+                            <button type="button" class="btn btn-warning btn-sm">로그인</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="row" style="background-color: gray;">
+                <div class="a" style="font-family: gg;">광고 혹은 이용설명</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 뉴스 시작
+        // 뉴스 헤더를 갱신할 시간 간격 (5초)
+        var intervalTime = 3000;
+
+        // 뉴스 데이터 배열
+        var newsData = [
+            "0.0.1a 앱 업데이트 내역 - 04.25",
+            "세계 펭귄의 날 - 04/25",
+            "저상버스 의무화 본격 시행 - 03.19",
+            "한솥은 돈치마요가 맛있단다"
+        ];
+
+        // 뉴스 헤더를 변경하는 함수
+        function changeNewsHeader() {
+            // 현재 뉴스 헤더 위치
+            var currentNewsIndex = $("#news-header").data("current-news-index");
+
+            // 다음 뉴스 인덱스 계산
+            var nextNewsIndex = (currentNewsIndex + 1) % newsData.length;
+
+            // 다음 뉴스 헤더 텍스트 설정
+            $("#news-header").text(newsData[nextNewsIndex]);
+
+            // 다음 뉴스 인덱스 데이터 속성으로 설정
+            $("#news-header").data("current-news-index", nextNewsIndex);
+        }
+
+        // 일정 시간마다 뉴스 헤더 갱신
+        $(document).ready(function () {
+            // 초기 뉴스 인덱스 0으로 설정
+            $("#news-header").data("current-news-index", 0);
+
+            // 첫번째 뉴스 헤더 텍스트 설정
+            $("#news-header").text(newsData[0]);
+
+            // 일정 시간마다 뉴스 헤더 변경
+            setInterval(changeNewsHeader, intervalTime);
+        });
+        const newsHeader = document.getElementById('news-header');
+
+        newsHeader.addEventListener('click', function () {
+            window.location.href = '대기화면.html';
+        });
+        // 뉴스 끝
+        const buttonbb = document.getElementById('buttonbb');
+
+        buttonbb.addEventListener('click', function () {
+            window.location.href = '노선검색결과창.html';
+        });
+
+
+
+    </script>
+</body>
+
+</html>
