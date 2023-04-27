@@ -118,3 +118,10 @@ FROM (SELECT *
       ORDER BY booktime DESC)
 WHERE ROWNUM = 1;
 
+select * from bus;
+alter table book_info
+add accepted number(1) default null;
+commit;
+alter table book_info
+add b_id varchar2(100);
+select * from book_info;

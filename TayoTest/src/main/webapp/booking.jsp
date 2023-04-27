@@ -282,7 +282,19 @@
     	// 해당 노선이 거치는 모든 정류장
     	let allNodes = null;
     	// 승차할 정류장의 정류장 DB상 순번 (방향 판단용)
-    	let dprtNodeOrder = "";
+    	let dprtNodeOrder = 0;
+    	// 해당 노선이 거치는 모든 정류장 개수
+    	let numOfAllNodes = 0;
+    	// 출발지 정류장의 방향
+    	let dprtNodeDirection = "";
+    	// 운행중인 해당 노선의 모든 버스 (Prolly redundant)
+		let allBuses = null;
+    	// 양 방향 버스 분리
+    	let ascBuses = [];
+    	let descBuses = [];
+    	// 예약 신호 보낼 타겟 버스
+    	let targetBus = null;
+    	
     	
     	$(document).ready(function () {
     		
@@ -299,9 +311,9 @@
         			error : function(error){
         				console.log("1st procedure has encountered an error: "+error);
         			}
-        		// 해당 노선이 가는 모든 정류장 검색
+        		// 출발 정류장의 db상 순서, 해당 노선이 거치는 정류장 개수 (방향 판단용)
         		}).then(function(toBeDumped){
-        			console.log("2nd procedure : Retrieve nodeord property of the node.");
+        			console.log("2nd procedure : Retrieve nodeord property of the node. And Get the number of nodes to use in operations.");
         			$.ajax({
         				url : 'https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=300&_type=json&cityCode=24&routeId='+iAmBabo.routeid,
         				success : function(resp002){
@@ -313,15 +325,72 @@
         							// use try catch to break from the loop / PRIORITY : LOW
         						}
         					});
-        					console.log(dprtNodeOrder);
+        					console.log("Departure node number of order: "+dprtNodeOrder);
+        					// 출발지 정류장의 순서number로 방향 조회 *모든 정류장이 2개씩 있다는 가정하에 짠 코드임 ^^ 순환선에는 다르게 써야할수도있다
+        					numOfAllNodes = allNodes.response.body.items.item.length;
+        					if(numOfAllNodes/2 < dprtNodeOrder){
+        						dprtNodeDirection = "Ascending";
+        					}else{
+        						dprtNodeDirection = "Descending";
+        					}
+        					console.log("Departure node direction: " + dprtNodeDirection);
         				},
         				error : function(error){
         					console.log(error);
         				}
         			});
-        	
+        		// 현재 운행중인 해당 노선의 버스들 모두 조회, 어떤 버스 호출할지 선택
         		}).then(function(humptyDumpty){
-        			console.log("3rd procedure : ")
+        			console.log("3rd procedure : Get all the bus of said route that are running.")
+        			$.ajax({
+        				url : 'https://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=50&_type=json&cityCode=24&routeId='+iAmBabo.routeid,
+        				success : function(resp003){
+        					console.log("Retrieved all the buses on the road.");
+        					allBuses = resp003.response.body.items.item;
+        					let distArr = []; // 거리 비교용
+        					// 먼저 버스들 방향별로 추려내기
+        					allBuses.forEach(function(elem){
+        						if(numOfAllNodes/2 < elem.nodeord){
+        							ascBuses.push(elem);
+        						}else{
+        							descBuses.push(elem);
+        						}
+        						distArr.push(Math.abs(elem.nodeord-dprtNodeOrder));
+        					});
+        					// 출발지 정류장과 맞는 방향 버스들중에서 비교
+        					if(dprtNodeDirection === "Ascending"){
+        						ascBuses.forEach(function(elem){
+        							distArr.push(Math.abs(elem.nodeord-dprtNodeOrder));
+        						});
+        					}else{
+        						descBuses.forEach(function(elem){
+        							distArr.push(Math.abs(elem.nodeord-dprtNodeOrder));
+        						});
+        					}
+        					
+        					// 최소값의 인덱스 구함 그럴거임 ㄴㄻㄴㅇㄻㄴㅇㄻㄴㅇㄹ
+        					let targetIdx = distArr.indexOf(Math.min(...distArr));
+        					// 대망으 그놈 ㅇㅎㅇㅎㅇㅎㄹㅇㅇㅎ
+        					targetBus = allBuses[targetIdx];
+        					console.log("Target Bus Found!!!!" + targetBus.vehicleno);
+        				},
+        				error : function(error){
+        					console.log(error);
+        				}
+        			});
+        		// 차량번호와 예약정보 서블렛으로 전송 -> 데이터 패키징 -> 디비 입력 -> 대기화면으로 리디렉트
+        		}).then(function(dumpThisMF){
+        			console.log("4th procedure : send the vehicleno and booking info to a servlet for packaging and get redirected to the waiting area.");
+        			$.ajax({
+        				url : 'Book', // book'em! f'ing book'em! asdkadlfjgnaldkjfg
+        				success : function(resp004){
+        					console.log("All packed up and ready to redirect.");
+        					
+        				},
+        				error : function(error){
+        					console.log("NOOOOOOOOOOO f"+error);
+        				}
+        			});
         		});
         		//!!!!########!!!!!!!!!!!!!!!!!!! catch 써야댐!!!!!!!!!!!!!!!!##########!!!!!!!!!!!
         		//	window.location.href = '대기화면.html';
