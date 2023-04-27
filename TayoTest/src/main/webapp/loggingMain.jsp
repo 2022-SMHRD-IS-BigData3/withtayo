@@ -388,7 +388,7 @@
                             <div class="navbar-nav">
                                 <a class="nav-link active" href="#">공지 사항</a>
                                 <hr>
-                                <div><span>로그인 이후 이용가능 서비스입니다.</span></div>
+                                <div><span>로그인 후 이용가능합니다</span></div>
                                 <hr>
                             </div>
                         </div>
