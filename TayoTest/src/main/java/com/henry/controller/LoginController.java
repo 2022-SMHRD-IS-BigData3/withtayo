@@ -33,7 +33,6 @@ public class LoginController extends HttpServlet {
 			HttpSession sesh = req.getSession();
 
 			sesh.setAttribute("driver", resultVO);
-			
 			resp.sendRedirect("driverLogging.jsp");
 		}else {
 			
