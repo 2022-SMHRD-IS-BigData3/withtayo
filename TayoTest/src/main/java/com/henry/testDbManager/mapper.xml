@@ -60,7 +60,7 @@
   	select * from recent where p_id=#{p_id}
   </select>
   
-  <select id="tempGetBooking" resultType="com.henry.testEntity.Book_Info">
-  	select * from Book_Info where p_id='test001'
-  </select>
+  <insert id="bookPreview" parameterType="com.henry.testEntity.Book_Info">
+  	insert into Book_Info (blog_id, routeid, routeno, dprtnode, arrvnode, p_id, dprtname, arrvname) values(book_prev_seq.NEXTVAL, #{routeid}, #{routeno}, #{dprtnode}, #{arrvnode}, #{p_id}, #{dprtname}, #{arrvname})
+  </insert>
 </mapper>

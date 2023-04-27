@@ -79,6 +79,10 @@ add routeno varchar(100);
 select * from b_stop;
 select * from recent;
 
+create sequence book_prev_seq
+start with 1
+increment by 1;
+
 rename r_log to book_log;
 select * from book_log;
 alter table book_log

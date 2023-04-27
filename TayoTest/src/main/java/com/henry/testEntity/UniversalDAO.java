@@ -206,21 +206,21 @@ public class UniversalDAO {
 		return resultList;
 	}
 	
-	// 예약정보 가데이터 사용 (임시)
-	public Book_Info getBookingInfo() {
+	// 예약 프리뷰 페이지로 넘어갈때
+	public int bookPrev(Book_Info binfo) {
 		SqlSession sesh = null;
-		Book_Info resultInfo = null;
+		int resultRow = 0;
 		
 		try {
-			
+			// handle dupe or not?
 			sesh = seshFac.openSession();
-			resultInfo = sesh.selectOne("tempGetBooking");
+			resultRow = sesh.insert("bookPreview", binfo);
 			
 		}finally {
 			sesh.close();
 		}
 		
-		return resultInfo;
+		return resultRow;
 	}
 	
 	// 노선 크롤링용 !

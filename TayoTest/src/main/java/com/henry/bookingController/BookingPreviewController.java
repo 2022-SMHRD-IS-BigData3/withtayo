@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.henry.testEntity.Book_Info;
+import com.henry.testEntity.Passenger;
 import com.henry.testEntity.UniversalDAO;
 
 @WebServlet("/BookingPrev")
@@ -17,19 +18,42 @@ public class BookingPreviewController extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// 나중에 길찾기 > 알림 클릭> 여기 로 이을 때 수정할 것
-		// 현재는 가데이터 사용함
-		UniversalDAO dao = new UniversalDAO();
-		Book_Info bookVO = dao.getBookingInfo();
+		request.setCharacterEncoding("UTF-8");
 		
-		// session? request?
+		HttpSession sesh = request.getSession();
+		
+		Passenger pVO = (Passenger)sesh.getAttribute("whoLoggedIn");
+		
+		Book_Info bInfoVO = new Book_Info();
+		bInfoVO.setP_id(pVO.getP_id());
+		bInfoVO.setRouteid(request.getParameter("routeid"));
+		bInfoVO.setRouteno(request.getParameter("routeno"));
+		bInfoVO.setArrvname(request.getParameter("arrvnm"));
+		bInfoVO.setArrvnode(request.getParameter("arrvid"));
+		bInfoVO.setDprtname(request.getParameter("dprtnm"));
+		bInfoVO.setDprtnode(request.getParameter("dprtid"));
+		
+		UniversalDAO dao = new UniversalDAO();
+		int result = dao.bookPrev(bInfoVO);
 		
 		response.setContentType("text/html;charset=utf-8");
 		
-		HttpSession sesh = request.getSession();
-		sesh.setAttribute("bookedInfo", bookVO);
+		if(result>0) {
+			
+			sesh.setAttribute("bookedInfo", bInfoVO);
+			
+		//	response.sendRedirect("booking.jsp");
 		
-		response.sendRedirect("booking.jsp");
+		}else {
+			
+			System.out.println("빨리클릭하지 마");
+			
+			sesh.setAttribute("bookedInfo", bInfoVO);
+			
+		//	response.sendRedirect("booking.jsp");
+			
+		}
+		
 	
 	}
 

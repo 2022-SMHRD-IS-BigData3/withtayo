@@ -352,12 +352,14 @@ hr {
 	color: rgb(90, 90, 90);
 }
 
-.busaralm {
+.busAlarm {
 	font-size: 22px;
 	border: 0;
 	background-color: white;
 	color: #0068c3;
 	margin-top: 3px;
+	z-index:9999 !important;
+	position:relative;
 }
 
 .btnenter {
@@ -523,6 +525,7 @@ hr {
 	</div>
 
 	<script>
+		// 동원 코드
         // TODO : geolocation / fav / recent
         // 검색 버튼 클릭시 전송용
         let dprtNodeId = "";
@@ -558,7 +561,7 @@ hr {
                     },
                     success: function (response) {
                         //	let resultList = JSON.parse(response);
-                        if (response != undefined || response != null) {
+                        if (response !== undefined || response !== null) {
                             //	console.log(response);
                             for (let i = 0; i < response.length; i++) {
                                 $("#dprtSrchDropdown").append("<span type='button' class='dprtPick'>"
@@ -769,14 +772,22 @@ hr {
                     success: function (rsps99) {
                         //				console.log(rsps99);
                         resRsps = rsps99;
+                        console.log(resRsps);
                         // 리스트로 수정중 ########(02)######## 
                         //			<c:set var="theJson" value="${resRsps}"/>
                         for (let p = 0; p < 2; p++) {
-                            $("#searchResultTable").append('<div class="instant_box" style="position: relative;"><table class="resTables" id="srchIdx' + resRsps[p].routeid + '"><tr><td class="resRoute">탑승 버스<strong>' + resRsps[p].routeno + '</strong><i class="material-icons busaralm">&#xe7f7;</i></td><td class="resRouteId">' + resRsps[p].routeid + '노선id(숨김)</td></tr><tr><td class="bustimetable" colspan="2"><div class="arrvTime arrvInfo" id="infoIdx' + resRsps[p].routeid + '"><span style="font-size: 12px;">남은 도착 시간</span><i class="material-icons">&#xe83a;</i></div><div style="font-size: 14px;  border-radius: 5px; margin-top: -10px;"><br><div style="display: flex; justify-content: center; width: 100%;"><table style="margin-left: 20px;"><tr><td style="width: 5px;"> <i class="material-icons" style="color: rgb(255, 150, 80);width: 20px;">&#xe530;</i></td><td class="dprtNode">'+dprtName+'</td><th style="font-size: 15px;"></th><td><i class="material-icons">&#xe154;</i></td><td style="width: 5px;"> <i class="material-icons favBtn" style="color: rgb(255, 150, 80);width: 20px;">&#xe3a0;</i></td><td class="arrvNode">'+arrvName+'</td></tr></table></div></div></td></tr></table></div><br><br>');
+                            $("#searchResultTable").append('<div class="instant_box" style="position: relative;"><table class="resTables" id="srchIdx' 
+                            	+ resRsps[p].routeid + '"><tr><td class="resRoute">탑승 버스<strong>' 
+                            	+ resRsps[p].routeno + '</strong><button onclick="alarmBtnAction($(this))" class="material-icons busAlarm">&#xe7f7;</button></td><td class="resRouteId">' 
+                            	+ resRsps[p].routeid + '</td></tr><tr><td class="bustimetable" colspan="2"><div class="arrvTime arrvInfo" id="infoIdx' 
+                            	+ resRsps[p].routeid + '"><span style="font-size: 12px;">남은 도착 시간</span><i class="material-icons">&#xe83a;</i></div><div style="font-size: 14px;  border-radius: 5px; margin-top: -10px;"><br><div style="display: flex; justify-content: center; width: 100%;"><table style="margin-left: 20px;"><tr><td style="width: 5px;"> <i class="material-icons" style="color: rgb(255, 150, 80);width: 20px;">&#xe530;</i></td><td class="dprtNode">'
+                            	+dprtName+'</td><th style="font-size: 15px;"></th><td><i class="material-icons">&#xe154;</i></td><td style="width: 5px;"> <i class="material-icons favBtn" style="color: rgb(255, 150, 80);width: 20px;">&#xe3a0;</i></td><td class="arrvNode">'
+                            	+arrvName+'</td></tr></table></div></div></td></tr></table></div><br><br>');
                         }
                         //		$("#resRoute").text(resRsps.routeno); // DEPRECATED!!!!!
                         //		$("#resRouteId").text(resRsps.routeid);
                         //			console.log(resRsps);
+                        console.log($(".busAlarm"));
                     },
                     error: function (error) {
                         console.log(error);
@@ -928,9 +939,33 @@ hr {
             }
         });
 
-        // 페이지 로딩시 최근 검색 갱신
-
-        // 페이지 로딩시 최근 검색 갱신
+        // 버스 알람 버튼!!!! #####################TODOTODOTODOTODOTODOTODOTODOTODOTODO
+   
+     // $("#searchResultTable .busAlarm").on('click', 
+        	
+      	function alarmBtnAction(btn){
+        	console.log("alarm clicked!!");
+        	let routeno = $(btn).siblings("strong").text();
+        	let routeid = $(btn).parent().siblings(".resRouteId").text();
+        	let dprtid = dprtNodeId;
+        	let arrvid = arrvNodeId;
+        	$.ajax({
+        		url : 'BookingPrev',
+        		data : {routeno : routeno, routeid : routeid, dprtid : dprtNodeId, arrvid : arrvNodeId, dprtnm : dprtName, arrvnm : arrvName},
+        		success : function(rspsEffed){
+					console.log("BOOKING PREVIEW DATA SENT");    
+					window.location.href = "booking.jsp";
+        		},
+        		error : function(error){
+        			console.log(error);
+        		}
+        	});
+        };
+	        
+ 
+        
+        
+        // 동현 코드
         // 뉴스 시작
         // 뉴스 헤더를 갱신할 시간 간격 (5초)
         var intervalTime = 3000;

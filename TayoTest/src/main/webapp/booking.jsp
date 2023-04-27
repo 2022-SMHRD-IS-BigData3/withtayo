@@ -211,7 +211,7 @@
                         <td style="font-size: 12px;">버스기사 ID : ㅎㅇㅇ</td>
                     </tr>  -->
                     <tr>
-                        <td style="font-size: 12px;">예약시간 : ${bookedInfo.booktime})</td>
+                        <td style="font-size: 12px;">예약시간 : ${bookedInfo.booktime}</td>
                     </tr>
                     </table>
                 </div>
