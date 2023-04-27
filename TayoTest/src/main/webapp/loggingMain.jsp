@@ -65,9 +65,9 @@
         #sign-up-container,
         #sign-in-container {
             padding: 50px 30px;
-            margin-left: 20px;
             width: 320px;
-            display: inline-block;
+            margin-left: 20px;
+            margin-top: 50px;
         }
 
         form input {
@@ -355,6 +355,14 @@
             height: 1.5cm;
             text-align: center;
         }
+        .navbar-toggler{
+            width: 70px;
+        }
+        .container-fluid{
+            display: flex;
+            text-align: center;
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -367,7 +375,7 @@
                         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                         <span class="navbar-toggler-icon"></span> <!-- navbar 토글 버튼 아이콘 -->
                     </button>
-                    <div class="col-9 d-flex  align-items-center" style="font-size:large">우리 모두 withTAYO</div>
+                    <div class="col-9 d-flex  align-items-center" style="font-size:large; font-style: italic; font-weight: 900; font-size: 30px; color: whitesmoke;"><span style="margin-left: 15px; text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);">withTAYO</span></div>
                     <div class="container offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                         aria-labelledby="offcanvasNavbarLabel"> <!-- Offcanvas 시작 -->
                         <div class="offcanvas-header" id="offcanvas-header">
@@ -380,14 +388,8 @@
                             <div class="navbar-nav">
                                 <a class="nav-link active" href="#">공지 사항</a>
                                 <hr>
-                                <a class="nav-link active" href="../1차프로젝트/노선정보겅색.html">길찾기</a>
-                                <a class="nav-link active" href="../1차프로젝트/예약확인.html">현재 예약 정보</a>
-                                <a class="nav-link active" href="#">예약내역</a>
+                                <div><span>로그인 이후 이용가능 서비스입니다.</span></div>
                                 <hr>
-                                <li><a class="nav-link active" href="#">개인정보 변경</a>
-                                    <a class="nav-link active" href="#">고객센터</a>
-                                    <a class="nav-link active" href="#"></a>
-                                    <a class="nav-link active" href="#">로그아웃</a>
                             </div>
                         </div>
                     </div> <!-- Offcanvas 끝 -->
@@ -405,29 +407,27 @@
                     <div id="sign-up-container">
                         <form action="PLogin" method="post">
                             <div>
-	                            <label for="id">ID</label>
-	                            <input type="text" name="p_id" id="id" placeholder="ID입력">
-							</div>
-							<div>
-	                            <label for="pw">PW</label>
-	                            <input type="password" name="p_pw" id="pw" placeholder="PW입력">
-							</div>
+                                <label for="id">ID</label>
+                                <input type="text" name="p_id" id="id" placeholder="ID입력">
+                            </div>
+                            <div>
+                                <label for="pw">PW</label>
+                                <input type="password" name="p_pw" id="pw" placeholder="PW입력">
+                            </div>
                             <div>
                                 <button type="reset" id="button-r">취소</button>
                                 <button type="submit" id="button-l" value="로그인">로그인</button>
                             </div>
                             <br>
-                            <div>
-                                <ul>
-                                    <li><a href="#" id="passengerJoin" style="text-decoration:none" align="left">회원가입</a>
+                                <ul style="margin-left: 18px;">
+                                    <li><a href="#" id="passengerJoin" style="text-decoration:none"
+                                            >회원가입</a>
                                     </li>
                                     <li><a href="#" style="text-decoration:none">ID/PW찾기</a></li>
                                 </ul>
-                            </div>
                             <br><br>
                             <!-- <hr width="295px" align="left" noshade="0.1px"> -->
-                            <hr width="237px" align="left" style="border:0; height:1px; background: #bbb;">
-                            <br>
+                            <hr width="237px" style="border:0; height:1px; background: #bbb;">
                             <div class="aTag">
                                 <a href="driverLogging.jsp" style="color: rgb(129, 128, 128);">기사님 로그인</a>
                             </div>
@@ -446,29 +446,50 @@
         </div>
 
         <div class="endbar">
-            <div class="row" style="background-color: gray;">
-                <div class="a" style="font-family: gg;">광고 혹은 이용설명</div>
+            <div class="row">
+                <div class="a">
+                    <img src="../스인개광고판.png" alt="" id="image" style="width: 100%; height: 100%; border: solid 1px black;">
+                </div>
             </div>
         </div>
     </div>
 
-	<script>
-		console.log($('#passengerJoin'));
-	    $('#passengerJoin').on("click", () => {
-	    	console.log("join clicked");
-	        $.ajax({
-	            url: 'SignUp',
-	            type: 'POST',
-	            data: { ident: 'isPassenger' },
-	            success: function (response) {
-	                window.location.href = response; // to the signup sheet!!
-	            },
-	            error: function (xhr, status, error) {
-	                console.log("ERROR: " + error);
-	            }
-	        });
-	    });
-	</script>
+    <script>
+        console.log($('#passengerJoin'));
+        $('#passengerJoin').on("click", () => {
+            console.log("join clicked");
+            $.ajax({
+                url: 'SignUp',
+                type: 'POST',
+                data: { ident: 'isPassenger' },
+                success: function (response) {
+                    window.location.href = response; // to the signup sheet!!
+                },
+                error: function (xhr, status, error) {
+                    console.log("ERROR: " + error);
+                }
+            });
+        });
+        var imageIndex = 0;
+        var images = ["../스인개광고판.png", "../스마트폰광고판.png", "../스인개추가광고판.jpg"];
+        var intervalTime = 3000; // 3초마다 이미지 변경
+
+        function changeImage() {
+            // 이미지 인덱스 계산
+            imageIndex = (imageIndex + 1) % images.length;
+
+            // 다음 이미지 표시
+            var imgElement = document.getElementById("image");
+            imgElement.src = images[imageIndex];
+        }
+
+        // 초기 이미지 표시
+        var imgElement = document.getElementById("image");
+        imgElement.src = images[0];
+
+        // 일정 시간마다 이미지 변경
+        setInterval(changeImage, intervalTime);
+    </script>
 
 
 
