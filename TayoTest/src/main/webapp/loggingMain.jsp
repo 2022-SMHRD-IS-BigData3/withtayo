@@ -419,7 +419,7 @@
                             <br>
                             <div>
                                 <ul>
-                                    <li><a href="#" id="liTag" style="text-decoration:none" align="left">회원가입</a>
+                                    <li><a href="#" id="passengerJoin" style="text-decoration:none" align="left">회원가입</a>
                                     </li>
                                     <li><a href="#" style="text-decoration:none">ID/PW찾기</a></li>
                                 </ul>
@@ -451,9 +451,6 @@
             </div>
         </div>
     </div>
-
-
-
 
 </body>
 
