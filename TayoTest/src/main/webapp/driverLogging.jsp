@@ -520,7 +520,7 @@
                                 <br>
                                 <div style="margin-left: -10px;">
                                     <ul>
-                                        <li><a href="#" id="liTag" style="text-decoration: none" align="left">회원가입</a>
+                                        <li><a href="#" id="driverJoin" style="text-decoration: none" align="left">회원가입</a>
                                         </li>
                                         <li><a href="#" style="text-decoration: none">ID/PW찾기</a></li>
                                     </ul>
@@ -576,7 +576,9 @@
 
     <script>
 
+    	console.log($('#driverJoin'));
         $('#driverJoin').on("click", () => {
+        	console.log("join clicked");
             $.ajax({
                 url: 'SignUp',
                 type: 'POST',

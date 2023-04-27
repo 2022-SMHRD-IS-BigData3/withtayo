@@ -1,6 +1,7 @@
 package com.henry.bookingController;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
 import com.henry.testEntity.Book_Info;
 import com.henry.testEntity.Passenger;
 import com.henry.testEntity.UniversalDAO;
@@ -55,15 +55,6 @@ public class BookingPreviewController extends HttpServlet {
 			
 			out.write("YES");
 		
-		}else {
-			// handle multiple clicks in a quick succession
-			System.out.println("빨리클릭하지 마");
-			
-			sesh.setAttribute("bookedInfo", result);
-			
-	//		response.sendRedirect("booking.jsp");
-			out.write("NO");
-			
 		}
 		
 	

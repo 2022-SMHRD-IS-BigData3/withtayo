@@ -277,13 +277,57 @@
         </div>
     </div>
     <script>
+    	// 넘겨받은 예약정보(프리뷰) 객체
+    	let iAmBabo = null;
+    	// 해당 노선이 거치는 모든 정류장
+    	let allNodes = null;
+    	// 승차할 정류장의 정류장 DB상 순번 (방향 판단용)
+    	let dprtNodeOrder = "";
+    	
     	$(document).ready(function () {
+    		
+    		// 예약 버튼 클릭시
         	$('#bookingBtn').on('click', function () {
- 				           
-        		
+ 				console.log("1st procedure : Get session attribute 'bookedInfo'");
+        		// 세션 속성 bookedInfo (예약 프리뷰 정보) 가져오기
+ 				$.ajax({
+        			url : 'GetSessionAttrib',
+        			success : function(resp001){
+        				console.log("1st procedure complete.");
+        				iAmBabo = resp001;
+        			},
+        			error : function(error){
+        				console.log("1st procedure has encountered an error: "+error);
+        			}
+        		// 해당 노선이 가는 모든 정류장 검색
+        		}).then(function(toBeDumped){
+        			console.log("2nd procedure : Retrieve nodeord property of the node.");
+        			$.ajax({
+        				url : 'https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=300&_type=json&cityCode=24&routeId='+iAmBabo.routeid,
+        				success : function(resp002){
+        		//			console.log(resp002);
+        					allNodes = resp002;
+        					allNodes.response.body.items.item.forEach(function(elem){
+        						if(elem.nodeid == iAmBabo.dprtnode){
+        							dprtNodeOrder = elem.nodeord;
+        							// use try catch to break from the loop / PRIORITY : LOW
+        						}
+        					});
+        					console.log(dprtNodeOrder);
+        				},
+        				error : function(error){
+        					console.log(error);
+        				}
+        			});
+        	
+        		}).then(function(humptyDumpty){
+        			console.log("3rd procedure : ")
+        		});
+        		//!!!!########!!!!!!!!!!!!!!!!!!! catch 써야댐!!!!!!!!!!!!!!!!##########!!!!!!!!!!!
         		//	window.location.href = '대기화면.html';
             });
         	
+    		
         });
     	
     	
