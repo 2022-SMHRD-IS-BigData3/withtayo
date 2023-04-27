@@ -63,4 +63,13 @@
   <insert id="bookPreview" parameterType="com.henry.testEntity.Book_Info">
   	insert into Book_Info (blog_id, routeid, routeno, dprtnode, arrvnode, p_id, dprtname, arrvname) values(book_prev_seq.NEXTVAL, #{routeid}, #{routeno}, #{dprtnode}, #{arrvnode}, #{p_id}, #{dprtname}, #{arrvname})
   </insert>
+  
+  <select id="getBookPrev" parameterType="com.henry.testEntity.Book_Info" resultType="com.henry.testEntity.Book_Info">
+  	SELECT *
+	FROM (SELECT *
+    FROM Book_Info
+    WHERE p_id = #{p_id}
+    ORDER BY booktime DESC)
+	WHERE ROWNUM = 1
+  </select>
 </mapper>

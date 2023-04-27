@@ -1,6 +1,8 @@
 package com.henry.bookingController;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.henry.testEntity.Book_Info;
 import com.henry.testEntity.Passenger;
 import com.henry.testEntity.UniversalDAO;
@@ -32,25 +35,34 @@ public class BookingPreviewController extends HttpServlet {
 		bInfoVO.setArrvnode(request.getParameter("arrvid"));
 		bInfoVO.setDprtname(request.getParameter("dprtnm"));
 		bInfoVO.setDprtnode(request.getParameter("dprtid"));
+
 		
 		UniversalDAO dao = new UniversalDAO();
-		int result = dao.bookPrev(bInfoVO);
+		Book_Info result = dao.bookPrev(bInfoVO);
 		
+		// 셀렉트도 다시 할 것
+		
+		System.out.println(result.getBooktime().toString());
 		response.setContentType("text/html;charset=utf-8");
 		
-		if(result>0) {
+		PrintWriter out = response.getWriter();
+		
+		if(result!=null) {
 			
-			sesh.setAttribute("bookedInfo", bInfoVO);
+			sesh.setAttribute("bookedInfo", result);
 			
-		//	response.sendRedirect("booking.jsp");
+			response.sendRedirect("booking.jsp");
+			
+			out.write("YES");
 		
 		}else {
-			
+			// handle multiple clicks in a quick succession
 			System.out.println("빨리클릭하지 마");
 			
-			sesh.setAttribute("bookedInfo", bInfoVO);
+			sesh.setAttribute("bookedInfo", result);
 			
-		//	response.sendRedirect("booking.jsp");
+	//		response.sendRedirect("booking.jsp");
+			out.write("NO");
 			
 		}
 		

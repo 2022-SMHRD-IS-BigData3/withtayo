@@ -1,5 +1,7 @@
 package com.henry.testEntity;
 
+import java.sql.Date;
+
 public class Book_Info {
 
 	private String blog_id;
@@ -8,7 +10,7 @@ public class Book_Info {
 	private String dprtnode;
 	private String arrvnode;
 	private String p_id;
-	private String booktime;
+	private Date booktime;
 	private String dprtname;
 	private String arrvname;
 
@@ -17,7 +19,7 @@ public class Book_Info {
 	}
 
 	public Book_Info(String blog_id, String routeid, String routeno, String dprtnode, String arrvnode, String p_id,
-			String booktime, String dprtname, String arrvname) {
+			Date booktime, String dprtname, String arrvname) {
 		this.blog_id = blog_id;
 		this.routeid = routeid;
 		this.routeno = routeno;
@@ -53,11 +55,11 @@ public class Book_Info {
 		this.p_id = p_id;
 	}
 
-	public String getBooktime() {
+	public Date getBooktime() {
 		return booktime;
 	}
 
-	public void setBooktime(String booktime) {
+	public void setBooktime(Date booktime) {
 		this.booktime = booktime;
 	}
 

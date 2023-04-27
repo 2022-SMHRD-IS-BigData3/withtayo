@@ -211,7 +211,7 @@
                         <td style="font-size: 12px;">버스기사 ID : ㅎㅇㅇ</td>
                     </tr>  -->
                     <tr>
-                        <td style="font-size: 12px;">예약시간 : ${bookedInfo.booktime}</td>
+                        <td style="font-size: 12px;">예약시간 : <fmt:formatDate value="${bookedInfo.booktime}" pattern="yyyy년MM월dd일hh시mm분"/></td>
                     </tr>
                     </table>
                 </div>
@@ -265,7 +265,7 @@
                     <div id="btnTbl">
                                 <button type="button" class="btn btn-secondary" id="button"
                                     style="background-color: rgb(192, 190, 190); border: 0;">취 소</button>
-                                <button type="submit" class="btn btn-warning" id="bookingBtn" style="color: white;background-color: rgb(231, 177, 10);">예 약</button>
+                                <button class="btn btn-warning" id="bookingBtn" style="color: white;background-color: rgb(231, 177, 10);">예 약</button>
                     </div>
                 </div>
             </div>
@@ -277,11 +277,16 @@
         </div>
     </div>
     <script>
-                $(document).ready(function () {
-            $('#bookingBtn').click(function () {
-                window.location.href = '대기화면.html';
+    	$(document).ready(function () {
+        	$('#bookingBtn').on('click', function () {
+ 				           
+        		
+        		//	window.location.href = '대기화면.html';
             });
+        	
         });
+    	
+    	
     </script>
 </body>
 

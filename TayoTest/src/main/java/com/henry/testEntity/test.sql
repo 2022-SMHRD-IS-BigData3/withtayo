@@ -111,3 +111,9 @@ add booktime date default sysdate;
 alter table book_info
 add arrvname varchar2(100);
 update book_info set arrvname='운천저수지' where p_id='test001';
+SELECT *
+FROM (SELECT *
+      FROM Book_Info
+      WHERE p_id = 'test001'
+      ORDER BY booktime DESC)
+WHERE ROWNUM = 1;

@@ -953,8 +953,8 @@ hr {
         		url : 'BookingPrev',
         		data : {routeno : routeno, routeid : routeid, dprtid : dprtNodeId, arrvid : arrvNodeId, dprtnm : dprtName, arrvnm : arrvName},
         		success : function(rspsEffed){
-					console.log("BOOKING PREVIEW DATA SENT");    
-					window.location.href = "booking.jsp";
+					console.log(rspsEffed);    
+					window.location.replace("booking.jsp");
         		},
         		error : function(error){
         			console.log(error);

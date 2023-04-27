@@ -404,12 +404,14 @@
                     <!-- Sign up form -->
                     <div id="sign-up-container">
                         <form action="PLogin" method="post">
-                            <label for="id">ID</label>
-                            <input type="text" name="p_id" id="id" placeholder="ID입력">
-
-                            <label for="pw">PW</label>
-                            <input type="password" name="p_pw" id="pw" placeholder="PW입력">
-
+                            <div>
+	                            <label for="id">ID</label>
+	                            <input type="text" name="p_id" id="id" placeholder="ID입력">
+							</div>
+							<div>
+	                            <label for="pw">PW</label>
+	                            <input type="password" name="p_pw" id="pw" placeholder="PW입력">
+							</div>
                             <div>
                                 <button type="reset" id="button-r">취소</button>
                                 <button type="submit" id="button-l" value="로그인">로그인</button>

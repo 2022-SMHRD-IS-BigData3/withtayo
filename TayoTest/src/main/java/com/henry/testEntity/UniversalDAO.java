@@ -207,20 +207,23 @@ public class UniversalDAO {
 	}
 	
 	// 예약 프리뷰 페이지로 넘어갈때
-	public int bookPrev(Book_Info binfo) {
+	public Book_Info bookPrev(Book_Info binfo) {
 		SqlSession sesh = null;
-		int resultRow = 0;
+		Book_Info resultVO = null;
 		
 		try {
 			// handle dupe or not?
 			sesh = seshFac.openSession();
-			resultRow = sesh.insert("bookPreview", binfo);
+			sesh.insert("bookPreview", binfo);
+			sesh.commit();
+			
+			resultVO = sesh.selectOne("getBookPrev", binfo);
 			
 		}finally {
 			sesh.close();
 		}
 		
-		return resultRow;
+		return resultVO;
 	}
 	
 	// 노선 크롤링용 !
