@@ -509,6 +509,12 @@
                                     <td><input type="text" placeholder=" ex.010-3311-2244" style="width: 200px;"></td>
                                 </tr>
                             </c:if>
+                            <tr>
+                                <td colspan="2"><a style="font-size: 10px;" href="" onclick="alert('세부내용 업데이트 준비 中')">이용약관 및 운영정책 확인하기</a></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><a style="font-size: 10px;" href="" onclick="alert('시스템 준비 中')">개인정보관련 사항 확인하기</a></td>
+                            </tr>
                         </table>
                         <div style="display: flex; justify-content: center; width: 338px;">
                             <div><input class="signupbtn1" type="reset" value="재입력"
