@@ -13,7 +13,7 @@ drop column routeno;
 select * from fav;
 alter table fav
 add f_arrv varchar2(100);
-
+select * from d_info;
 select * from passenger;
 
 insert into 승객 values ('test001', 'test001', '123-456-7890');
@@ -117,3 +117,4 @@ FROM (SELECT *
       WHERE p_id = 'test001'
       ORDER BY booktime DESC)
 WHERE ROWNUM = 1;
+

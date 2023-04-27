@@ -2,29 +2,24 @@ package com.henry.testEntity;
 
 public class Bus {
 
-	private String b_id;
+	private String b_id; // vehicleno
 	private String routeno;
-	private String routetp;
-	private String vehicletp;
-
-	private String nodeid; // prolly redundant!! but keep an eye on it or two if you feel like it lolololololol
-
+	private String routetid;
+	private String nodeid; 
+	private String nodenm;
+	private int nodeord;
+	
 	public Bus() {
-		// for Spring
+		
 	}
 	
-	public Bus(String b_id, String routeno, String routetp, String vehicletp, String nodeid) {
+	public Bus(String b_id, String routeno, String routetid, String nodeid, String nodenm, int nodeord) {
 		this.b_id = b_id;
 		this.routeno = routeno;
-		this.routetp = routetp;
-		this.vehicletp = vehicletp;
+		this.routetid = routetid;
 		this.nodeid = nodeid;
-	}
-
-	@Override
-	public String toString() {
-		return "Bus [b_id=" + b_id + ", routeno=" + routeno + ", routetp=" + routetp + ", vehicletp=" + vehicletp
-				+ ", nodeid=" + nodeid + "]";
+		this.nodenm = nodenm;
+		this.nodeord = nodeord;
 	}
 
 	public String getB_id() {
@@ -43,20 +38,12 @@ public class Bus {
 		this.routeno = routeno;
 	}
 
-	public String getRoutetp() {
-		return routetp;
+	public String getRoutetid() {
+		return routetid;
 	}
 
-	public void setRoutetp(String routetp) {
-		this.routetp = routetp;
-	}
-
-	public String getVehicletp() {
-		return vehicletp;
-	}
-
-	public void setVehicletp(String vehicletp) {
-		this.vehicletp = vehicletp;
+	public void setRoutetid(String routetid) {
+		this.routetid = routetid;
 	}
 
 	public String getNodeid() {
@@ -67,5 +54,26 @@ public class Bus {
 		this.nodeid = nodeid;
 	}
 
+	public String getNodenm() {
+		return nodenm;
+	}
 
+	public void setNodenm(String nodenm) {
+		this.nodenm = nodenm;
+	}
+
+	public int getNodeord() {
+		return nodeord;
+	}
+
+	public void setNodeord(int nodeord) {
+		this.nodeord = nodeord;
+	}
+
+	@Override
+	public String toString() {
+		return "Bus [b_id=" + b_id + ", routeno=" + routeno + ", routetid=" + routetid + ", nodeid=" + nodeid
+				+ ", nodenm=" + nodenm + ", nodeord=" + nodeord + "]";
+	}
+	
 }
