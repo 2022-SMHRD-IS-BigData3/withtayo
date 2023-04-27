@@ -394,6 +394,7 @@
         		});
         		//!!!!########!!!!!!!!!!!!!!!!!!! catch 써야댐!!!!!!!!!!!!!!!!##########!!!!!!!!!!!
         		//	window.location.href = '대기화면.html';
+ 					window.location.href = 'http://localhost:8081/test/matching.jsp';
             });
         	
     		
