@@ -452,6 +452,26 @@
         </div>
     </div>
 
+	<script>
+		console.log($('#passengerJoin'));
+	    $('#passengerJoin').on("click", () => {
+	    	console.log("join clicked");
+	        $.ajax({
+	            url: 'SignUp',
+	            type: 'POST',
+	            data: { ident: 'isPassenger' },
+	            success: function (response) {
+	                window.location.href = response; // to the signup sheet!!
+	            },
+	            error: function (xhr, status, error) {
+	                console.log("ERROR: " + error);
+	            }
+	        });
+	    });
+	</script>
+
+
+
 </body>
 
 </html>
