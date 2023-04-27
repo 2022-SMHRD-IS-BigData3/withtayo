@@ -72,4 +72,12 @@
     ORDER BY booktime DESC)
 	WHERE ROWNUM = 1
   </select>
+  
+  <select id="getBookingPSG" parameterType="java.lang.String" resultType="com.henry.testEntity.Book_Info">
+  	select * from book_info where blog_id = #{blog_id}
+  </select>
+  
+  <insert id="packageBooking" parameterType="com.henry.testEntity.Book_Info">
+  	update book_info set b_id=#{b_id} where blog_id=#{blog_id}
+  </insert>
 </mapper>
