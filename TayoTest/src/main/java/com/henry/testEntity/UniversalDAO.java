@@ -263,5 +263,33 @@ public class UniversalDAO {
 		
 		return result;
 	}
+	// 승객 회원가입 
+	public int pjoin(Passenger vo) {
+		SqlSession sesh=null;
+		int row=0;
+		try {
+			sesh=seshFac.openSession();
+			row =sesh.insert("pjoin",vo);
+			sesh.commit();
+		} catch (Exception e) {
+			sesh.close();
+		}
+				
+				
+		return row;		
+	}
+	//버스 기사 회원가입
+	public int djoin(Driver vo) {
+		SqlSession sesh =null;
+		int row=0;
+		try {
+			sesh=seshFac.openSession();
+			row=sesh.insert("djoin",vo);
+			sesh.commit();
+		} catch (Exception e) {
+			sesh.close();
+		}
+		return row;
+	}
 
 }
