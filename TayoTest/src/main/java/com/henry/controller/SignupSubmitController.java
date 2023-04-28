@@ -24,7 +24,7 @@ public class SignupSubmitController extends HttpServlet {
 		int row=dao.pjoin(vo);
 		if(row>0) {
 			req.setAttribute("pjoin", vo);
-			RequestDispatcher rd=req.getRequestDispatcher("loggingMain.jsp");
+			RequestDispatcher rd=req.getRequestDispatcher("testSearch.jsp");
 			rd.forward(req, res);
 		}else {
 			res.sendRedirect("universalSignup.jsp");

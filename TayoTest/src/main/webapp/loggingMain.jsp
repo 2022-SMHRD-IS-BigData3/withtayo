@@ -27,7 +27,7 @@
             display: flex;
             flex-direction: column;
         }
-
+		
         .navbar {
             width: 100%;
             height: 1.8cm;
