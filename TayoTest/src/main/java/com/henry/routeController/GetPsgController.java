@@ -25,6 +25,7 @@ public class GetPsgController extends HttpServlet {
 		Book_Info bookinfo = dao.getBookingByBID(b_id);
 		
 		
+		
 	}
 
 }

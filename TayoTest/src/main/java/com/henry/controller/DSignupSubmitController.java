@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.henry.testEntity.Driver;
 import com.henry.testEntity.Passenger;
@@ -23,15 +24,12 @@ public class DSignupSubmitController extends HttpServlet {
 		String d_pw = req.getParameter("d_pw");
 		Driver vo = new Driver(d_id,d_pw);
 		UniversalDAO dao =new UniversalDAO();
-		int row=dao.djoin(vo);
-		if(row>0) {
-			req.setAttribute("djoin", vo);
-			RequestDispatcher rd=req.getRequestDispatcher("loggingMain.jsp");
-			rd.forward(req, res);
+		Driver result=dao.djoin(vo);
+		HttpSession sesh = req.getSession();
+		sesh.setAttribute("driver", result);
+		
+		res.sendRedirect("driverLogging.jsp");
 			
-		}else {
-			res.sendRedirect("universalSignup.jsp");
-		}
 		
 	
 	}

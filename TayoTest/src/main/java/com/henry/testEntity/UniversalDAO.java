@@ -297,17 +297,18 @@ public class UniversalDAO {
 	}
 	
 	//버스 기사 회원가입
-	public int djoin(Driver vo) {
+	public Driver djoin(Driver vo) {
 		SqlSession sesh =null;
-		int row=0;
+		Driver result = null;
 		try {
 			sesh=seshFac.openSession();
-			row=sesh.insert("djoin",vo);
+			sesh.insert("djoin",vo);
 			sesh.commit();
+			result = sesh.selectOne("xxx", vo);
 		} catch (Exception e) {
 			sesh.close();
 		}
-		return row;
+		return result;
 	}
 
 }
