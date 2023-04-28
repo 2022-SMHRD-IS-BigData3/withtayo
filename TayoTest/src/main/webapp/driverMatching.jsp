@@ -210,6 +210,46 @@
             </div>
         </div>
     </div>
+    
+    <script>
+    	// 세션의 운행정보
+    	let currentShift = null;
+    	
+    	
+    	
+    	$(document).ready(function(){
+    		
+    		// Ambient functions : 페이지 로딩 되자 마자 실행, 또는 반복 실행
+    		// 기록 하려면 세션에서 운행 정보 가져와
+    		console.log("1st procedure : Get session attribute");
+    		$.ajax({
+    			url : 'GetSessionForShift',
+    			success : function(resp001){
+    				console.log(resp001);
+    				// 운행정보 가져옴
+    				currentShift = resp001;
+    			},
+    			error : function(xhr, status, error){
+					console.log(error);    				
+    			}
+    		
+    		// Pseudo-communication : 예약정보 조회 반복실행으로 통신 미믹
+    		}).then(function(alwaysBeDumpin){
+    			console.log("2nd procedure : Loop to retrieve booking info from database.");
+    			$.ajax({
+    				url : 'GetPsg',
+    				// 임시데이터임 currentShift.b_id 로 바꿀것
+    				data : {b_id : '광주77바2540'},
+    				success : function(resp002){
+    					console.log(resp002);
+    				},
+    				error : function(xhr, status, error){
+    					
+    				}
+    			});
+    		});
+    	});
+    </script>
 </body>
 
 </html>
