@@ -63,13 +63,12 @@
             
         }
 
-        #sign-up-container,
-        #sign-in-container {
-            padding: 50px 30px;
-            width: 320px;
-            margin-left: 20px;
-            margin-top: 50px;
-        }
+#sign-up-container, #sign-in-container {
+	padding: 50px 20px;
+	margin-left: 30px;
+	width: 320px;
+	display: inline-block;
+}
 
         form input {
             display: block;
@@ -407,7 +406,7 @@
                 <div id="form-inner-container">
                     <!-- Sign up form -->
                     <div id="sign-up-container">
-                        <form action="PLogin" method="post">
+                        <form action="PLogin" method="post" style="margin-top: 50px">
                             <div>
                                 <label for="id">ID</label>
                                 <input type="text" name="p_id" id="id" placeholder="ID입력">
@@ -420,14 +419,14 @@
                                 <button type="reset" id="button-r">취소</button>
                                 <button type="submit" id="button-l" value="로그인">로그인</button>
                             </div>
-                            <br>
+                            <br><br>
                                 <ul style="margin-left: 18px;">
                                     <li><a href="#" id="passengerJoin" style="text-decoration:none"
                                             >회원가입</a>
                                     </li>
                                     <li><a href="#" style="text-decoration:none">ID/PW찾기</a></li>
                                 </ul>
-                            <br><br>
+                            <br>
                             <!-- <hr width="295px" align="left" noshade="0.1px"> -->
                             <hr width="237px" style="border:0; height:1px; background: #bbb;">
                             <div class="aTag">

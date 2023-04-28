@@ -49,10 +49,6 @@
 	width: 100%;
 }
 
-body {
-	margin: 0;
-	padding: 0;
-}
 
 .big {
 	height: 12.7cm;
@@ -454,6 +450,31 @@ li:last-child::after {
 .alwaysHide{
 	display: none;
 }
+        .selectBox {
+            position: relative;
+            width: 150px;
+            height: 35px;
+            border-radius: 4px;
+            border: 2px solid rgb(212, 165, 22);
+        }
+
+        .selectBox .select {
+            width: inherit;
+            height: inherit;
+            background: transparent;
+            border: 0 none;
+            outline: 0 none;
+            padding: 0 5px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .selectBox .select option {
+            background: rgb(248, 197, 44);
+            color: #fff;
+            padding: 1px 0;
+            font-size: 16px;
+        }
 </style>
 </head>
 
@@ -560,16 +581,17 @@ li:last-child::after {
 					<div>
 						<div>
 							<strong>${driver.d_id}기사님 환영합니다!</strong>
+							<hr>
 						</div>
 						<div class="sign-out-container-body">
 							<form action="BusRegister" method="post">
 							
 								<div>
 										<!-- 노선번호 입력창 -->
-										<input class="ifRoute" type="text" id="routeno" name="routeno" placeholder="노선번호 입력 예) 송암72"
+										<input class="ifRoute" type="text" id="routeno" name="routeno" placeholder="운행할 버스 입력 ex) 송암72"
 											style="margin-left: 10px;">
 										<!-- 차량번호 드랍다운 -->
-										<select class="ifTailNum" name="tailNum" id="tailNum">
+										<select class="ifTailNum selectBox" name="tailNum" id="tailNum">
 											<option selected>차량번호선택</option>
 										</select>
 								</div>
@@ -578,12 +600,12 @@ li:last-child::after {
 								<div class="btnddrd" style="width: 100%; margin-left: 5px;">
 									<div>
 												<!-- 노선번호 -->
-											<input type="button" id="button-ld" value="노선번호 조회"
+											<input type="button" id="button-ld" value="버스 번호판 조회"
 												class="btn btn-block ifRoute">
 												
 												<!-- 차량번호 -->
-											<input type="submit" id="submit" disabled value="버스운행시작"
-												class="btn btn-block ifTailNum">
+											<input type="submit" id="submit" value="운행시작"
+                class="btn btn-block ifTailNum button-l" style="background-color: rgb(231, 177, 10);font-weight:bold; height:40px; color: #fff; font-size: 20px">
 									</div>
 									<div>
 										<input type="button" id="button-rd" class="btn btn-block"
@@ -652,7 +674,7 @@ li:last-child::after {
 									$("#tailNum").append("<option value='"+elem+"'>"+elem+"</option>");
 								})
 								$("#routeid").val(routeid);
-								$("#submit").removeAttr("disabled");
+								$("#submitstart").removeAttr("disabled");
 								
 							},
 							error : function(xhr, status, error){
