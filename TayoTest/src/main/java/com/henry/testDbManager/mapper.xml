@@ -80,18 +80,19 @@
   <insert id="packageBooking" parameterType="com.henry.testEntity.Book_Info">
   	update book_info set b_id=#{b_id} where blog_id=#{blog_id}
   </insert>
+  
   <insert id="pjoin" parameterType="com.henry.testEntity.Passenger">
-  insert into passenger
-  values(#{p_id},#{p_pw},#{p_ph})
+	  insert into passenger
+	  values(#{p_id},#{p_pw},#{p_ph})
   </insert>
+  
   <insert id="djoin" parameterType="com.henry.testEntity.Driver">
-  insert into b_driver
-  values(#{d_id},#{d_pw})
+	  insert into b_driver
+	  values(#{d_id},#{d_pw})
   </insert>
   
-  
-  
-  
-  
+  <select id="getBookingByBID" parameterType="java.lang.String" resultType="com.henry.testEntity.Book_Info">
+  	select * from book_info where b_id=#{b_id}
+  </select>
   
 </mapper>

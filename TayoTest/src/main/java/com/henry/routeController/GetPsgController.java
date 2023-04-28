@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.henry.testEntity.Book_Info;
+import com.henry.testEntity.UniversalDAO;
+
 @WebServlet("/GetPsg")
 public class GetPsgController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -17,6 +20,9 @@ public class GetPsgController extends HttpServlet {
 		
 		String b_id = request.getParameter("b_id");
 		
+		UniversalDAO dao = new UniversalDAO();
+		
+		Book_Info bookinfo = dao.getBookingByBID(b_id);
 		
 		
 	}

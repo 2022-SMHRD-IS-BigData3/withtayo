@@ -263,6 +263,23 @@ public class UniversalDAO {
 		
 		return result;
 	}
+	
+	// 예약정보 조회 (차량번호로)
+	public Book_Info getBookingByBID(String b_id) {
+		
+		SqlSession sesh = null;
+		Book_Info result = null;
+		
+		try {
+			sesh = seshFac.openSession();
+			result = sesh.selectOne("getBookingByBID", b_id);
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+	}
+	
 	// 승객 회원가입 
 	public int pjoin(Passenger vo) {
 		SqlSession sesh=null;
@@ -278,6 +295,7 @@ public class UniversalDAO {
 				
 		return row;		
 	}
+	
 	//버스 기사 회원가입
 	public int djoin(Driver vo) {
 		SqlSession sesh =null;
