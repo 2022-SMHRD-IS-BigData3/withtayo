@@ -8,18 +8,38 @@ public class Shift {
 	private String d_id;
 	private int num_psg;
 	private int total_psg;
+	private String routeid;
+	private String routeno;
 	
 	public Shift() {
 		
 	}
 	
-	public Shift(String shift_id, String b_id, String d_id, int num_psg, int total_psg) {
-
+	public Shift(String shift_id, String b_id, String d_id, int num_psg, int total_psg, String routeid,
+			String routeno) {
 		this.shift_id = shift_id;
 		this.b_id = b_id;
 		this.d_id = d_id;
 		this.num_psg = num_psg;
 		this.total_psg = total_psg;
+		this.routeid = routeid;
+		this.routeno = routeno;
+	}
+
+	public String getRouteid() {
+		return routeid;
+	}
+
+	public void setRouteid(String routeid) {
+		this.routeid = routeid;
+	}
+
+	public String getRouteno() {
+		return routeno;
+	}
+
+	public void setRouteno(String routeno) {
+		this.routeno = routeno;
 	}
 
 	public String getShift_id() {
@@ -65,7 +85,7 @@ public class Shift {
 	@Override
 	public String toString() {
 		return "Shift [shift_id=" + shift_id + ", b_id=" + b_id + ", d_id=" + d_id + ", num_psg=" + num_psg
-				+ ", total_psg=" + total_psg + "]";
+				+ ", total_psg=" + total_psg + ", routeid=" + routeid + ", routeno=" + routeno + "]";
 	}
 	
 }
