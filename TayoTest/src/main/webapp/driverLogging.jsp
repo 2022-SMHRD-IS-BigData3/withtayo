@@ -507,9 +507,9 @@ li:last-child::after {
 						<div id="sign-up-container"
 							style="padding: 30px; margin-top: 70px;">
 							<form action="Login" method="post">
-								<label for="id">ID</label> <input type="text" name="d_id"
-									id="id" placeholder="기사님 ID입력"> <label for="pw">PW</label>
-								<input type="password" name="d_pw" id="pw" placeholder="기사님 PW입력">
+								<label for="id">기사님 ID</label> <input type="text" name="d_id"
+									id="id" placeholder="ID입력"> <label for="pw">기사님 PW</label>
+								<input type="password" name="d_pw" id="pw" placeholder="PW입력">
 
 								<div>
 									<button type="reset" id="button-r">취소</button>

@@ -446,11 +446,12 @@
     .signupbtn2:hover:after {
         width: 100%;
         transition: 800ms ease all;
-        
+
     }
-    .navbar-toggler{
-            width: 70px;
-        }
+
+    .navbar-toggler {
+        width: 70px;
+    }
 </style>
 
 <body>
@@ -462,7 +463,10 @@
                         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                         <span class="navbar-toggler-icon"></span> <!-- navbar 토글 버튼 아이콘 -->
                     </button>
-                    <div class="col-9 d-flex  align-items-center" style="font-size:large; font-style: italic; font-weight: 900; font-size: 30px; color: whitesmoke;"><span style="margin-left: 15px; text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);">withTAYO</span></div>
+                    <div class="col-9 d-flex  align-items-center"
+                        style="font-size:large; font-style: italic; font-weight: 900; font-size: 30px; color: whitesmoke;">
+                        <span style="margin-left: 15px; text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);">withTAYO</span>
+                    </div>
                     <div class="container offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                         aria-labelledby="offcanvasNavbarLabel"> <!-- Offcanvas 시작 -->
                         <div class="offcanvas-header" id="offcanvas-header">
@@ -490,10 +494,13 @@
                 <div id="signupWrapper">
                     <form action="SignupSubmit" method="post">
                         <table style="width: 338px; text-align: center; font-weight: bold;">
-                            <div style="display: flex; justify-content: center; width: 338px; font-weight: bold; font-size: 20px; margin-bottom: 25px;">회원가입</div>
+                            <div
+                                style="display: flex; justify-content: center; width: 338px; font-weight: bold; font-size: 20px; margin-bottom: 25px;">
+                                회원가입</div>
                             <tr>
                                 <td>아이디</td> <!--原 value="ID입력" -->
-                                <td><input type="text" value="" placeholder=" 모든 정보 필수 입력" style="width: 200px; font-weight: bold;">
+                                <td><input type="text" value="" placeholder=" 모든 정보 필수 입력"
+                                        style="width: 200px; font-weight: bold;">
                                 </td>
                             </tr>
                             <tr>
@@ -507,10 +514,17 @@
                                 </tr>
                             </c:if>
                             <tr>
-                                <td colspan="2"><a style="font-size: 10px;" href="" onclick="alert('세부내용 업데이트 준비 中')">이용약관 및 운영정책 확인하기</a></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><a style="font-size: 10px;" href="" onclick="alert('시스템 준비 中')">개인정보관련 사항 확인하기</a></td>
+                                <td colspan="2"><a style="font-size: 12px;" href=""
+                                        onclick="alert('세부내용 업데이트 준비 中')">이용약관 및 운영정책 확인하기</a></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><a style="font-size: 12px;" href=""
+                                        onclick="alert('세부내용 업데이트 준비 中')">개인정보관련
+                                        사항 확인하기</a></td>
                             </tr>
                         </table>
                         <div style="display: flex; justify-content: center; width: 338px;">
@@ -521,6 +535,7 @@
                         </div>
                     </form>
                 </div>
+
             </div>
 
 
@@ -529,7 +544,8 @@
         <div class="endbar">
             <div class="row">
                 <div class="a">
-                    <img src="../스인개광고판.png" alt="" id="image" style="width: 100%; height: 100%; border: solid 1px black;">
+                    <img src="../스인개광고판.png" alt="" id="image"
+                        style="width: 100%; height: 100%; border: solid 1px black;">
                 </div>
             </div>
         </div>
@@ -550,8 +566,8 @@
             });
         });
 
-                // 하단 광고판 이미지 변경 코드
-                var imageIndex = 0;
+        // 하단 광고판 이미지 변경 코드
+        var imageIndex = 0;
         var images = ["../스인개광고판.png", "../스마트폰광고판.png", "../스인개추가광고판.jpg"];
         var intervalTime = 3000; // 3초마다 이미지 변경
 
