@@ -1002,8 +1002,9 @@
         });
 
         var imageIndex = 0;
-        var images = ["../스인개광고판.png", "../스마트폰광고판.png", "../스인개추가광고판.jpg"];
-        var intervalTime = 3000; // 3초마다 이미지 변경
+        
+        var images = ["IMG/광고1.png", "IMG/광고2.png", "IMG/광고3.png", "IMG/광고4.png"];
+        var intervalTime = 5000; // 3초마다 이미지 변경
 
         function changeImage() {
             // 이미지 인덱스 계산

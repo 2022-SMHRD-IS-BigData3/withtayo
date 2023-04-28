@@ -448,6 +448,10 @@
         width: 100%;
         transition: 800ms ease all;
     }
+
+    .navbar-toggler {
+        width: 70px;
+    }
 </style>
 
 <body>
@@ -459,7 +463,10 @@
                         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                         <span class="navbar-toggler-icon"></span> <!-- navbar 토글 버튼 아이콘 -->
                     </button>
-                    <div class="col-9 d-flex  align-items-center" style="font-size:large">basic</div>
+                    <div class="col-9 d-flex  align-items-center"
+                        style="font-size:large; font-style: italic; font-weight: 900; font-size: 30px; color: whitesmoke;">
+                        <span style="margin-left: 15px; text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);">withTAYO</span>
+                    </div>
                     <div class="container offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                         aria-labelledby="offcanvasNavbarLabel"> <!-- Offcanvas 시작 -->
                         <div class="offcanvas-header" id="offcanvas-header">
@@ -469,18 +476,11 @@
                             <!-- Offcanvas 닫기 버튼 -->
                         </div>
                         <div class="offcanvas-body" id="offcanvas-body"> <!-- Offcanvas 내용 -->
-                            <div class="navbar-nav">
+                            <div class="navbar-nav" style="text-align: center;">
                                 <a class="nav-link active" href="#">공지 사항</a>
                                 <hr>
-                                <a class="nav-link active" href="../1차프로젝트/노선정보겅색.html">길찾기</a>
-                                <a class="nav-link active" href="../1차프로젝트/예약확인.html">현재 예약 정보</a>
-                                <a class="nav-link active" href="#">예약내역</a>
+                                <div><span>로그인 이후 이용가능</span></div>
                                 <hr>
-                                <li class="nav-item dropdown">
-                                <li><a class="nav-link active" href="#">개인정보 변경</a>
-                                    <a class="nav-link active" href="#">고객센터</a>
-                                    <a class="nav-link active" href="#"></a>
-                                    <a class="nav-link active" href="#">로그아웃</a>
                             </div>
                         </div>
                     </div> <!-- Offcanvas 끝 -->
@@ -492,75 +492,87 @@
             <div style="width: 338px; margin: 1px;">
                 <!-- 중앙 컨텐츠 -->
                 <div id="signupWrapper">
-                	<!--  버스기사 회원가입으로 이동 -->
-                	<c:if test="${userCategory == 'isDriver'}">
-                	 <form action="DSignupSubmit" method="post">
-                        <table style="width: 338px; text-align: center; font-weight: bold;">
-                            <div style="display: flex; justify-content: center; width: 338px; font-weight: bold; font-size: 20px; margin-bottom: 25px;">회원가입</div>
-                            <tr>
-                                <td>아이디</td> <!--原 value="ID입력" -->
-                                <td><input type="text" name = "d_id"value="" placeholder=" 모든 정보 필수 입력" style="width: 200px; font-weight: bold;">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>비밀번호</td><!--原 value="PW입력" -->
-                                <td><input type="password" name = "d_pw"placeholder=" ●●●●●●" style="width: 200px;"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><a style="font-size: 10px;" href="" onclick="alert('세부내용 업데이트 준비 中')">이용약관 및 운영정책 확인하기</a></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><a style="font-size: 10px;" href="" onclick="alert('시스템 준비 中')">개인정보관련 사항 확인하기</a></td>
-                            </tr>
-                        </table>
-                        
-                        <div style="display: flex; justify-content: center; width: 338px;">
-                            <div><input  class="signupbtn1" type="reset" value="재입력"
-                                    style="width: 100px; margin-right: 20px;"></div>
-                            <div><input class="signupbtn2" type="submit" value="가입"
-                                    style="width: 100px; margin-left: 20px;"></div>
-                        </div>
-                      </form>
-                	</c:if>
-                
-                <!--  승객 회원가입으로 이동 -->
-                 <c:if test="${userCategory=='isPassenger'}">
-                    <form action="SignupSubmit" method="post">
-                        <table style="width: 338px; text-align: center; font-weight: bold;">
-                            <div style="display: flex; justify-content: center; width: 338px; font-weight: bold; font-size: 20px; margin-bottom: 25px;">회원가입</div>
-                            <tr>
-                                <td>아이디</td> <!--原 value="ID입력" -->
-                                <td><input type="text" name = "p_id"value="" placeholder=" 모든 정보 필수 입력" style="width: 200px; font-weight: bold;">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>비밀번호</td><!--原 value="PW입력" -->
-                                <td><input type="password" name = "p_pw"placeholder=" ●●●●●●" style="width: 200px;"></td>
-                            </tr>
-                            
+                    <!--  버스기사 회원가입으로 이동 -->
+                    <c:if test="${userCategory == 'isDriver'}">
+                        <form action="DSignupSubmit" method="post" style="margin-top: 60px;">
+                            <table style="width: 338px; text-align: center; font-weight: bold;">
+                                <div
+                                    style="display: flex; justify-content: center; width: 338px; font-weight: bold; font-size: 20px; margin-bottom: 25px;">
+                                    Bus 기사 회원가입</div>
+                                <tr>
+                                    <td>아이디</td> <!--原 value="ID입력" -->
+                                    <td><input type="text" name="d_id" value="" placeholder=" 모든 정보 필수 입력"
+                                            style="width: 200px; font-weight: bold;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>비밀번호</td><!--原 value="PW입력" -->
+                                    <td><input type="password" name="d_pw" placeholder=" ●●●●●●" style="width: 200px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><a style="font-size: 12px;" href=""
+                                            onclick="alert('세부내용 업데이트 준비 中')">이용약관 및 운영정책 확인하기</a></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><a style="font-size: 12px;" href=""
+                                            onclick="alert('세부내용 업데이트 준비 中')">개인정보관련
+                                            사항 확인하기</a></td>
+                                </tr>
+                            </table>
+
+                            <div style="display: flex; justify-content: center; width: 338px;">
+                                <div><input class="signupbtn1" type="reset" value="재입력"
+                                        style="width: 100px; margin-right: 20px;"></div>
+                                <div><input class="signupbtn2" type="submit" value="가입"
+                                        style="width: 100px; margin-left: 20px;"></div>
+                            </div>
+                        </form>
+                    </c:if>
+
+                    <!--  승객 회원가입으로 이동 -->
+                    <c:if test="${userCategory=='isPassenger'}">
+                        <form action="SignupSubmit" method="post">
+                            <table style="width: 338px; text-align: center; font-weight: bold;">
+                                <div
+                                    style="display: flex; justify-content: center; width: 338px; font-weight: bold; font-size: 20px; margin-bottom: 25px;">
+                                    회원가입</div>
+                                <tr>
+                                    <td>아이디</td> <!--原 value="ID입력" -->
+                                    <td><input type="text" name="p_id" value="" placeholder=" 모든 정보 필수 입력"
+                                            style="width: 200px; font-weight: bold;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>비밀번호</td><!--原 value="PW입력" -->
+                                    <td><input type="password" name="p_pw" placeholder=" ●●●●●●" style="width: 200px;">
+                                    </td>
+                                </tr>
+
                                 <tr>
                                     <td>전화번호</td> <!--原 value="전화번호 입력" -->
-                                    <td><input type="text" name = "p_ph" placeholder=" ex.010-3311-2244" style="width: 200px;"></td>
+                                    <td><input type="text" name="p_ph" placeholder=" ex.010-3311-2244"
+                                            style="width: 200px;"></td>
                                 </tr>
-                    
-                           
-                    
-                            <tr>
-                                <td colspan="2"><a style="font-size: 10px;" href="" onclick="alert('세부내용 업데이트 준비 中')">이용약관 및 운영정책 확인하기</a></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><a style="font-size: 10px;" href="" onclick="alert('시스템 준비 中')">개인정보관련 사항 확인하기</a></td>
-                            </tr>
-                        </table>
-                        
-                        <div style="display: flex; justify-content: center; width: 338px;">
-                            <div><input  class="signupbtn1" type="reset" value="재입력"
-                                    style="width: 100px; margin-right: 20px;"></div>
-                            <div><input class="signupbtn2" type="submit" value="가입"
-                                    style="width: 100px; margin-left: 20px;"></div>
-                        </div>
-                    </form>
-                  </c:if>
+                                <tr>
+                                    <td colspan="2"><a style="font-size: 12px;" href=""
+                                            onclick="alert('세부내용 업데이트 준비 中')">이용약관 및 운영정책 확인하기</a></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><a style="font-size: 12px;" href=""
+                                            onclick="alert('세부내용 업데이트 준비 中')">개인정보관련
+                                            사항 확인하기</a></td>
+                                </tr>
+                            </table>
+
+                            <div style="display: flex; justify-content: center; width: 338px;">
+                                <div><input class="signupbtn1" type="reset" value="재입력"
+                                        style="width: 100px; margin-right: 20px;"></div>
+                                <div><input class="signupbtn2" type="submit" value="가입"
+                                        style="width: 100px; margin-left: 20px;"></div>
+                            </div>
+                        </form>
+                    </c:if>
                 </div>
             </div>
 
@@ -568,8 +580,11 @@
             <!--  -->
         </div>
         <div class="endbar">
-            <div class="row" style="background-color: gray;">
-                <div class="a" style="font-family: gg;">광고 혹은 이용설명</div>
+            <div class="row">
+                <div class="a">
+                    <img src="../스인개광고판.png" alt="" id="image"
+                        style="width: 100%; height: 100%; border: solid 1px black;">
+                </div>
             </div>
         </div>
     </div>
@@ -588,6 +603,29 @@
                 });
             });
         });
+
+        // 하단 광고판 이미지 변경 코드
+        var imageIndex = 0;
+        var images = ["IMG/광고1.png", "IMG/광고2.png", "IMG/광고3.png", "IMG/광고4.png"];
+        var intervalTime = 5000; // 3초마다 이미지 변경
+
+        function changeImage() {
+            // 이미지 인덱스 계산
+            imageIndex = (imageIndex + 1) % images.length;
+
+            // 다음 이미지 표시
+            var imgElement = document.getElementById("image");
+            imgElement.src = images[imageIndex];
+        }
+
+        // 초기 이미지 표시
+        var imgElement = document.getElementById("image");
+        imgElement.src = images[0];
+
+        // 일정 시간마다 이미지 변경
+        setInterval(changeImage, intervalTime);
+
+        // 광고판 이미지 변경 끝
     </script>
 </body>
 
