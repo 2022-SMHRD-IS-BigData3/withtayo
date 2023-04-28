@@ -248,7 +248,6 @@
     					// 예약 조회 결과(리스트 아님 selectOne으로 하나씩 반복)
     					bookedInfoQueryResult = resp002;
     					console.log(bookedInfoQueryResult);
-    					
     				},
     				error : function(xhr, status, error){
     					console.log(error);
