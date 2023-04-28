@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,22 +45,12 @@
             padding: 0;
         }
 
-        .jumbotron {
-            background-color: gray;
-            width: 100%;
-            height: 1.5cm;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+
 
         .big {
             height: 12.7cm;
         }
 
-        .jumbotron>.container {
-            max-width: unset;
-        }
 
         /* Font를 적용할 클래스를 지정합니다. */
         .my-font {
@@ -129,7 +119,7 @@
 
         .offcanvas {
             max-width: 250px;
-            max-height: 450px;
+            max-height: 330px;
             position: absolute;
             left: 150px;
             background-color: #fff8f8;
@@ -151,6 +141,29 @@
         #offcanvas-body {
             padding: 14px;
         }
+
+        .navbar-toggler {
+            width: 70px;
+        }
+
+        .container-fluid {
+            display: flex;
+            text-align: center;
+            width: 100%;
+        }
+
+        .endbar {
+            position: inline-block;
+            bottom: 0;
+            width: 96.5%;
+            padding-left: 12px;
+        }
+
+        .a {
+            padding: 0px;
+            height: 1.5cm;
+            text-align: center;
+        }
     </style>
 
 </head>
@@ -164,28 +177,30 @@
                         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                         <span class="navbar-toggler-icon"></span> <!-- navbar 토글 버튼 아이콘 -->
                     </button>
-                    <div class="col-9 d-flex  align-items-center" style="font-size:large">basic</div>
+                    <div class="col-9 d-flex  align-items-center"
+                        style="font-size:large; font-style: italic; font-weight: 900; font-size: 30px; color: whitesmoke;">
+                        <span style="margin-left: 15px; text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);">withTAYO</span>
+                    </div>
                     <div class="container offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                         aria-labelledby="offcanvasNavbarLabel"> <!-- Offcanvas 시작 -->
                         <div class="offcanvas-header" id="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">withTAYO</h5> <!-- Offcanvas 헤더 -->
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">withTAYO</h5>
+                            <!-- Offcanvas 헤더 -->
                             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                                 aria-label="Close"></button>
                             <!-- Offcanvas 닫기 버튼 -->
                         </div>
                         <div class="offcanvas-body" id="offcanvas-body"> <!-- Offcanvas 내용 -->
-                            <div class="navbar-nav">
+                            <div class="navbar-nav" style="text-align: center;">
                                 <a class="nav-link active" href="#">공지 사항</a>
                                 <hr>
                                 <a class="nav-link active" href="../1차프로젝트/노선정보겅색.html">길찾기</a>
-                                <a class="nav-link active" href="../1차프로젝트/예약확인.html">현재 예약 정보</a>
-                                <a class="nav-link active" href="#">예약내역</a>
+                                <a class="nav-link active" href="../1차프로젝트/예약확인.html">예약 정보</a>
+                                <a class="nav-link active" href="#">개인정보 변경</a>
+                                <a class="nav-link active" href="#">고객센터</a>
+                                <a class="nav-link active" href="#"></a>
                                 <hr>
-                                <li class="nav-item dropdown">
-                                <li><a class="nav-link active" href="#">개인정보 변경</a>
-                                    <a class="nav-link active" href="#">고객센터</a>
-                                    <a class="nav-link active" href="#"></a>
-                                    <a class="nav-link active" href="#">로그아웃</a>
+                                <a class="nav-link active" href="#">로그아웃</a>
                             </div>
                         </div>
                     </div> <!-- Offcanvas 끝 -->
@@ -202,16 +217,19 @@
                             <th style=" font-weight: bold;">예약 정보</th>
                     </tr>
                     <tr>
-                        <td style="font-size: 12px;">노선번호: <span style="font-weight: bold;">${bookedInfo.routeno}</span></td>
+                        <td style="font-size: 12px;">노선번호: <span style="font-weight: bold;">${bookedInfo.routeno}</span>
+                        </td>
                     </tr>
                     <tr>
                         <td style="font-size: 12px;">예약자 ID : ${bookedInfo.p_id}</td>
                     </tr>
-               <!--      <tr>
+                    <!--      <tr>
                         <td style="font-size: 12px;">버스기사 ID : ㅎㅇㅇ</td>
                     </tr>  -->
                     <tr>
-                        <td style="font-size: 12px;">예약시간 : <fmt:formatDate value="${bookedInfo.booktime}" pattern="yyyy년MM월dd일hh시mm분"/></td>
+                        <td style="font-size: 12px;">예약시간 :
+                            <fmt:formatDate value="${bookedInfo.booktime}" pattern="yyyy년MM월dd일hh시mm분" />
+                        </td>
                     </tr>
                     </table>
                 </div>
@@ -263,147 +281,172 @@
             <div>
                 <div>
                     <div id="btnTbl">
-                                <button type="button" class="btn btn-secondary" id="button"
-                                    style="background-color: rgb(192, 190, 190); border: 0;">취 소</button>
-                                <button class="btn btn-warning" id="bookingBtn" style="color: white;background-color: rgb(231, 177, 10);">예 약</button>
+                        <button type="button" class="btn btn-secondary" id="button"
+                            style="background-color: rgb(192, 190, 190); border: 0;">취 소</button>
+                        <button class="btn btn-warning" id="bookingBtn"
+                            style="color: white;background-color: rgb(231, 177, 10);">예 약</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="jumbotron jumbotron-fluid">
-            <div class="row" style="background-color: gray;">
-                <div class="a" style="font-family: gg;">광고 혹은 이용설명</div>
+        <div class="endbar">
+            <div class="row">
+                <div class="a">
+                    <img src="../스인개광고판.png" alt="" id="image"
+                        style="width: 100%; height: 100%; border: solid 1px black;">
+                </div>
             </div>
         </div>
     </div>
     <script>
-    	// 넘겨받은 예약정보(프리뷰) 객체
-    	let iAmBabo = null;
-    	// 해당 노선이 거치는 모든 정류장
-    	let allNodes = null;
-    	// 승차할 정류장의 정류장 DB상 순번 (방향 판단용)
-    	let dprtNodeOrder = 0;
-    	// 해당 노선이 거치는 모든 정류장 개수
-    	let numOfAllNodes = 0;
-    	// 출발지 정류장의 방향
-    	let dprtNodeDirection = "";
-    	// 운행중인 해당 노선의 모든 버스 (Prolly redundant)
-		let allBuses = null;
-    	// 양 방향 버스 분리
-    	let ascBuses = [];
-    	let descBuses = [];
-    	// 예약 신호 보낼 타겟 버스
-    	let targetBus = null;
-    	
-    	
-    	$(document).ready(function () {
-    		
-    		// 예약 버튼 클릭시
-        	$('#bookingBtn').on('click', function () {
- 				console.log("1st procedure : Get session attribute 'bookedInfo'");
-        		// 세션 속성 bookedInfo (예약 프리뷰 정보) 가져오기
- 				$.ajax({
-        			url : 'GetSessionAttrib',
-        			success : function(resp001){
-        				console.log("1st procedure complete.");
-        				iAmBabo = resp001;
-        			},
-        			error : function(error){
-        				console.log("1st procedure has encountered an error: "+error);
-        			}
-        		// 출발 정류장의 db상 순서, 해당 노선이 거치는 정류장 개수 (방향 판단용)
-        		}).then(function(toBeDumped){
-        			console.log("2nd procedure : Retrieve nodeord property of the node. And Get the number of nodes to use in operations.");
-        			$.ajax({
-        				url : 'https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=300&_type=json&cityCode=24&routeId='+iAmBabo.routeid,
-        				success : function(resp002){
-        		//			console.log(resp002);
-        					allNodes = resp002;
-        					allNodes.response.body.items.item.forEach(function(elem){
-        						if(elem.nodeid == iAmBabo.dprtnode){
-        							dprtNodeOrder = elem.nodeord;
-        							// use try catch to break from the loop / PRIORITY : LOW
-        						}
-        					});
-        					console.log("Departure node number of order: "+dprtNodeOrder);
-        					// 출발지 정류장의 순서number로 방향 조회 *모든 정류장이 2개씩 있다는 가정하에 짠 코드임 ^^ 순환선에는 다르게 써야할수도있다
-        					numOfAllNodes = allNodes.response.body.items.item.length;
-        					if(numOfAllNodes/2 < dprtNodeOrder){
-        						dprtNodeDirection = "Ascending";
-        					}else{
-        						dprtNodeDirection = "Descending";
-        					}
-        					console.log("Departure node direction: " + dprtNodeDirection);
-        				},
-        				error : function(error){
-        					console.log(error);
-        				}
-        			});
-        		// 현재 운행중인 해당 노선의 버스들 모두 조회, 어떤 버스 호출할지 선택
-        		}).then(function(humptyDumpty){
-        			console.log("3rd procedure : Get all the bus of said route that are running.")
-        			$.ajax({
-        				url : 'https://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=50&_type=json&cityCode=24&routeId='+iAmBabo.routeid,
-        				success : function(resp003){
-        					console.log("Retrieved all the buses on the road.");
-        					allBuses = resp003.response.body.items.item;
-        					let distArr = []; // 거리 비교용
-        					// 먼저 버스들 방향별로 추려내기
-        					allBuses.forEach(function(elem){
-        						if(numOfAllNodes/2 < elem.nodeord){
-        							ascBuses.push(elem);
-        						}else{
-        							descBuses.push(elem);
-        						}
-        						distArr.push(Math.abs(elem.nodeord-dprtNodeOrder));
-        					});
-        					// 출발지 정류장과 맞는 방향 버스들중에서 비교
-        					if(dprtNodeDirection === "Ascending"){
-        						ascBuses.forEach(function(elem){
-        							distArr.push(Math.abs(elem.nodeord-dprtNodeOrder));
-        						});
-        					}else{
-        						descBuses.forEach(function(elem){
-        							distArr.push(Math.abs(elem.nodeord-dprtNodeOrder));
-        						});
-        					}
-        					
-        					// 최소값의 인덱스 구함 그럴거임 ㄴㄻㄴㅇㄻㄴㅇㄻㄴㅇㄹ
-        					let targetIdx = distArr.indexOf(Math.min(...distArr));
-        					// 대망으 그놈 ㅇㅎㅇㅎㅇㅎㄹㅇㅇㅎ
-        					targetBus = allBuses[targetIdx];
-        					console.log("Target Bus Found!!!!" + targetBus);
-        				},
-        				error : function(error){
-        					console.log(error);
-        				}
-        			});
-        		// 차량번호와 예약정보 서블렛으로 전송 -> 데이터 패키징 -> 디비 입력 -> 대기화면으로 리디렉트
-        		}).then(function(dumpThisMF){
-        			console.log("4th procedure : send the vehicleno and booking info to a servlet for packaging and get redirected to the waiting area.");
-        			$.ajax({
-        				url : 'Book', // book'em! f'ing book'em! asdkadlfjgnaldkjfg
-        				data : {b_id:targetBus, blog_id:iAmBabo.blog_id},
-        				success : function(resp004){
-        					console.log("All packed up and ready to redirect.");
-        					console.log(resp004);
-        					window.location.replace("matching.jsp");
-        				},
-        				error : function(xhr, status, error){
-        					console.log(error);
-        				}
-        			});
-        		});
-        		//!!!!########!!!!!!!!!!!!!!!!!!! catch 써야댐!!!!!!!!!!!!!!!!##########!!!!!!!!!!!
-        		//	window.location.href = '대기화면.html';
-        			
-        		
+        // 넘겨받은 예약정보(프리뷰) 객체
+        let iAmBabo = null;
+        // 해당 노선이 거치는 모든 정류장
+        let allNodes = null;
+        // 승차할 정류장의 정류장 DB상 순번 (방향 판단용)
+        let dprtNodeOrder = 0;
+        // 해당 노선이 거치는 모든 정류장 개수
+        let numOfAllNodes = 0;
+        // 출발지 정류장의 방향
+        let dprtNodeDirection = "";
+        // 운행중인 해당 노선의 모든 버스 (Prolly redundant)
+        let allBuses = null;
+        // 양 방향 버스 분리
+        let ascBuses = [];
+        let descBuses = [];
+        // 예약 신호 보낼 타겟 버스
+        let targetBus = null;
+
+
+        $(document).ready(function () {
+
+            // 예약 버튼 클릭시
+            $('#bookingBtn').on('click', function () {
+                console.log("1st procedure : Get session attribute 'bookedInfo'");
+                // 세션 속성 bookedInfo (예약 프리뷰 정보) 가져오기
+                $.ajax({
+                    url: 'GetSessionAttrib',
+                    success: function (resp001) {
+                        console.log("1st procedure complete.");
+                        iAmBabo = resp001;
+                    },
+                    error: function (error) {
+                        console.log("1st procedure has encountered an error: " + error);
+                    }
+                    // 출발 정류장의 db상 순서, 해당 노선이 거치는 정류장 개수 (방향 판단용)
+                }).then(function (toBeDumped) {
+                    console.log("2nd procedure : Retrieve nodeord property of the node. And Get the number of nodes to use in operations.");
+                    $.ajax({
+                        url: 'https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=300&_type=json&cityCode=24&routeId=' + iAmBabo.routeid,
+                        success: function (resp002) {
+                            //			console.log(resp002);
+                            allNodes = resp002;
+                            allNodes.response.body.items.item.forEach(function (elem) {
+                                if (elem.nodeid == iAmBabo.dprtnode) {
+                                    dprtNodeOrder = elem.nodeord;
+                                    // use try catch to break from the loop / PRIORITY : LOW
+                                }
+                            });
+                            console.log("Departure node number of order: " + dprtNodeOrder);
+                            // 출발지 정류장의 순서number로 방향 조회 *모든 정류장이 2개씩 있다는 가정하에 짠 코드임 ^^ 순환선에는 다르게 써야할수도있다
+                            numOfAllNodes = allNodes.response.body.items.item.length;
+                            if (numOfAllNodes / 2 < dprtNodeOrder) {
+                                dprtNodeDirection = "Ascending";
+                            } else {
+                                dprtNodeDirection = "Descending";
+                            }
+                            console.log("Departure node direction: " + dprtNodeDirection);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                    // 현재 운행중인 해당 노선의 버스들 모두 조회, 어떤 버스 호출할지 선택
+                }).then(function (humptyDumpty) {
+                    console.log("3rd procedure : Get all the bus of said route that are running.")
+                    $.ajax({
+                        url: 'https://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=50&_type=json&cityCode=24&routeId=' + iAmBabo.routeid,
+                        success: function (resp003) {
+                            console.log("Retrieved all the buses on the road.");
+                            allBuses = resp003.response.body.items.item;
+                            let distArr = []; // 거리 비교용
+                            // 먼저 버스들 방향별로 추려내기
+                            allBuses.forEach(function (elem) {
+                                if (numOfAllNodes / 2 < elem.nodeord) {
+                                    ascBuses.push(elem);
+                                } else {
+                                    descBuses.push(elem);
+                                }
+                                distArr.push(Math.abs(elem.nodeord - dprtNodeOrder));
+                            });
+                            // 출발지 정류장과 맞는 방향 버스들중에서 비교
+                            if (dprtNodeDirection === "Ascending") {
+                                ascBuses.forEach(function (elem) {
+                                    distArr.push(Math.abs(elem.nodeord - dprtNodeOrder));
+                                });
+                            } else {
+                                descBuses.forEach(function (elem) {
+                                    distArr.push(Math.abs(elem.nodeord - dprtNodeOrder));
+                                });
+                            }
+
+                            // 최소값의 인덱스 구함 그럴거임 ㄴㄻㄴㅇㄻㄴㅇㄻㄴㅇㄹ
+                            let targetIdx = distArr.indexOf(Math.min(...distArr));
+                            // 대망으 그놈 ㅇㅎㅇㅎㅇㅎㄹㅇㅇㅎ
+                            targetBus = allBuses[targetIdx];
+                            console.log("Target Bus Found!!!!" + targetBus);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    });
+                    // 차량번호와 예약정보 서블렛으로 전송 -> 데이터 패키징 -> 디비 입력 -> 대기화면으로 리디렉트
+                }).then(function (dumpThisMF) {
+                    console.log("4th procedure : send the vehicleno and booking info to a servlet for packaging and get redirected to the waiting area.");
+                    $.ajax({
+                        url: 'Book', // book'em! f'ing book'em! asdkadlfjgnaldkjfg
+                        data: { b_id: targetBus, blog_id: iAmBabo.blog_id },
+                        success: function (resp004) {
+                            console.log("All packed up and ready to redirect.");
+                            console.log(resp004);
+                            window.location.replace("matching.jsp");
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                });
+                //!!!!########!!!!!!!!!!!!!!!!!!! catch 써야댐!!!!!!!!!!!!!!!!##########!!!!!!!!!!!
+                //	window.location.href = '대기화면.html';
+
+
             });
-        	
-    		
+
+
         });
-    	
-    	
+        // 하단 광고판 이미지 변경 코드
+        var imageIndex = 0;
+        var images = ["../스인개광고판.png", "../스마트폰광고판.png", "../스인개추가광고판.jpg"];
+        var intervalTime = 3000; // 3초마다 이미지 변경
+
+        function changeImage() {
+            // 이미지 인덱스 계산
+            imageIndex = (imageIndex + 1) % images.length;
+
+            // 다음 이미지 표시
+            var imgElement = document.getElementById("image");
+            imgElement.src = images[imageIndex];
+        }
+
+        // 초기 이미지 표시
+        var imgElement = document.getElementById("image");
+        imgElement.src = images[0];
+
+        // 일정 시간마다 이미지 변경
+        setInterval(changeImage, intervalTime);
+
+        // 광고판 이미지 변경 끝
+
     </script>
 </body>
 

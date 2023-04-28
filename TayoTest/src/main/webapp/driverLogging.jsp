@@ -507,9 +507,12 @@ li:last-child::after {
 						<div id="sign-up-container"
 							style="padding: 30px; margin-top: 70px;">
 							<form action="Login" method="post">
-								<label for="id">기사님 ID</label> <input type="text" name="d_id"
-									id="id" placeholder="ID입력"> <label for="pw">기사님 PW</label>
-								<input type="password" name="d_pw" id="pw" placeholder="PW입력">
+								<label for="id">기사님 ID</label> 
+								<div> 
+									<input type="text" name="d_id" id="id" placeholder="ID입력">
+								</div>
+								 <label for="pw">기사님 PW</label>
+									<input type="password" name="d_pw" id="pw" placeholder="PW입력">
 
 								<div>
 									<button type="reset" id="button-r">취소</button>
@@ -559,7 +562,7 @@ li:last-child::after {
 								</div>
 								<div class="btnddrd" style="width: 100%; margin-left: 5px;">
 									<div>
-										<input type="submit" id="button-ld" value="운행 시작"
+										<input type="submit" id="button-ld" value="버스고유번호 등록"
 											class="btn btn-block">
 									</div>
 									<div>

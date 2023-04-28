@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 
@@ -312,7 +312,7 @@
 
         .offcanvas {
             max-width: 250px;
-            max-height: 450px;
+            max-height: 330px;
             position: absolute;
             left: 150px;
             background-color: #fff8f8;
@@ -360,6 +360,28 @@
             justify-content: center;
             padding: 5px;
         }
+
+        .endbar {
+            position: inline-block;
+            bottom: 0;
+            width: 96.5%;
+            padding-left: 12px;
+        }
+
+        .a {
+            padding: 0px;
+            height: 1.5cm;
+            text-align: center;
+        }
+
+        .sign-out-container-body {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-toggler {
+            width: 70px;
+        }
     </style>
 </head>
 
@@ -367,43 +389,41 @@
     <div class="container">
         <div class="navbar" style="font-family: gg;">
             <nav class="navbar">
-                <!-- navbar 시작 -->
-                <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                        <span class="navbar-toggler-icon"></span>
-                        <!-- navbar 토글 버튼 아이콘 -->
-                    </button>
-                    <div class="col-9 d-flex  align-items-center" style="font-size: large">안전운전하세요!</div>
-                    <div class="container offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
-                        aria-labelledby="offcanvasNavbarLabel">
-                        <!-- Offcanvas 시작 -->
-                        <div class="offcanvas-header" id="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">withTAYO</h5>
-                            <!-- Offcanvas 헤더 -->
-                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-                                aria-label="Close"></button>
-                            <!-- Offcanvas 닫기 버튼 -->
-                        </div>
-                        <div class="offcanvas-body" id="offcanvas-body">
-                            <!-- Offcanvas 내용 -->
-                            <div class="navbar-nav">
-                                <a class="nav-link active" href="#">공지 사항</a>
-                                <hr>
-                                <a class="nav-link active" href="../1차프로젝트/노선정보겅색.html">길찾기</a>
-                                <a class="nav-link active" href="../1차프로젝트/예약확인.html">현재 예약
-                                    정보</a> <a class="nav-link active" href="#">예약내역</a>
-                                <hr>
-                                <li><a class="nav-link active" href="#">개인정보 변경</a> <a class="nav-link active"
-                                        href="#">고객센터</a> <a class="nav-link active" href="#"></a> <a
-                                        class="nav-link active" href="#">로그아웃</a>
+                <nav class="navbar">
+                    <nav class="navbar"> <!-- navbar 시작 -->
+                        <div class="container-fluid">
+                            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                                <span class="navbar-toggler-icon"></span> <!-- navbar 토글 버튼 아이콘 -->
+                            </button>
+                            <div class="col-9 d-flex  align-items-center"
+                                style="font-size:large; font-style: italic; font-weight: 900; font-size: 30px; color: whitesmoke;">
+                                <span
+                                    style="margin-left: 15px; text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);">withTAYO</span>
                             </div>
+                            <div class="container offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+                                aria-labelledby="offcanvasNavbarLabel"> <!-- Offcanvas 시작 -->
+                                <div class="offcanvas-header" id="offcanvas-header">
+                                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">withTAYO</h5>
+                                    <!-- Offcanvas 헤더 -->
+                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                        aria-label="Close"></button>
+                                    <!-- Offcanvas 닫기 버튼 -->
+                                </div>
+                                <div class="offcanvas-body" id="offcanvas-body"> <!-- Offcanvas 내용 -->
+                                    <div class="navbar-nav" style="text-align: center;">
+                                        <a class="nav-link active" href="#">공지 사항</a>
+                                        <hr>
+                                        <a class="nav-link active" href="#">개인정보 변경</a>
+                                        <a class="nav-link active" href="#">고객센터</a>
+                                        <a class="nav-link active" href="#"></a>
+                                        <hr>
+                                        <a class="nav-link active" href="#">로그아웃</a>
+                                    </div>
+                                </div>
+                            </div> <!-- Offcanvas 끝 -->
                         </div>
-                    </div>
-                    <!-- Offcanvas 끝 -->
-                </div>
-            </nav>
-            <!-- navbar 끝 -->
+                    </nav> <!-- navbar 끝 -->
         </div>
         <div class="section big">
             <!-- 중앙 컨텐츠 -->
@@ -412,32 +432,62 @@
 
                     <tr>
                         <td>ID</td>
-                        <td>${driver.d_id}</td>
+                        <td style="font-size: 14px; font-weight: bold;">${driver.d_id}</td>
                     </tr>
                     <tr>
                         <td>BUS등록번호</td>
-                        <td>${bus.b_id}</td>
+                        <td style="font-size: 14px; font-weight: bold;">${bus.b_id}</td>
                     </tr>
                     <tr>
-                        <td colspan="2">해당 정보로 접속합니다.</td>
+                        <td colspan="2" style="text-align: center;">해당 정보로 접속합니다.</td>
                     </tr>
+
                 </table>
             </div>
+                    <div style="text-align: center; font-weight: bold;">안전 운행 부탁드립니다.</div>
+
             <div class="section_mainbusinfor_add">
-            <input style="margin-right: 15px;" id="btnr"  type="button" value="취소" onclick="location.href='driverLogging.jsp'">
-            <input style="margin-left: 15px;" id="btnl" type="button" value="확인" onclick="location.href='driverMatching.jsp'">
-            <!-- 은혜 컨텐츠 시작 -->
+                <input style="margin-right: 15px;" id="btnr" type="button" value="취소"
+                    onclick="location.href='driverLogging.jsp'">
+                <input style="margin-left: 15px;" id="btnl" type="button" value="확인"
+                    onclick="location.href='driverMatching.jsp'">
+                <!-- 은혜 컨텐츠 시작 -->
             </div>
         </div>
 
         <div class="endbar">
-            <div class="row" style="background-color: gray;">
-                <div class="a" style="font-family: gg;">광고 혹은 이용설명</div>
+            <div class="row">
+                <div class="a">
+                    <img src="../스인개광고판.png" alt="" id="image"
+                        style="width: 100%; height: 100%; border: solid 1px black;">
+                </div>
             </div>
         </div>
     </div>
 
+    <script>
+        var imageIndex = 0;
+        var images = ["../스인개광고판.png", "../스마트폰광고판.png", "../스인개추가광고판.jpg"];
+        var intervalTime = 3000; // 3초마다 이미지 변경
 
+        function changeImage() {
+            // 이미지 인덱스 계산
+            imageIndex = (imageIndex + 1) % images.length;
+
+            // 다음 이미지 표시
+            var imgElement = document.getElementById("image");
+            imgElement.src = images[imageIndex];
+        }
+
+        // 초기 이미지 표시
+        var imgElement = document.getElementById("image");
+        imgElement.src = images[0];
+
+        // 일정 시간마다 이미지 변경
+        setInterval(changeImage, intervalTime);
+
+        // 광고판 이미지 변경 끝
+    </script>
 </body>
 
 </html>
