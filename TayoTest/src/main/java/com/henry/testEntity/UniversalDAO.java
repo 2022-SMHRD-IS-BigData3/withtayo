@@ -311,4 +311,18 @@ public class UniversalDAO {
 		return result;
 	}
 
+	public R_Info getRouteByName(String routeno) {
+		
+		SqlSession sesh = null;
+		R_Info result = null;
+		try {
+			sesh = seshFac.openSession();
+			result = sesh.selectOne("getRouteByName", routeno);
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+	}
+
 }

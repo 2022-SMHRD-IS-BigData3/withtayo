@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.henry.testEntity.Bus;
+import com.henry.testEntity.Driver;
 import com.henry.testEntity.UniversalDAO;
 
 @WebServlet("/BusRegister")
@@ -18,7 +19,17 @@ public class BusRegistryController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String b_id = req.getParameter("b_id");
+		req.setCharacterEncoding("UTF-8");
+		
+		HttpSession sesh = req.getSession();
+		
+		Driver driver = (Driver)sesh.getAttribute("driver");
+		String d_id = driver.getD_id();
+		String b_id = req.getParameter("tailNum");
+		String routeno = req.getParameter("routeno");
+		String routeid = req.getParameter("routeid");
+		
+		System.out.println(d_id+b_id+routeno+routeid);
 		
 		// 해당 번호의 버스 등록 여부 체크 (기사가 버스 로그인시켜줌 졸귀? 응 아님)
 		Bus busVO = new Bus();
@@ -28,7 +39,6 @@ public class BusRegistryController extends HttpServlet {
 		
 		Bus resultVO = dao.busCheck(busVO);
 		
-		HttpSession sesh = req.getSession();
 			
 		sesh.setAttribute("bus", resultVO);
 			

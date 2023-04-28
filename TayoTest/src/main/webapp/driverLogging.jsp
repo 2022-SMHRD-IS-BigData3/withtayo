@@ -447,6 +447,13 @@ li:last-child::after {
 .navbar-toggler {
 	width: 70px;
 }
+/* 노선본호  - 차량번호 인풋이랑 버튼 숨길거*/
+.ifTailNum{
+	display: none;
+}
+.alwaysHide{
+	display: none;
+}
 </style>
 </head>
 
@@ -556,14 +563,27 @@ li:last-child::after {
 						</div>
 						<div class="sign-out-container-body">
 							<form action="BusRegister" method="post">
+							
 								<div>
-									<input type="text" name="b_id" placeholder="버스고유번호입력"
-										style="margin-left: 10px;">
+										<!-- 노선번호 입력창 -->
+										<input class="ifRoute" type="text" id="routeno" name="routeno" placeholder="노선번호 입력 예) 송암72"
+											style="margin-left: 10px;">
+										<!-- 차량번호 드랍다운 -->
+										<select class="ifTailNum" name="tailNum" id="tailNum">
+											<option selected>차량번호선택</option>
+										</select>
 								</div>
+										<input class="alwaysHide" name="routeid" id="routeid">
+								
 								<div class="btnddrd" style="width: 100%; margin-left: 5px;">
 									<div>
-										<input type="submit" id="button-ld" value="버스고유번호 등록"
-											class="btn btn-block">
+												<!-- 노선번호 -->
+											<input type="button" id="button-ld" value="노선번호 조회"
+												class="btn btn-block ifRoute">
+												
+												<!-- 차량번호 -->
+											<input type="submit" id="submit" disabled value="버스운행시작"
+												class="btn btn-block ifTailNum">
 									</div>
 									<div>
 										<input type="button" id="button-rd" class="btn btn-block"
@@ -587,9 +607,66 @@ li:last-child::after {
 			</div>
 		</div>
 	</div>
-
+	
 	<script>
-
+		// THESE CODES ARE STRICTLY FOR DYNAMIC DEMONSTRATION PURPOSE.
+		// HENCE NOT TO BE TAKEN AS AN ACTUAL USE CASE AS A PRODUCT.
+		// 노선번호부터 조회
+		
+		// 버스 조회 결과 raw json
+		let buses = null;
+		let routeid = "";
+		let routeno = "";
+		// 운행중인 해당노선 차량번호들
+		let tailNums = [];
+		
+		$('#button-ld').on("click", function(){
+			let routeInput = $("#routeno").val();
+			$.ajax({
+				url : 'DriverRouteSelect',
+				data : {routeno : routeInput},
+				success : function(resp001){
+					routeid = resp001.routeid;
+					routeno = resp001.routeno;
+					//노선 테이블 조회 완료
+		//			console.log(resp001);
+					if(resp001 === null || typeof resp001 === undefined){
+						$('#routeno').val("그런 노선 읍다");
+					}else{
+						$.ajax({
+							url : 'https://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=50&_type=json&cityCode=24&routeId='+resp001.routeid,
+							success : function(resp001_nested){
+								// 운행중인 해당노선 버스들 조회 완료
+								console.log(resp001_nested);
+								
+								buses = resp001_nested.response.body.items.item;
+								
+								buses.forEach(function(elem){
+									tailNums.push(elem.vehicleno);
+								});
+								
+								console.log(tailNums);
+								$(".ifRoute").hide();
+								$(".ifTailNum").show();
+								tailNums.forEach(function(elem){
+									$("#tailNum").append("<option value='"+elem+"'>"+elem+"</option>");
+								})
+								$("#routeid").val(routeid);
+								$("#submit").removeAttr("disabled");
+								
+							},
+							error : function(xhr, status, error){
+								console.log(error);
+							}
+						});						
+					}
+				},
+				error : function(xhr, status, error){
+				}
+				
+			});
+		});
+		
         console.log($('#driverJoin'));
         $('#driverJoin').on("click", () => {
             console.log("join clicked");

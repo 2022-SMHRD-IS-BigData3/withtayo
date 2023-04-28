@@ -95,4 +95,8 @@
   	select * from book_info where b_id=#{b_id}
   </select>
   
+  <select id="getRouteByName" parameterType="java.lang.String" resultType="com.henry.testEntity.R_Info">
+  	select * from r_info where routeno=#{routeno}
+  </select>
+  
 </mapper>
