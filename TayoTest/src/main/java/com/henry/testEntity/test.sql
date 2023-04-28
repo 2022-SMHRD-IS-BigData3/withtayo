@@ -136,3 +136,12 @@ alter table bus_shift
 add constraint shift_fk_routeid
 foreign key (routeid)
 references r_info(routeid);
+
+alter table bus_shift
+add nodeid varchar(100);
+
+alter table bus_shift
+add nodeord number;
+
+alter table bus_shift
+add nodenm varchar(100);

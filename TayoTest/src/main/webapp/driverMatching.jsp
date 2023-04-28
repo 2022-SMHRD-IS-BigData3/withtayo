@@ -253,19 +253,33 @@
     					console.log(error);
     				}
     			});
-    		}); // ajax-then scope
+    		}); // ajax-then scope CATCH NEEDED##############################
     		
-    		// 버스 현 위치 갱신
+    		// 버스 현 위치 갱신해서 카운타다운 계산과 동시에 자신 운행정보에 위치 저장
     		setInterval(function(){
+    			// 노선 운행 조회 > 이 차량 GET > FETCH : nodeid, nodenm, nodeord 
     			$.ajax({
-	    			url : 'https://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=50&_type=json&cityCode=24&routeId='+,
+	    			url : 'https://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=50&_type=json&cityCode=24&routeId='+currentShift.routeid,
 	    			success : function(resp003){
-	    				console.log(resp003);
+	    				console.log("Fetching position data!");
+	    				
 	    			},
 	    			error : function(xhr, status, error){
 	    				console.log(error);
 	    			}
-    			});
+    			}).then(function(dumpee){
+    				// 
+    				$.ajax({
+    					url : '',
+    					success : function(resp004){
+    						
+    					},
+    					error : function(xhr, status, error){
+    						console.log(error);
+    					}
+    				});
+    				
+    			});// CATCH NEEDED!########################################
     		}, 15000);
     		
     			
