@@ -38,7 +38,7 @@ public class UniversalDAO {
 		return result;
 	}
 	
-	// 버스 등록번호 조회용
+	// 버스 등록번호 조회용 아마 안씀// check
 	public Bus busCheck(Bus vo) {
 		
 		SqlSession sesh = null;
@@ -310,7 +310,8 @@ public class UniversalDAO {
 		}
 		return result;
 	}
-
+	
+	// 단순 노선 테이블 조회
 	public R_Info getRouteByName(String routeno) {
 		
 		SqlSession sesh = null;
@@ -323,6 +324,24 @@ public class UniversalDAO {
 		}
 		
 		return result;
+	}
+	
+	// 운행정보 입력
+	public int addShift(Shift shift) {
+		
+		SqlSession sesh = null;
+		int result = 0;
+		
+		try {
+			sesh = seshFac.openSession();
+			result = sesh.insert("addShift", shift);
+			sesh.commit();
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+		
 	}
 
 }

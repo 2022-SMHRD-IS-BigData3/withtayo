@@ -8,14 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.henry.testEntity.Bus;
 import com.henry.testEntity.Driver;
+import com.henry.testEntity.Shift;
 import com.henry.testEntity.UniversalDAO;
 
 @WebServlet("/BusRegister")
 public class BusRegistryController extends HttpServlet {
 
-	// 버스 고유번호 입력 핸들할 서블릿
+	// 운행정보 패키징 후 세션에 뙇
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -30,22 +32,22 @@ public class BusRegistryController extends HttpServlet {
 		String routeid = req.getParameter("routeid");
 		
 		System.out.println(d_id+b_id+routeno+routeid);
-		
-		// 해당 번호의 버스 등록 여부 체크 (기사가 버스 로그인시켜줌 졸귀? 응 아님)
-		Bus busVO = new Bus();
-		busVO.setB_id(b_id);
+		// 운행정보 패키징
+		Shift thisShift = new Shift();
+		thisShift.setD_id(d_id);
+		thisShift.setB_id(b_id);
+		thisShift.setRouteno(routeno);
+		thisShift.setRouteid(routeid);
 		
 		UniversalDAO dao = new UniversalDAO();
+		int result = dao.addShift(thisShift);
 		
-		Bus resultVO = dao.busCheck(busVO);
+		resp.setContentType("application/json;charset=utf-8");
 		
-			
-		sesh.setAttribute("bus", resultVO);
+		sesh.setAttribute("thisShift", thisShift);
 			
 		resp.sendRedirect("driverBusRegistryResult.jsp");
 		
-		// null 은 jsp에서 판단
-	
 	}
 	
 }

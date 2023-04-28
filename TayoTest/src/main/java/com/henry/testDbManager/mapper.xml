@@ -99,4 +99,8 @@
   	select * from r_info where routeno=#{routeno}
   </select>
   
+  <insert id="addShift" parameterType="com.henry.testEntity.Shift">
+  	insert into bus_shift (shift_id, d_id, b_id, routeno, routeid) values(seq_shift_id.NEXTVAL, #{d_id}, #{b_id}, #{routeno}, #{routeid})
+  </insert>
+  
 </mapper>
