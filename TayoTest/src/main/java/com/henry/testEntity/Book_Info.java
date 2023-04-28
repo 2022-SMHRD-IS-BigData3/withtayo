@@ -14,14 +14,14 @@ public class Book_Info {
 	private String dprtname;
 	private String arrvname;
 	private String b_id;
-	private String accepted;
+	private boolean accepted;
 
 	public Book_Info() {
 		
 	}
 	
 	public Book_Info(String blog_id, String routeid, String routeno, String dprtnode, String arrvnode, String p_id,
-			Date booktime, String dprtname, String arrvname, String b_id, String accepted) {
+			Date booktime, String dprtname, String arrvname, String b_id, boolean accepted) {
 		this.blog_id = blog_id;
 		this.routeid = routeid;
 		this.routeno = routeno;
@@ -43,11 +43,11 @@ public class Book_Info {
 		this.b_id = b_id;
 	}
 
-	public String getAccepted() {
+	public boolean getAccepted() {
 		return accepted;
 	}
 
-	public void setAccepted(String accepted) {
+	public void setAccepted(boolean accepted) {
 		this.accepted = accepted;
 	}
 

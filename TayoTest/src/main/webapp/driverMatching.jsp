@@ -219,6 +219,16 @@
     	// 아길다
     	let bookedInfoQueryResult = null;
     	
+    	// 화면 표시 판단용 대기 상태 번호 : 0-승객도 없고 예약도 없음(대기), 1-승객은 있고 예약은 없음, 2-예약있음 
+    	// 사용 임시 보류
+    	let bookStat = 0;
+    	
+    	// 현재 탑승자
+    	let currPsg = null;
+    	
+    	// 예약자 리스트
+    	let bookingList = [];
+    	
     	
     	
     	$(document).ready(function(){
@@ -240,19 +250,42 @@
     		// Pseudo-communication : 예약정보 조회 반복실행으로 통신 미믹
     		}).then(function(alwaysBeDumpin){
     			console.log("2nd procedure : Loop to retrieve booking info from database.");
-    			$.ajax({
-    				url : 'GetPsg',
-    				// 임시데이터임 currentShift.b_id 로 바꿀것
-    				data : {b_id : '광주77바2516'},
-    				success : function(resp002){
-    					// 예약 조회 결과(리스트 아님 selectOne으로 하나씩 반복)
-    					bookedInfoQueryResult = resp002;
-    					console.log(bookedInfoQueryResult);
-    				},
-    				error : function(xhr, status, error){
-    					console.log(error);
-    				}
-    			});
+    			
+    			// 인터벌 루프 시켜야됨!!!!###############################
+    			setInterval(function(){
+	    			$.ajax({
+	    				url : 'GetPsg',
+	    				// 임시데이터임 currentShift.b_id 로 바꿀것
+	    				data : {b_id : currentShift.b_id},
+	    				success : function(resp002){
+	    					// 예약 조회 결과(리스트 아님 selectOne으로 하나씩 반복)
+	    					bookedInfoQueryResult = resp002;
+	    	//				console.log(bookedInfoQueryResult);
+	    					// 1루프 (1조회)에 대해 비교하는거임 햇갈리지 말기!!!!!
+	    					if(bookedInfoQueryResult != null){
+	    						// 차에 승객이 있고 다른 예약이 조회된 경우
+	    						if(currentShift.num_psg > 0){
+	    							bookStat = 2;
+	    							if(//판단: 예약자 리스트 2개 이상인지 체크)
+	    						// 차에 승객이 없고 다른 예약이 조회된 경우 : 승낙시 예약자 리스트에 일단 담는다. 아직 전 예약자가 탑승 안했는데 또 예약 온 경우
+	    						}else{
+	    							bookStat = 2;
+	    						}
+	    					}else{
+	    						// 차에 승객이 있고 다른 예약이 없는 경우
+	    						if(currentShift.num_psg > 0){
+	    							bookStat = 1;
+	    						// 차에 승객이 없고 예약도 없는 경우
+	    						}else{
+		    						bookStat = 0;
+	    						}
+	    					}
+	    				},
+	    				error : function(xhr, status, error){
+	    					console.log(error);
+	    				}
+	    			});
+    			}, 6000);
     		}); // ajax-then scope CATCH NEEDED##############################
     		
     		// 버스 현 위치 갱신해서 카운타다운 계산과 동시에 자신 운행정보에 위치 저장

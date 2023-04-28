@@ -23,7 +23,7 @@ public class GetSessionForShiftController extends HttpServlet {
 		
 		HttpSession sesh = request.getSession();
 		
-		Shift currentShift = (Shift)sesh.getAttribute("currentShift");
+		Shift currentShift = (Shift)sesh.getAttribute("thisShift");
 		
 		Gson gson = new Gson();
 		
