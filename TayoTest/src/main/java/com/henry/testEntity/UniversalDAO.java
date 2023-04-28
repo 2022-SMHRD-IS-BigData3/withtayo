@@ -304,7 +304,7 @@ public class UniversalDAO {
 			sesh=seshFac.openSession();
 			sesh.insert("djoin",vo);
 			sesh.commit();
-			result = sesh.selectOne("xxx", vo);
+			result = sesh.selectOne("dLogin", vo);
 		} catch (Exception e) {
 			sesh.close();
 		}
