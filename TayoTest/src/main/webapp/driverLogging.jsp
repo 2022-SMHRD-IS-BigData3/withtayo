@@ -7,577 +7,589 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Insert title here</title>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+	crossorigin="anonymous"></script>
 
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <script type="text/JavaScript" src="./my-script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        .container {
-            width: 9cm;
-            height: 16cm;
-            border: 1px solid black;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-        }
+<script
+	src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<script type="text/JavaScript" src="./my-script.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+.container {
+	width: 9cm;
+	height: 16cm;
+	border: 1px solid black;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+}
 
-        .navbar {
-            width: 100%;
-            height: 1.8cm;
-            background-color: rgb(255, 204, 0);
-            padding: 0;
-        }
+.navbar {
+	width: 100%;
+	height: 1.8cm;
+	background-color: rgb(255, 204, 0);
+	padding: 0;
+}
 
-        .section {
-            height: 6cm;
-            width: 100%;
-        }
+.section {
+	height: 6cm;
+	width: 100%;
+}
 
-        body {
-            margin: 0;
-            padding: 0;
-        }
+body {
+	margin: 0;
+	padding: 0;
+}
 
-        .big {
-            height: 12.7cm;
-        }
+.big {
+	height: 12.7cm;
+}
 
-        /* 은혜 컨텐츠 시작 */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            font-size: 14px;
-        }
+/* 은혜 컨텐츠 시작 */
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 14px;
+}
 
-        #form-inner-container {
-            background-color: white;
-            box-shadow: 0 0 20px gainsboro;
-        }
+#form-inner-container {
+	background-color: white;
+	box-shadow: 0 0 20px gainsboro;
+}
 
-        #sign-up-container,
-        #sign-in-container {
-            padding: 50px 20px;
-            margin-left: 20px;
-            width: 320px;
-            display: inline-block;
-        }
+#sign-up-container, #sign-in-container {
+	padding: 50px 20px;
+	margin-left: 20px;
+	width: 320px;
+	display: inline-block;
+}
 
-        #sign-out-container {
-            padding: 50px 30px;
-            margin-left: 20px;
-            width: 320px;
-            display: inline-block;
-            text-align: center;
-        }
+#sign-out-container {
+	padding: 50px 30px;
+	margin-left: 20px;
+	width: 320px;
+	display: inline-block;
+	text-align: center;
+}
 
-        form input {
-            display: block;
-            margin-bottom: 5px;
-            border: 1px solid #E5E9F5;
-            background-color: #F6F7FA;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 10px;
-            width: 240px;
-        }
+form input {
+	display: block;
+	margin-bottom: 5px;
+	border: 1px solid #E5E9F5;
+	background-color: #F6F7FA;
+	padding: 10px;
+	margin-top: 10px;
+	border-radius: 10px;
+	width: 240px;
+}
 
-        #form-controls {
-            margin-bottom: 20px;
-        }
+#form-controls {
+	margin-bottom: 20px;
+}
 
-        h3 {
-            color: red;
-            font-size: 14px;
-            font-weight: 500;
-        }
+h3 {
+	color: red;
+	font-size: 14px;
+	font-weight: 500;
+}
 
-        label {
-            color: gray;
-        }
+label {
+	color: gray;
+}
 
-        ::placeholder {
-            color: #C0C7DB;
-            font-size: 14px;
-            letter-spacing: 1.2px;
-        }
+::placeholder {
+	color: #C0C7DB;
+	font-size: 14px;
+	letter-spacing: 1.2px;
+}
 
-        #form-controls button {
-            border: none;
-            font-size: 5px;
-        }
+#form-controls button {
+	border: none;
+	font-size: 5px;
+}
 
-        #form-controls button:hover {
-            cursor: pointer;
-        }
+#form-controls button:hover {
+	cursor: pointer;
+}
 
-        .hide {
-            display: none !important;
-        }
+.hide {
+	display: none !important;
+}
 
-        #animation-container {
-            display: inline-block;
-        }
+#animation-container {
+	display: inline-block;
+}
 
-        /* responsive display */
-        @media (max-width :1438px) {
-            lottie-player {
-                width: 300px !important;
-            }
-        }
+/* responsive display */
+@media ( max-width :1438px) {
+	lottie-player {
+		width: 300px !important;
+	}
+}
 
-        @media (max-width :1124px) {
-            #animation-container {
-                display: none;
-            }
+@media ( max-width :1124px) {
+	#animation-container {
+		display: none;
+	}
+	#form-inner-container {
+		display: flex;
+		justify-content: center;
+	}
+}
 
-            #form-inner-container {
-                display: flex;
-                justify-content: center;
-            }
-        }
+@media ( max-width : 684px) {
+	#form-controls {
+		text-align: center;
+		margin: 0;
+		padding: 0;
+	}
+	button {
+		width: 100%;
+	}
+	form input:not(:last-of-type) {
+		width: 0%;
+	}
+	#toggleSignIn, #toggleSignUp {
+		padding: 16px 75px;
+		width: 5px;
+		height: 5px;
+	}
+}
 
-        @media (max-width : 684px) {
-            #form-controls {
-                text-align: center;
-                margin: 0;
-                padding: 0;
-            }
+/* 취소 버튼 디자인*/
+#button-r {
+	background: rgb(192, 190, 190);
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	position: relative;
+	width: 117px;
+	height: 35px;
+	font-size: 14px;
+	margin-top: 20px;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+}
 
-            button {
-                width: 100%;
-            }
+#button-r:hover {
+	background: #fff;
+	color: rgb(192, 190, 190);
+}
 
-            form input:not(:last-of-type) {
-                width: 0%;
-            }
+#button-r:before, button:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	background: rgb(192, 190, 190);
+	transition: 400ms ease all;
+}
 
-            #toggleSignIn,
-            #toggleSignUp {
-                padding: 16px 75px;
-                width: 5px;
-                height: 5px;
-            }
-        }
+#button-r:after {
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 0;
+	background-color: rgb(192, 190, 190);
+}
 
-        /* 취소 버튼 디자인*/
-        #button-r {
-            background: rgb(192, 190, 190);
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            position: relative;
-            width: 117px;
-            height: 35px;
-            font-size: 14px;
-            margin-top: 20px;
-            padding: 0 2em;
-            cursor: pointer;
-            transition: 800ms ease all;
-            outline: none;
-        }
+#button-r:hover:before, button:hover:after {
+	width: 100%;
+	transition: 800ms ease all;
+}
 
-        #button-r:hover {
-            background: #fff;
-            color: rgb(192, 190, 190);
-        }
+/* 로그인 버튼 디자인 */
+#button-l {
+	background: rgb(231, 177, 10);
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	position: relative;
+	width: 117px;
+	height: 35px;
+	font-size: 14px;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+}
 
-        #button-r:before,
-        button:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            height: 2px;
-            width: 0;
-            background: rgb(192, 190, 190);
-            transition: 400ms ease all;
-        }
+#button-l:hover {
+	background: #fff;
+	color: rgb(212, 165, 22);
+}
 
-        #button-r:after {
-            right: inherit;
-            top: inherit;
-            left: 0;
-            bottom: 0;
-            background-color: rgb(192, 190, 190);
-        }
+#button-l:before, button:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	background: rgb(231, 177, 10);
+	transition: 400ms ease all;
+}
 
-        #button-r:hover:before,
-        button:hover:after {
-            width: 100%;
-            transition: 800ms ease all;
-        }
+#button-l:after {
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 0;
+}
 
-        /* 로그인 버튼 디자인 */
-        #button-l {
-            background: rgb(231, 177, 10);
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            position: relative;
-            width: 117px;
-            height: 35px;
-            font-size: 14px;
-            padding: 0 2em;
-            cursor: pointer;
-            transition: 800ms ease all;
-            outline: none;
-        }
+#button-l:hover:before, button:hover:after {
+	width: 100%;
+	transition: 800ms ease all;
+}
 
-        #button-l:hover {
-            background: #fff;
-            color: rgb(212, 165, 22);
-        }
+#button-rd {
+	background: rgb(192, 190, 190);
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	position: relative;
+	width: 117px;
+	height: 35px;
+	font-size: 14px;
+	margin-top: 20px;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+	width: 90%;
+}
 
-        #button-l:before,
-        button:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            height: 2px;
-            width: 0;
-            background: rgb(231, 177, 10);
-            transition: 400ms ease all;
-        }
+#button-rd:hover {
+	background: #fff;
+	color: rgb(192, 190, 190);
+}
 
-        #button-l:after {
-            right: inherit;
-            top: inherit;
-            left: 0;
-            bottom: 0;
-        }
+#button-rd:before, button:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	background: rgb(192, 190, 190);
+	transition: 400ms ease all;
+}
 
-        #button-l:hover:before,
-        button:hover:after {
-            width: 100%;
-            transition: 800ms ease all;
-        }
+#button-rd:after {
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 0;
+	background-color: rgb(192, 190, 190);
+}
 
-        #button-rd {
-            background: rgb(192, 190, 190);
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            position: relative;
-            width: 117px;
-            height: 35px;
-            font-size: 14px;
-            margin-top: 20px;
-            padding: 0 2em;
-            cursor: pointer;
-            transition: 800ms ease all;
-            outline: none;
-            width: 90%;
-        }
+#button-rd:hover:before, button:hover:after {
+	width: 100%;
+	transition: 800ms ease all;
+}
 
-        #button-rd:hover {
-            background: #fff;
-            color: rgb(192, 190, 190);
-        }
+/* 로그인 버튼 디자인 */
+#button-ld {
+	background: rgb(231, 177, 10);
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	position: relative;
+	width: 117px;
+	height: 35px;
+	font-size: 14px;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+	width: 90%;
+}
 
-        #button-rd:before,
-        button:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            height: 2px;
-            width: 0;
-            background: rgb(192, 190, 190);
-            transition: 400ms ease all;
-        }
+#button-ld:hover {
+	background: #fff;
+	color: rgb(212, 165, 22);
+}
 
-        #button-rd:after {
-            right: inherit;
-            top: inherit;
-            left: 0;
-            bottom: 0;
-            background-color: rgb(192, 190, 190);
-        }
+#button-ld:before, button:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	background: rgb(231, 177, 10);
+	transition: 400ms ease all;
+}
 
-        #button-rd:hover:before,
-        button:hover:after {
-            width: 100%;
-            transition: 800ms ease all;
-        }
+#button-ld:after {
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 0;
+}
 
-        /* 로그인 버튼 디자인 */
-        #button-ld {
-            background: rgb(231, 177, 10);
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            position: relative;
-            width: 117px;
-            height: 35px;
-            font-size: 14px;
-            padding: 0 2em;
-            cursor: pointer;
-            transition: 800ms ease all;
-            outline: none;
-            width: 90%;
-        }
+#button-ld:hover:before, button:hover:after {
+	width: 100%;
+	transition: 800ms ease all;
+}
 
-        #button-ld:hover {
-            background: #fff;
-            color: rgb(212, 165, 22);
-        }
+/* a태그 폰트 효과 */
+.aTag {
+	text-align: center;
+	margin-top: 8px;
+}
 
-        #button-ld:before,
-        button:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            height: 2px;
-            width: 0;
-            background: rgb(231, 177, 10);
-            transition: 400ms ease all;
-        }
+/* ul li 가로정렬 후 구분선 넣기 */
+ul {
+	margin-left: 27px;
+}
 
-        #button-ld:after {
-            right: inherit;
-            top: inherit;
-            left: 0;
-            bottom: 0;
-        }
+li {
+	list-style: none;
+	float: left;
+	margin-right: 33px;
+}
 
-        #button-ld:hover:before,
-        button:hover:after {
-            width: 100%;
-            transition: 800ms ease all;
-        }
+li::after {
+	content: "|";
+	float: right;
+	color: rgb(192, 190, 190);
+	margin-right: -17px;
+}
 
-        /* a태그 폰트 효과 */
-        .aTag {
-            text-align: center;
-            margin-top: 8px;
-        }
+li:last-child::after {
+	content: "";
+}
 
-        /* ul li 가로정렬 후 구분선 넣기 */
-        ul {
-            margin-left: 27px;
-        }
+/* 은혜 컨텐츠 끝 */
+/* Font를 적용할 클래스를 지정합니다. */
+.my-font {
+	font-family: "gg";
+}
 
-        li {
-            list-style: none;
-            float: left;
-            margin-right: 33px;
-        }
+@font-face {
+	font-family: "gg";
+	src: url("../빛고을광주_Medium.ttf");
+}
 
-        li::after {
-            content: "|";
-            float: right;
-            color: rgb(192, 190, 190);
-            margin-right: -17px;
-        }
+#navbarNavAltMarkup {
+	position: fixed;
+	top: 70px;
+	z-index: 999;
+	width: 100%;
+}
 
-        li:last-child::after {
-            content: "";
-        }
+.show #navbarNavAltMarkup {
+	display: block;
+}
 
-        /* 은혜 컨텐츠 끝 */
-        /* Font를 적용할 클래스를 지정합니다. */
-        .my-font {
-            font-family: "gg";
-        }
+.offcanvas {
+	max-width: 250px;
+	max-height: 350px;
+	position: absolute;
+	left: 150px;
+	background-color: #fff8f8;
+}
 
-        @font-face {
-            font-family: "gg";
-            src: url("../빛고을광주_Medium.ttf");
-        }
+.aaarr {
+	font-size: 12px;
+	padding: 4px;
+}
 
-        #navbarNavAltMarkup {
-            position: fixed;
-            top: 70px;
-            z-index: 999;
-            width: 100%;
-        }
+.nav-link {
+	font-size: 14px;
+}
 
-        .show #navbarNavAltMarkup {
-            display: block;
-        }
+#offcanvas-header {
+	padding: 12px;
+}
 
-        .offcanvas {
-            max-width: 250px;
-            max-height: 450px;
-            position: absolute;
-            left: 150px;
-            background-color: #fff8f8;
-        }
+#offcanvas-body {
+	padding: 14px;
+}
 
-        .aaarr {
-            font-size: 12px;
-            padding: 4px;
-        }
+.endbar {
+	position: inline-block;
+	bottom: 0;
+	width: 96.5%;
+	padding-left: 12px;
+}
 
-        .nav-link {
-            font-size: 14px;
-        }
+.a {
+	padding: 0px;
+	height: 1.5cm;
+	text-align: center;
+}
 
-        #offcanvas-header {
-            padding: 12px;
-        }
+.sign-out-container-body {
+	display: flex;
+	align-items: center;
+}
 
-        #offcanvas-body {
-            padding: 14px;
-        }
-
-        .endbar {
-            position: inline-block;
-            bottom: 0;
-            width: 96.5%;
-            padding-left: 12px;
-        }
-
-        .a {
-            padding: 0px;
-            height: 1.5cm;
-            text-align: center;
-        }
-
-        .sign-out-container-body{
-            display: flex;
-            align-items: center;
-        }
-    </style>
+.navbar-toggler {
+	width: 70px;
+}
+</style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="navbar" style="font-family: gg;">
-            <nav class="navbar">
-                <!-- navbar 시작 -->
-                <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                        <span class="navbar-toggler-icon"></span>
-                        <!-- navbar 토글 버튼 아이콘 -->
-                    </button>
-                    <div class="col-9 d-flex  align-items-center" style="font-size: large">안전운전하세요!</div>
-                    <div class="container offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
-                        aria-labelledby="offcanvasNavbarLabel">
-                        <!-- Offcanvas 시작 -->
-                        <div class="offcanvas-header" id="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">withTAYO</h5>
-                            <!-- Offcanvas 헤더 -->
-                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-                                aria-label="Close"></button>
-                            <!-- Offcanvas 닫기 버튼 -->
-                        </div>
-                        <div class="offcanvas-body" id="offcanvas-body">
-                            <!-- Offcanvas 내용 -->
-                            <div class="navbar-nav">
-                                <a class="nav-link active" href="#">공지 사항</a>
-                                <hr>
-                                <a class="nav-link active" href="../1차프로젝트/노선정보겅색.html">길찾기</a>
-                                <a class="nav-link active" href="../1차프로젝트/예약확인.html">현재 예약
-                                    정보</a> <a class="nav-link active" href="#">예약내역</a>
-                                <hr>
-                                <li><a class="nav-link active" href="#">개인정보 변경</a> <a class="nav-link active"
-                                        href="#">고객센터</a> <a class="nav-link active" href="#"></a> <a
-                                        class="nav-link active" href="#">로그아웃</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Offcanvas 끝 -->
-                </div>
-            </nav>
-            <!-- navbar 끝 -->
-        </div>
-        <div class="section big">
-            <!-- 중앙 컨텐츠 -->
+	<div class="container">
+		<div class="navbar" style="font-family: gg;">
+			<nav class="navbar">
+				<nav class="navbar">
+					<!-- navbar 시작 -->
+					<div class="container-fluid">
+						<button class="navbar-toggler" type="button"
+							data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+							aria-controls="offcanvasNavbar">
+							<span class="navbar-toggler-icon"></span>
+							<!-- navbar 토글 버튼 아이콘 -->
+						</button>
+						<div class="col-9 d-flex  align-items-center"
+							style="font-size: large; font-style: italic; font-weight: 900; font-size: 30px; color: whitesmoke;">
+							<span
+								style="margin-left: 15px; text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);">withTAYO</span>
+						</div>
+						<div class="container offcanvas offcanvas-start" tabindex="-1"
+							id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+							<!-- Offcanvas 시작 -->
+							<div class="offcanvas-header" id="offcanvas-header">
+								<h5 class="offcanvas-title" id="offcanvasNavbarLabel">withTAYO</h5>
+								<!-- Offcanvas 헤더 -->
+								<button type="button" class="btn-close"
+									data-bs-dismiss="offcanvas" aria-label="Close"></button>
+								<!-- Offcanvas 닫기 버튼 -->
+							</div>
+							<div class="offcanvas-body" id="offcanvas-body">
+								<!-- Offcanvas 내용 -->
+								<div class="navbar-nav" style="text-align: center;">
+									<a class="nav-link active" href="#">공지 사항</a>
+									<hr>
+									<div>
+										<span>로그인 이후 이용가능</span>
+									</div>
+									<hr>
+								</div>
+							</div>
+						</div>
+						<!-- Offcanvas 끝 -->
+					</div>
+				</nav>
+				<!-- navbar 끝 -->
+		</div>
+		<div class="section big">
+			<!-- 중앙 컨텐츠 -->
 
 
-            <!-- 은혜 컨텐츠 시작 -->
-            <c:if test="${empty driver}">
-                <div id="psngrLogWrapper">
-                    <div id="form-inner-container">
-                        <!-- Sign up form -->
-                        <div id="sign-up-container">
-                            <form action="Login" method="post">
-                                <label for="id">ID</label> <input type="text" name="d_id" id="id" placeholder="ID입력">
-                                <label for="pw">PW</label>
-                                <input type="password" name="d_pw" id="pw" placeholder="PW입력">
+			<!-- 은혜 컨텐츠 시작 -->
+			<c:if test="${empty driver}">
+				<div id="psngrLogWrapper">
+					<div id="form-inner-container">
+						<!-- Sign up form -->
+						<div id="sign-up-container"
+							style="padding: 30px; margin-top: 70px;">
+							<form action="Login" method="post">
+								<label for="id">ID</label> <input type="text" name="d_id"
+									id="id" placeholder="기사님 ID입력"> <label for="pw">PW</label>
+								<input type="password" name="d_pw" id="pw" placeholder="기사님 PW입력">
 
-                                <div>
-                                    <button type="reset" id="button-r">취소</button>
-                                    <button type="submit" id="button-l" value="로그인">로그인</button>
-                                </div>
-                            </form>
-                            <form action="">
-                                <br>
-                                <div style="margin-left: -10px;">
-                                    <ul>
-                                        <li><a href="#" id="driverJoin" style="text-decoration: none" align="left">회원가입</a>
-                                        </li>
-                                        <li><a href="#" style="text-decoration: none">ID/PW찾기</a></li>
-                                    </ul>
-                                </div>
-                                <br>
-                                <br>
-                            </form>
-                            <!-- <hr width="295px" align="left" noshade="0.1px"> -->
-                            <hr width="237px" align="left" style="border: 0; height: 1px; background: #bbb;">
-                            <br>
-                            <div class="aTag">
-                                <a href="loggingMain.jsp" style="color: rgb(129, 128, 128);">승객
-                                    로그인</a>
-                            </div>
+								<div>
+									<button type="reset" id="button-r">취소</button>
+									<button type="submit" id="button-l" value="로그인">로그인</button>
+								</div>
+							</form>
+							<form action="">
+								<br>
+								<div style="margin-left: -10px;">
+									<ul>
+										<li><a href="#" id="driverJoin"
+											style="text-decoration: none" align="left">회원가입</a></li>
+										<li><a href="#" style="text-decoration: none">ID/PW찾기</a></li>
+									</ul>
+								</div>
+								<br> <br>
+							</form>
+							<!-- <hr width="295px" align="left" noshade="0.1px"> -->
+							<hr width="237px" align="left"
+								style="border: 0; height: 1px; background: #bbb; margin-bottom: 0px; margin-top: 0px;">
+							<br>
+							<div class="aTag">
+								<a href="loggingMain.jsp" style="color: rgb(129, 128, 128);">승객
+									로그인</a>
+							</div>
 
-                        </div>
+						</div>
 
-                        <!-- Sign in form -->
+						<!-- Sign in form -->
 
 
-                    </div>
-                </div>
+					</div>
+				</div>
 
-            </c:if>
-            <c:if test="${!empty driver}">
-                <div id="sign-out-container" style="margin-top: 100px;">
-                    <div>
-                        <div>${driver.d_id}기사님 환영합니다!</div>
-                        <div class="sign-out-container-body">
-                            <form action="BusRegister" method="post">
-                                <div><input type="text" name="b_id" placeholder="버스고유번호입력" style="margin-left: 10px;">
-                                </div>
-                                <div class="btnddrd" style="width: 100%;">
-                                    <div><input type="submit" id="button-ld" value="운행 시작" class="btn btn-block"></div>
-                                    <div><input type="button" id="button-rd" class="btn btn-block" value="로그아웃"
-                                            onclick="location.href='DriverLogout'">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
+			</c:if>
+			<c:if test="${!empty driver}">
+				<div id="sign-out-container" style="margin-top: 100px;">
+					<div>
+						<div>
+							<strong>${driver.d_id}기사님 환영합니다!</strong>
+						</div>
+						<div class="sign-out-container-body">
+							<form action="BusRegister" method="post">
+								<div>
+									<input type="text" name="b_id" placeholder="버스고유번호입력"
+										style="margin-left: 10px;">
+								</div>
+								<div class="btnddrd" style="width: 100%; margin-left: 5px;">
+									<div>
+										<input type="submit" id="button-ld" value="운행 시작"
+											class="btn btn-block">
+									</div>
+									<div>
+										<input type="button" id="button-rd" class="btn btn-block"
+											value="로그아웃" onclick="location.href='DriverLogout'">
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</c:if>
 
-        </div>
+		</div>
 
-        <div class="endbar">
-            <div class="row" style="background-color: gray;">
-                <div class="a" style="font-family: gg;">광고 혹은 이용설명</div>
-            </div>
-        </div>
-    </div>
+		<div class="endbar">
+			<div class="row">
+				<div class="a">
+					<img src="../스인개광고판.png" alt="" id="image"
+						style="width: 100%; height: 100%; border: solid 1px black;">
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <script>
+	<script>
 
-    	console.log($('#driverJoin'));
+        console.log($('#driverJoin'));
         $('#driverJoin').on("click", () => {
-        	console.log("join clicked");
+            console.log("join clicked");
             $.ajax({
                 url: 'SignUp',
                 type: 'POST',
@@ -590,6 +602,30 @@
                 }
             });
         });
+
+
+        // 하단 광고판 이미지 변경 코드
+        var imageIndex = 0;
+        var images = ["../스인개광고판.png", "../스마트폰광고판.png", "../스인개추가광고판.jpg"];
+        var intervalTime = 3000; // 3초마다 이미지 변경
+
+        function changeImage() {
+            // 이미지 인덱스 계산
+            imageIndex = (imageIndex + 1) % images.length;
+
+            // 다음 이미지 표시
+            var imgElement = document.getElementById("image");
+            imgElement.src = images[imageIndex];
+        }
+
+        // 초기 이미지 표시
+        var imgElement = document.getElementById("image");
+        imgElement.src = images[0];
+
+        // 일정 시간마다 이미지 변경
+        setInterval(changeImage, intervalTime);
+
+        // 광고판 이미지 변경 끝
     </script>
 
 
