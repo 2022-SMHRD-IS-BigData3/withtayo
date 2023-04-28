@@ -425,7 +425,7 @@
             </div>
             <div class="section_mainbusinfor_add">
             <input style="margin-right: 15px;" id="btnr"  type="button" value="취소" onclick="location.href='driverLogging.jsp'">
-            <input style="margin-left: 15px;" id="btnl" type="button" value="확인" onclick="알림통신화면으로 ㄱㄱ  location.href='뭐시기뭐시기'">
+            <input style="margin-left: 15px;" id="btnl" type="button" value="확인" onclick="location.href='driverMatching.jsp'">
             <!-- 은혜 컨텐츠 시작 -->
             </div>
         </div>
