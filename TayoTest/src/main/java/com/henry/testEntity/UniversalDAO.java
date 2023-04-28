@@ -226,6 +226,26 @@ public class UniversalDAO {
 		return resultVO;
 	}
 	
+	// 예약정보 > 대기화면 전송시 select,차량번호 업데이트 후 다시 셀렉트
+	public Book_Info packageBooking(String b_id, String blog_id) {
+		
+		SqlSession sesh = null;
+		Book_Info resultVO = null;
+		Book_Info finalVO = null;
+		try {
+			sesh = seshFac.openSession();
+			resultVO = sesh.selectOne("getBookingPSG", blog_id);
+			resultVO.setB_id(b_id);
+			sesh.update("packageBooking", resultVO);
+			sesh.commit();
+			finalVO = sesh.selectOne("getBookingPSG", blog_id);
+		}finally {
+			sesh.close();
+		}
+		
+		return finalVO;
+	}
+	
 	// 노선 크롤링용 !
 	public int crawlAndInsert(R_Info route) {
 		

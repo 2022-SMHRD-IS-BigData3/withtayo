@@ -372,7 +372,7 @@
         					let targetIdx = distArr.indexOf(Math.min(...distArr));
         					// 대망으 그놈 ㅇㅎㅇㅎㅇㅎㄹㅇㅇㅎ
         					targetBus = allBuses[targetIdx];
-        					console.log("Target Bus Found!!!!" + targetBus.vehicleno);
+        					console.log("Target Bus Found!!!!" + targetBus);
         				},
         				error : function(error){
         					console.log(error);
@@ -383,17 +383,21 @@
         			console.log("4th procedure : send the vehicleno and booking info to a servlet for packaging and get redirected to the waiting area.");
         			$.ajax({
         				url : 'Book', // book'em! f'ing book'em! asdkadlfjgnaldkjfg
+        				data : {b_id:targetBus, blog_id:iAmBabo.blog_id},
         				success : function(resp004){
         					console.log("All packed up and ready to redirect.");
-        					
+        					console.log(resp004);
+        					window.location.replace("matching.jsp");
         				},
-        				error : function(error){
-        					console.log("NOOOOOOOOOOO f"+error);
+        				error : function(xhr, status, error){
+        					console.log(error);
         				}
         			});
         		});
         		//!!!!########!!!!!!!!!!!!!!!!!!! catch 써야댐!!!!!!!!!!!!!!!!##########!!!!!!!!!!!
         		//	window.location.href = '대기화면.html';
+        			
+        		
             });
         	
     		
