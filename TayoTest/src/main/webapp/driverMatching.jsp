@@ -243,7 +243,7 @@
     			$.ajax({
     				url : 'GetPsg',
     				// 임시데이터임 currentShift.b_id 로 바꿀것
-    				data : {b_id : '광주77바2540'},
+    				data : {b_id : '광주77바2516'},
     				success : function(resp002){
     					// 예약 조회 결과(리스트 아님 selectOne으로 하나씩 반복)
     					bookedInfoQueryResult = resp002;
@@ -253,8 +253,23 @@
     					console.log(error);
     				}
     			});
-    		});
-    	});
+    		}); // ajax-then scope
+    		
+    		// 버스 현 위치 갱신
+    		setInterval(function(){
+    			$.ajax({
+	    			url : 'https://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=50&_type=json&cityCode=24&routeId='+,
+	    			success : function(resp003){
+	    				console.log(resp003);
+	    			},
+	    			error : function(xhr, status, error){
+	    				console.log(error);
+	    			}
+    			});
+    		}, 15000);
+    		
+    			
+    	});// document ready scope
     </script>
 </body>
 

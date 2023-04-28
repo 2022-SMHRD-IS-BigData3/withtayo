@@ -127,3 +127,12 @@ add b_id varchar2(100);
 select * from book_info;
 select * from bus_shift; seq_shift_id
 select * from bus_shift_log; seq_shift_log
+alter table bus_shift
+add routeid varchar2(100);
+alter table bus_shift
+add routeno varchar2(100);
+
+alter table bus_shift
+add constraint shift_fk_routeid
+foreign key (routeid)
+references r_info(routeid);
