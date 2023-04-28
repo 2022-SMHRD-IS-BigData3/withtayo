@@ -215,6 +215,10 @@
     	// 세션의 운행정보
     	let currentShift = null;
     	
+    	// 조회한 예약정보 prone to change
+    	// 아길다
+    	let bookedInfoQueryResult = null;
+    	
     	
     	
     	$(document).ready(function(){
@@ -225,9 +229,9 @@
     		$.ajax({
     			url : 'GetSessionForShift',
     			success : function(resp001){
-    				console.log(resp001);
     				// 운행정보 가져옴
     				currentShift = resp001;
+    				console.log(currentShift);
     			},
     			error : function(xhr, status, error){
 					console.log(error);    				
@@ -241,10 +245,13 @@
     				// 임시데이터임 currentShift.b_id 로 바꿀것
     				data : {b_id : '광주77바2540'},
     				success : function(resp002){
-    					console.log(resp002);
+    					// 예약 조회 결과(리스트 아님 selectOne으로 하나씩 반복)
+    					bookedInfoQueryResult = resp002;
+    					console.log(bookedInfoQueryResult);
+    					
     				},
     				error : function(xhr, status, error){
-    					
+    					console.log(error);
     				}
     			});
     		});
