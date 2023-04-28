@@ -436,7 +436,7 @@
                     </tr>
                     <tr>
                         <td>BUS등록번호</td>
-                        <td style="font-size: 14px; font-weight: bold;">${bus.b_id}</td>
+                        <td style="font-size: 14px; font-weight: bold;">${thisShift.b_id}</td>
                     </tr>
                     <tr>
                         <td colspan="2" style="text-align: center;">해당 정보로 접속합니다.</td>
