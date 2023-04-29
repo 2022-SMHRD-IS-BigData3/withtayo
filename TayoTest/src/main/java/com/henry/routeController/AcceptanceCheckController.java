@@ -24,13 +24,13 @@ public class AcceptanceCheckController extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		
-		BufferedReader reader = req.getReader();
-		
 		Gson gson = new Gson();
-			
-		Book_Info bookInfo = gson.fromJson(reader, Book_Info.class); 
 		
-		int accepted = Integer.parseInt(req.getParameter("accepted"));
+		String fetchedJson = req.getParameter("bookInfo");
+		
+		int accepted = Integer.parseInt(req.getParameter("accepted")); 
+			
+		Book_Info bookInfo = gson.fromJson(fetchedJson, Book_Info.class); 
 		
 		if(accepted == 0) {
 			bookInfo.setAccepted(false);

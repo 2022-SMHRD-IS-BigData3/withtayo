@@ -147,5 +147,6 @@ alter table bus_shift
 add nodenm varchar(100);
 
 select * from bus_shift;
+select * from book_info;
 delete from book_info;
 delete from bus_shift;

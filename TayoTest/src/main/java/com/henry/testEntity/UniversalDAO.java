@@ -360,4 +360,19 @@ public class UniversalDAO {
 		return result;
 	}
 
+	public Book_Info cancelCheck(String blog_id) {
+
+		SqlSession sesh = null;
+		Book_Info result = null;
+		
+		try {
+			sesh = seshFac.openSession();
+			result = sesh.selectOne("cancelCheck", blog_id);
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+	}
+
 }

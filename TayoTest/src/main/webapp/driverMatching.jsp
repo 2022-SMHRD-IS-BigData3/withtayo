@@ -273,7 +273,7 @@
 
             <hr style="padding-bottom: 10px;">
             <div class="btnbb">
-                <button style="font-size:20px" class="btnbus" disabled> <i class="material-icons"
+                <button style="font-size:20px" class="btnbus" disabled id="offTheBus"> <i class="material-icons"
                         style="font-size: 50px;">&#xe8d7;</i><br>하차 완료</button>
                 <button style="font-size:20px" class="btnbus"> <i class="material-icons"
                         style="font-size: 50px;">&#xe61d;</i><br>고객 센터</button>
@@ -311,10 +311,10 @@
     	// 노선이 거치는 모든 정류장
     	let allNodes = [];
     	
-    	// 현재 탑승자
+    	// 현재 탑승자 **REDUNDANT
     	let currPsg = null;
     	
-    	// 예약자 리스트 : ***********첫번째는 무조건 승객임*********** (1명만 타거든)
+    	// 예약자 리스트 : **********1번째는 승객으로 변함*********** (1명만 타거든)
     	let bookingList = [];
     	// 예약자 리스트에 대응하는 출발-도착 정류장 순서 어떤 인덱스의 예약자의 카운트다운을 보여줄건지
     	let bookedDprt = [];
@@ -323,7 +323,6 @@
     	// 모달 인터벌 안에서 쓸거
     	let prevListLength = 0;
     	let modalClicked = false;
-    	
     	
     	// #### 3-thread-system! i.e., fetch booking - prompt - node counter ####
     	$(document).ready(function(){
@@ -397,7 +396,7 @@
 		    			}); 
     				}
     			}
-    			
+    			// STILL INSIDE THE AJAX!!!!!!!!!!!!!!!
     			// 모달 팝업용
     			setInterval(function(){
     				// 조회시 리스트 길이가 늘어나있으면
@@ -441,7 +440,6 @@
     		}); // END OF A MAJOR SCOPE
     		
     		/////////////////////SEPARATOR/////////////////////
-    		
     		// 모달 내부 버튼 핸들 : 예약 리스트 마지막의 예약정보에 승낙 정보 업데이트
     		$("#accept").on("click", function(){
     			console.log("accepted");
@@ -450,7 +448,7 @@
     				contentType : 'application/json',
     				data : {bookInfo : JSON.stringify(bookingList[bookingList.length-1]), accepted:1},
     				success : function(modalResp){
-    					console.log("Acceptance updated to the booking info.")
+    					console.log("Acceptance updated to the booking info.");
     				},
     				error : function(xhr, status, error){
     					console.log(error);
@@ -464,9 +462,9 @@
     			$.ajax({
     				url : 'AcceptCheck',
     				contentType : 'application/json',
-    				data : {bookInfo : JSON.stringify(bookingList[bookingList.length-1]), accpeted:0},
+    				data : {bookInfo : JSON.stringify(bookingList[bookingList.length-1]), accepted:0},
     				success : function(modalResp){
-    					console.log("Rejection updated to the booking info.")
+    					console.log("Rejection updated to the booking info.");
     				},
     				error : function(xhr, status, error){
     					console.log(error);
@@ -500,26 +498,57 @@
     			return resultArr;
     		}
     		
-   			// 모달창 프롬프트용 루프에 쓸 method
-    		
-			/////////////////////SEPARATOR/////////////////////
-			// 모달 프롬프트, 인터벌 통제용
-    		setInterval(function(){
-    			
-    		});
-    		
 			/////////////////////SEPARATOR/////////////////////
     		// 예약 취소 핸들링용 루프
     		setInterval(function(){
     			// 취소 컬럼 select 조회
+    			if(bookingList.length != 0){
+	    			$.ajax({
+	    				url : 'CancelCheck',
+	    				contentType : 'application/json',
+	    				data : {subjects : JSON.stringify(bookingList)},
+	    				success : function(theCancelers){ // the weaklings!!!!! going crazy ^ _ ^ 
+							console.log(theCancelers.length + " passengers have canceled."); // NEED TO CHECK STRUCTURE OF THE JSON!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+							// filter out the list!! YOU are the weakest link!!!
+							// 캔슬한사람 리스트ㅇ에서 필터링
+							theCancelers.forEach(function(stuff){
+								bookingList = bookingList.filter(elem => elem.blog_id != stuff.blog_id);
+							});
+	    				},
+	    				error : function(xhr, status, error){
+	    					console.log(error);
+	    				}
+	    			});
+    			}
     		}, 3000);
+			/////////////////////SEPARATOR/////////////////////
+			// 승객 하차 버튼
+			$("#OffTheBus").on("click", function(){
+				//순서리스트 트리오에서 shift, 예약정보에서 딜리트 후 예약 내역으로 // 내역 컬럼 만들어야함
+				let theBailer = bookingList.shift();
+				bookedDprt.shift();
+				bookedArrv.shift();
+				console.log(theBailer.p_id + " has gotten off the bus! You kicked'm out, you monster.");
+				$.ajax({
+					url : 'DropOff',
+					data : {ousted : theBailer.blog_id},
+					success : function(kickResp){ // lmfao 
+						console.log("You kicked them derriere!!! LOLOLOLOLOLOLOLOLOLOLOLOLOL");
+					},
+					error : function(xhr, status, error){
+						console.log(error);
+					}
+				});
+				
+			});
 			
-    		// TODO : 하차 처리 : 순서리스트 트리오에서pop // 승낙 거부 클릭 // 고객센터
+    		// TODO : // 고객센터 // 신고 //
 			
     		/////////////////////SEPARATOR/////////////////////
     		// 버스 현 위치 갱신해서 카운타다운 계산과 동시에 자신 운행정보에 위치 저장
     		setInterval(function(){
-    			// 노선 운행 조회 > 이 차량 GET > FETCH : nodeid, nodenm, nodeord 
+    			// Procedure
+    			// 노선 운행 조회 > 이 차량 GET > FETCH : nodeid, nodenm, nodeord  //  카운트다운에서 승차 처리(운행정보의 관련 컬럼 업데이트) // 탑승객 목적지 도착시 #OffTheBus disabled 제거
     			$.ajax({
 	    			url : 'https://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=50&_type=json&cityCode=24&routeId='+currentShift.routeid,
 	    			success : function(resp003){

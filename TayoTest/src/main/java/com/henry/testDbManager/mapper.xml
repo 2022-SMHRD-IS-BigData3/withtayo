@@ -107,4 +107,8 @@
   	update book_info set accepted=#{accepted} where blog_id=#{blog_id}
   </update>
   
+  <select id="cancelCheck" parameterType="java.lang.String" resultType="com.henry.testEntity.Book_Info">
+  	select * from book_info where blog_id=#{blog_id}
+  </select>
+  
 </mapper>
