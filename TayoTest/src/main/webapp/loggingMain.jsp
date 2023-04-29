@@ -486,6 +486,7 @@
 
         // 일정 시간마다 이미지 변경
         setInterval(changeImage, intervalTime);
+        
     </script>
 
 

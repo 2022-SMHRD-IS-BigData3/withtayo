@@ -93,7 +93,7 @@
         }
 
         #rs2 {
-            height: 210px;
+            height: 190px;
         }
 
         #btnTbl {
@@ -170,6 +170,16 @@
             height: 1.5cm;
             text-align: center;
         }
+
+        .bookinginfor {
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            margin: 5px;
+            height: 70px;
+            font-size: 12px;
+        }
     </style>
 
 </head>
@@ -216,11 +226,10 @@
         <div class="section big" id="reserve_serction">
             <!-- 중앙 컨텐츠 -->
             <div id="rs1">
-                <p style="font-weight: bold; font-size: 25px; margin: 0px;"> 예약 페이지</p>
                 <div class=check-title style="font-size: 16px;">
                     <table>
                         <tr>
-                            <th style=" font-weight: bold;"> - 예약 정보</th>
+                            <th style=" font-weight: bold;"> 예약 정보</th>
                         </tr>
                         <tr>
                             <td style="font-size: 14px;">노선번호: <span
@@ -244,12 +253,7 @@
             <hr>
             <div id="rs2">
                 <div style="font-size: 14px; padding: 10px; border-radius: 5px; ">
-                    <br>
                     <table>
-                        <tr>
-                            <th></th>
-                            <td></td>
-                        </tr>
                         <tr>
                             <td> <i class="material-icons"
                                     style="color: rgb(255, 150, 80); margin-right: 15px;">&#xe530;</i></td>
@@ -258,10 +262,6 @@
                         <tr>
                             <td></td>
                             <td>${bookedInfo.dprtname} <span>정류장</span></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
                         </tr>
                     </table>
                     <i class="material-icons"
@@ -278,6 +278,11 @@
                         </tr>
                     </table>
                 </div>
+            </div>
+            <hr>
+            <div class="bookinginfor">
+                <div>만약 <a href="#" data-toggle="tooltip" title="휠체어와 유모차 동행자"><strong> 교통약자(!)</strong></a>가 아닌 경우, <br>
+                    이 예약 서비스의 이용은 형법 제185조 <br> 일반교통방해죄에 해당할 수 있으므로,<br> <strong> 법적 처벌 대상</strong>이 될 수 있습니다.</div>
             </div>
         </div>
         <div id="btnTbl">
@@ -443,6 +448,12 @@
         setInterval(changeImage, intervalTime);
 
         // 광고판 이미지 변경 끝
+
+        // 교통약자 툴팁
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
 
     </script>
 </body>
