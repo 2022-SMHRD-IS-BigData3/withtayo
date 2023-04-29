@@ -103,4 +103,8 @@
   	insert into bus_shift (shift_id, d_id, b_id, routeno, routeid) values(seq_shift_id.NEXTVAL, #{d_id}, #{b_id}, #{routeno}, #{routeid})
   </insert>
   
+  <update id="updateAcceptance" parameterType="com.henry.testEntity.Book_Info">
+  	update book_info set accepted=#{accepted} where blog_id=#{blog_id}
+  </update>
+  
 </mapper>

@@ -344,4 +344,20 @@ public class UniversalDAO {
 		
 	}
 
+	// 승낙 거부 정보 업데이트용
+	public int updateAcceptance(Book_Info bookInfo) {
+
+		SqlSession sesh = null;
+		int result = 0;
+		try {
+			sesh = seshFac.openSession();
+			result = sesh.update("updateAcceptance", bookInfo);
+			sesh.commit();
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+	}
+
 }
