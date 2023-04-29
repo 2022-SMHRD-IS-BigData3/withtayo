@@ -375,4 +375,35 @@ public class UniversalDAO {
 		return result;
 	}
 
+	public int delThenArchive(Book_Info toProcess) {
+
+		SqlSession sesh = null;
+		int result = 0;
+		
+		try {
+			sesh = seshFac.openSession(true);
+			sesh.delete("writeOff", toProcess);
+			result = sesh.insert("archivePsg", toProcess);
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+	}
+
+	public int updatePsgNum(String b_id) {
+	
+		SqlSession sesh = null;
+		int result = 0 ;
+		
+		try {
+			sesh = seshFac.openSession();
+			result = sesh.update("updatePsgNum", b_id);
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+	}
+	
 }

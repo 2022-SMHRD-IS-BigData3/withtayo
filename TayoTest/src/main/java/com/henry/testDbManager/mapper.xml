@@ -72,7 +72,7 @@
     ORDER BY booktime DESC)
 	WHERE ROWNUM = 1
   </select>
-  
+  <!-- DUPLICATE WITH 'getBookingByBID' CHECK USAGE BEFORE REFACTORING !!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
   <select id="getBookingPSG" parameterType="java.lang.String" resultType="com.henry.testEntity.Book_Info">
   	select * from book_info where blog_id = #{blog_id}
   </select>
@@ -111,4 +111,15 @@
   	select * from book_info where blog_id=#{blog_id}
   </select>
   
+  <delete id="writeOff" parameterType="com.henry.testEntity.Book_Info">
+  	delete from book_info where blog_id=#{blog_id}
+  </delete>
+  
+  <insert id="archive" parameterType="com.henry.testEntity.Book_Info">
+  	insert into book_record (bookrec_id, canceled, accepted, b_id, arrvname, dprtname, booktime, p_id, arrvnode, dprtnode, routeno, routeid) values(bookrec_seq.NEXTVAL, #{canceled}, #{accepted}, #{b_id}, #{arrvname}, #{dprtname}, #{booktime}, #{p_id}, #{arrvnode}, #{dprtnode}, #{routeno}, #{routeid})
+  </insert>
+  
+  <update id="updatePsgNum" parameterType="java.lang.String">
+  	update bus_shift set num_psg=num_psg-1 where b_id=#{b_id}
+  </update>
 </mapper>

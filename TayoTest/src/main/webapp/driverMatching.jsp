@@ -524,7 +524,7 @@
 			/////////////////////SEPARATOR/////////////////////
 			// 승객 하차 버튼
 			$("#OffTheBus").on("click", function(){
-				//순서리스트 트리오에서 shift, 예약정보에서 딜리트 후 예약 내역으로 // 내역 컬럼 만들어야함
+				//순서리스트 트리오에서 shift, 예약정보에서 딜리트 후 예약 내역으로// 운행정보에서 승객수 처리 //
 				let theBailer = bookingList.shift();
 				bookedDprt.shift();
 				bookedArrv.shift();
@@ -534,6 +534,7 @@
 					data : {ousted : theBailer.blog_id},
 					success : function(kickResp){ // lmfao 
 						console.log("You kicked them derriere!!! LOLOLOLOLOLOLOLOLOLOLOLOLOL");
+						console.log("Result num : " + kickResp);
 					},
 					error : function(xhr, status, error){
 						console.log(error);
@@ -557,8 +558,8 @@
 	    				allCars = resp003.response.body.items.item;
 	    				allCars.forEach(function(elem){
 	    					if(elem['vehicleno'] == currentShift.b_id){
-	    						// LOGIC
 	    						console.log("Currently at" + elem['nodenm']);
+	    						
 	    					}
 	    				});
 	    			},
