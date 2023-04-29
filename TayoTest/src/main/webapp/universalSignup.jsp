@@ -503,13 +503,11 @@ body {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2"><a style="font-size: 12px;" href=""
-                                            onclick="alert('세부내용 업데이트 준비 中')">이용약관 및 운영정책 확인하기</a></td>
+                                    <td colspan="2"><a style="font-size: 12px;" href="#" data-toggle="popover"
+                                            title="준비中" >이용약관 및 운영정책 확인하기</a></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2"><a style="font-size: 12px;" href=""
-                                            onclick="alert('세부내용 업데이트 준비 中')">개인정보관련
-                                            사항 확인하기</a></td>
+                                    <td colspan="2"><a style="font-size: 12px;" href="#" data-toggle="popover" title="준비中" >개인정보관련 사항 확인하기</a></td>
                                 </tr>
                             </table>
 
@@ -526,8 +524,7 @@ body {
                     <c:if test="${userCategory=='isPassenger'}">
                         <form action="SignupSubmit" method="post">
                             <table style="width: 338px; text-align: center; font-weight: bold;">
-                                <div
-                                    style="display: flex; justify-content: center; width: 338px; font-weight: bold; font-size: 20px; margin-bottom: 25px;">
+                                <div style="display: flex; justify-content: center; width: 338px; font-weight: bold; font-size: 20px; margin-bottom: 25px;">
                                     회원가입</div>
                                 <tr>
                                     <td>아이디</td> <!--原 value="ID입력" -->
@@ -547,13 +544,13 @@ body {
                                             style="width: 200px;"></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2"><a style="font-size: 12px;" href=""
-                                            onclick="alert('세부내용 업데이트 준비 中')">이용약관 및 운영정책 확인하기</a></td>
+                                    <td colspan="2"><a style="font-size: 12px;" href="#" data-toggle="popover"
+                                            title="준비中" >이용약관 및 운영정책 확인하기</a></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2"><a style="font-size: 12px;" href=""
-                                            onclick="alert('세부내용 업데이트 준비 中')">개인정보관련
-                                            사항 확인하기</a></td>
+                                    <td colspan="2">
+                                    <a style="font-size: 12px;" href="#" data-toggle="popover" title="준비中" >개인정보관련 사항 확인하기</a>
+                                    </td>
                                 </tr>
                             </table>
 
@@ -618,6 +615,13 @@ body {
         setInterval(changeImage, intervalTime);
 
         // 광고판 이미지 변경 끝
+        
+                // 동현
+        // 팝오버 시작
+                $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+        // 팝오버 끝
     </script>
 </body>
 
