@@ -27,7 +27,7 @@
             display: flex;
             flex-direction: column;
         }
-		
+
         .navbar {
             width: 100%;
             height: 1.8cm;
@@ -40,35 +40,39 @@
             width: 100%;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-        }
+
 
         .big {
             height: 12.7cm;
         }
 
-        /* 은혜 컨텐츠 시작 */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+            body {
             font-size: 14px;
-        }
+        margin: 0;
+        padding: 0;
+        font-family: 'NanumSquareNeo-Variable', sans-serif;
+    }
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 
         #form-inner-container {
             background-color: white;
             box-shadow: 0 0 20px gainsboro;
-            
+
         }
 
-#sign-up-container, #sign-in-container {
-	padding: 50px 20px;
-	margin-left: 30px;
-	width: 320px;
-	display: inline-block;
-}
+        #sign-up-container,
+        #sign-in-container {
+            padding: 50px 20px;
+            margin-left: 30px;
+            width: 320px;
+            display: inline-block;
+        }
 
         form input {
             display: block;
@@ -294,20 +298,6 @@
 
 
 
-
-
-
-        /* 은혜 컨텐츠 끝 */
-        /* Font를 적용할 클래스를 지정합니다. */
-        .my-font {
-            font-family: "gg";
-        }
-
-        @font-face {
-            font-family: "gg";
-            src: url("../빛고을광주_Medium.ttf");
-        }
-
         #navbarNavAltMarkup {
             position: fixed;
             top: 70px;
@@ -321,7 +311,7 @@
 
         .offcanvas {
             max-width: 250px;
-            max-height: 450px;
+            max-height: 250px;
             position: absolute;
             left: 150px;
             background-color: #fff8f8;
@@ -356,10 +346,12 @@
             height: 1.5cm;
             text-align: center;
         }
-        .navbar-toggler{
+
+        .navbar-toggler {
             width: 70px;
         }
-        .container-fluid{
+
+        .container-fluid {
             display: flex;
             text-align: center;
             width: 100%;
@@ -369,18 +361,22 @@
 
 <body>
     <div class="container">
-        <div class="navbar" style="font-family: gg;">
+        <div class="navbar">
             <nav class="navbar"> <!-- navbar 시작 -->
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                         <span class="navbar-toggler-icon"></span> <!-- navbar 토글 버튼 아이콘 -->
                     </button>
-                    <div class="col-9 d-flex  align-items-center" style="font-size:large; font-style: italic; font-weight: 900; font-size: 30px; color: whitesmoke;"><span style="margin-left: 15px; text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);">withTAYO</span></div>
+                    <div class="col-9 d-flex  align-items-center"
+                        style="font-size:large; font-style: italic; font-weight: 900; font-size: 30px; color: whitesmoke;">
+                        <span style="margin-left: 15px; text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);">withTAYO</span>
+                    </div>
                     <div class="container offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                         aria-labelledby="offcanvasNavbarLabel"> <!-- Offcanvas 시작 -->
                         <div class="offcanvas-header" id="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">withTAYO</h5> <!-- Offcanvas 헤더 -->
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">withTAYO</h5>
+                            <!-- Offcanvas 헤더 -->
                             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                                 aria-label="Close"></button>
                             <!-- Offcanvas 닫기 버튼 -->
@@ -420,17 +416,17 @@
                                 <button type="submit" id="button-l" value="로그인">로그인</button>
                             </div>
                             <br><br>
-                                <ul style="margin-left: 18px;">
-                                    <li><a href="#" id="passengerJoin" style="text-decoration:none"
-                                            >회원가입</a>
-                                    </li>
-                                    <li><a href="#" style="text-decoration:none">ID/PW찾기</a></li>
-                                </ul>
+                            <ul style="margin-left: 17px; margin-top: -5px;">
+                                <li><a href="#" id="passengerJoin" style="text-decoration:none">회원가입</a>
+                                </li>
+                                <li><a href="#" style="text-decoration:none">ID/PW찾기</a></li>
+                            </ul>
                             <br>
                             <!-- <hr width="295px" align="left" noshade="0.1px"> -->
                             <hr width="237px" style="border:0; height:1px; background: #bbb;">
-                            <div class="aTag">
-                                <a href="driverLogging.jsp" style="color: rgb(129, 128, 128);">기사님 로그인</a>
+                            <div class="aTag" style="margin-top: 18px;">
+                                <a href="driverLogging.jsp" style="color: rgb(129, 128, 128);">기사님
+                                    로그인</a>
                             </div>
                         </form>
                     </div>

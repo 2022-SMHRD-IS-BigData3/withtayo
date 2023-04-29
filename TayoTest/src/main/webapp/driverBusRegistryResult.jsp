@@ -40,23 +40,22 @@
             width: 100%;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-        }
 
         .big {
             height: 12.7cm;
         }
-
-        /* 은혜 컨텐츠 시작 */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            font-size: 14px;
-        }
-
+body {
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        font-family: 'NanumSquareNeo-Variable', sans-serif;
+    }
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
         #form-inner-container {
             background-color: white;
             box-shadow: 0 0 20px gainsboro;
@@ -283,22 +282,6 @@
             content: "";
         }
 
-
-
-
-
-
-        /* 은혜 컨텐츠 끝 */
-        /* Font를 적용할 클래스를 지정합니다. */
-        .my-font {
-            font-family: "gg";
-        }
-
-        @font-face {
-            font-family: "gg";
-            src: url("../빛고을광주_Medium.ttf");
-        }
-
         #navbarNavAltMarkup {
             position: fixed;
             top: 70px;
@@ -387,7 +370,7 @@
 
 <body>
     <div class="container">
-        <div class="navbar" style="font-family: gg;">
+        <div class="navbar">
             <nav class="navbar">
                 <nav class="navbar">
                     <nav class="navbar"> <!-- navbar 시작 -->
@@ -444,7 +427,7 @@
 
                 </table>
             </div>
-                    <div style="text-align: center; font-weight: bold;">안전 운행 부탁드립니다.</div>
+                    <div style="text-align: center; font-weight: bold; font-size: 16px;">안전 운행 부탁드립니다.</div>
 
             <div class="section_mainbusinfor_add">
                 <input style="margin-right: 15px;" id="btnr" type="button" value="취소"

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,24 +43,26 @@
         body {
             margin: 0;
             padding: 0;
+            font-size: 14px;
+            font-family: 'NanumSquareNeo-Variable', sans-serif;
+        }
+
+        @font-face {
+            font-family: 'NanumSquareNeo-Variable';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
         }
 
 
 
         .big {
-            height: 12.7cm;
+            height: 420px;
         }
 
 
         /* Font를 적용할 클래스를 지정합니다. */
-        .my-font {
-            font-family: "gg";
-        }
 
-        @font-face {
-            font-family: "gg";
-            src: url("../빛고을광주_Medium.ttf");
-        }
 
         #navbarNavAltMarkup {
             position: fixed;
@@ -91,18 +93,22 @@
         }
 
         #rs2 {
-            height: 240px;
+            height: 210px;
         }
 
         #btnTbl {
             margin-left: 10px;
             margin-top: 0px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             margin-right: 10px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
 
+        }
+
+        .btn {
+            width: 100px;
         }
 
 
@@ -170,7 +176,7 @@
 
 <body>
     <div class="container">
-        <div class="navbar" style="font-family: gg;">
+        <div class="navbar">
             <nav class="navbar"> <!-- navbar 시작 -->
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
@@ -210,33 +216,35 @@
         <div class="section big" id="reserve_serction">
             <!-- 중앙 컨텐츠 -->
             <div id="rs1">
-                <p style="font-weight: bold;"> 예약 페이지</p>
-                <div class=check-title style="font-size: 12px;"">
+                <p style="font-weight: bold; font-size: 25px; margin: 0px;"> 예약 페이지</p>
+                <div class=check-title style="font-size: 16px;">
                     <table>
                         <tr>
-                            <th style=" font-weight: bold;">예약 정보</th>
-                    </tr>
-                    <tr>
-                        <td style="font-size: 12px;">노선번호: <span style="font-weight: bold;">${bookedInfo.routeno}</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="font-size: 12px;">예약자 ID : ${bookedInfo.p_id}</td>
-                    </tr>
-                    <!--      <tr>
+                            <th style=" font-weight: bold;"> - 예약 정보</th>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 14px;">노선번호: <span
+                                    style="font-weight: bold;">${bookedInfo.routeno}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 14px;">예약자 ID : ${bookedInfo.p_id}</td>
+                        </tr>
+                        <!--      <tr>
                         <td style="font-size: 12px;">버스기사 ID : ㅎㅇㅇ</td>
                     </tr>  -->
-                    <tr>
-                        <td style="font-size: 12px;">예약시간 :
-                            <fmt:formatDate value="${bookedInfo.booktime}" pattern="yyyy년MM월dd일hh시mm분" />
-                        </td>
-                    </tr>
+                        <tr>
+                            <td style="font-size: 14px;">예약시간 :
+                                <fmt:formatDate value="${bookedInfo.booktime}" pattern="yyyy년MM월dd일hh시mm분" />
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>
             <hr>
             <div id="rs2">
                 <div style="font-size: 14px; padding: 10px; border-radius: 5px; ">
+                    <br>
                     <table>
                         <tr>
                             <th></th>
@@ -253,7 +261,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td>주소 보류</td>
+                            <td></td>
                         </tr>
                     </table>
                     <i class="material-icons"
@@ -268,26 +276,15 @@
                             <td></td>
                             <td>${bookedInfo.arrvname} <span>정류장</span></td>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td>주소 보류</td>
-                        </tr>
                     </table>
                 </div>
-
-
             </div>
-            <hr style="padding-bottom: 10px;">
-            <div>
-                <div>
-                    <div id="btnTbl">
-                        <button type="button" class="btn btn-secondary" id="button"
-                            style="background-color: rgb(192, 190, 190); border: 0;">취 소</button>
-                        <button class="btn btn-warning" id="bookingBtn"
-                            style="color: white;background-color: rgb(231, 177, 10);">예 약</button>
-                    </div>
-                </div>
-            </div>
+        </div>
+        <div id="btnTbl">
+            <button type="button" class="btn btn-secondary" id="button"
+                style="background-color: rgb(192, 190, 190); border: 0; margin-right: 50px;">취 소</button>
+            <button class="btn btn-warning" id="bookingBtn"
+                style="color: white;background-color: rgb(231, 177, 10); margin-left: 50px;">예 약</button>
         </div>
         <div class="endbar">
             <div class="row">

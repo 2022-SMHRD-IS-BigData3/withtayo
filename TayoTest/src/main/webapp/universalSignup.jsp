@@ -39,11 +39,18 @@
         width: 100%;
     }
 
-    body {
+body {
         margin: 0;
         padding: 0;
+        font-size: 14px;
+        font-family: 'NanumSquareNeo-Variable', sans-serif;
     }
-
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
     .big {
         height: 12.7cm;
     }
@@ -52,7 +59,6 @@
     body {
         margin: 0;
         padding: 0;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
         font-size: 14px;
     }
 
@@ -292,20 +298,6 @@
 
 
 
-
-
-
-    /* 은혜 컨텐츠 끝 */
-    /* Font를 적용할 클래스를 지정합니다. */
-    .my-font {
-        font-family: "gg";
-    }
-
-    @font-face {
-        font-family: "gg";
-        src: url("../빛고을광주_Medium.ttf");
-    }
-
     #navbarNavAltMarkup {
         position: fixed;
         top: 70px;
@@ -319,7 +311,7 @@
 
     .offcanvas {
         max-width: 250px;
-        max-height: 420px;
+        max-height: 250px;
         position: absolute;
         left: 150px;
         background-color: #fff8f8;
@@ -456,7 +448,7 @@
 
 <body>
     <div class="container">
-        <div class="navbar" style="font-family: gg;">
+        <div class="navbar">
             <nav class="navbar"> <!-- navbar 시작 -->
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
