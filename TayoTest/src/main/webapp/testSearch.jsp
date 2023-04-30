@@ -384,6 +384,12 @@
                 text-align: center;
                 width: 100%;
             }
+            .bookmark{
+            	color: gold;
+            }
+            .recent{
+            	color: gold;
+            }
         </style>
 
         <body>
@@ -461,7 +467,7 @@
                                             </div>
                                         </div>
                                         <div class="srchBtn" id="btnTbl">
-                                            <input type="reset" class="btn btn-secondary" value="재입력"
+                                            <input type="button" onclick="location.replace('testSearch.jsp')" class="btn btn-secondary" value="재입력"
                                                 style="background-color: rgb(192, 190, 190); border: 0;">
                                             <input type="button" id="srchBtn" disabled class="btn btn-warning"
                                                 value="검색" style="color: white; background-color: rgb(231, 177, 10);">
@@ -510,7 +516,7 @@
             </div>
 
             <script>
-                // TODO : geolocation / fav / recent
+                // TODO : GEOLOCATION /
                 // 검색 버튼 클릭시 전송용
                 let dprtNodeId = "";
                 let arrvNodeId = "";
@@ -547,11 +553,16 @@
                                 //	let resultList = JSON.parse(response);
                                 if (response !== undefined || response !== null) {
                                     //	console.log(response);
-                                    for (let i = 0; i < response.length; i++) {
+                                    let iter = 0;
+                                    while (true) {
                                         $("#dprtSrchDropdown").append("<span type='button' class='dprtPick'>"
-                                            + response[i]['nodenm'] + "</span>"
-                                            + "<p class='nodeIds'>" + response[i]['nodeid'] + "</p>"
+                                            + response[iter]['nodenm'] + "</span>"
+                                            + "<p class='nodeIds'>" + response[iter]['nodeid'] + "</p>"
                                             + "<br>");
+                                        iter += 1;
+                                        if(iter >= 3){
+                                        	break;
+                                        }
                                     }
                                 }
                             },
@@ -580,11 +591,16 @@
                             },
                             success: function (response) {
                                 if (response != undefined || response != null) {
-                                    for (let i = 0; i < response.length; i++) {
+                                	let iter = 0;
+                                    while (true) {
                                         $("#arrvSrchDropdown").append("<span type='button' class='arrvPick'>"
-                                            + response[i]['nodenm'] + "</span>"
-                                            + "<p class='nodeIds'>" + response[i]['nodeid'] + "</p>"
+                                            + response[iter]['nodenm'] + "</span>"
+                                            + "<p class='nodeIds'>" + response[iter]['nodeid'] + "</p>"
                                             + "<br>");
+                                        iter += 1;
+                                        if(iter >= 3){
+                                        	break;
+                                        }
                                     }
                                 }
                             },
@@ -797,11 +813,11 @@
                                 //			<c:set var="theJson" value="${resRsps}"/>
                                 for (let p = 0; p < 2; p++) {
                                     $("#searchResultTable").append('<div class="instant_box" style="position: relative;"><table class="resTables" id="srchIdx'
-                                        + resRsps[p].routeid + '"><tr><td class="resRoute"><i class="material-icons">&#xe83a;</i>탑승 버스<strong>'
+                                        + resRsps[p].routeid + '"><tr><td class="resRoute"><button onclick="favBtnAction($(this))" class="material-icons favBtn">&#xe83a;</button>탑승 버스<strong>'
                                         + resRsps[p].routeno + '</strong><button onclick="alarmBtnAction($(this))" class="material-icons busAlarm">&#xe7f7;</button></td><td class="resRouteId">'
                                         + resRsps[p].routeid + '</td></tr><tr><td class="bustimetable" colspan="2"><div class="arrvTime arrvInfo" id="infoIdx'
                                         + resRsps[p].routeid + '"><span style="font-size: 14px;">도착 시간 계산 중</span></div><div style="font-size: 14px;  border-radius: 5px; margin-top: -10px;"><br><div style="display: flex; justify-content: center; width: 100%;"><table style="margin-left: 20px;"><tr><td style="width: 5px;"> <i class="material-icons" style="color: rgb(255, 150, 80);width: 20px;">&#xe530;</i></td><td class="dprtNode">'
-                                        + dprtName + '</td><th style="font-size: 15px;"></th><td><i class="material-icons">&#xe154;</i></td><td style="width: 5px;"> <i class="material-icons favBtn" style="color: rgb(255, 150, 80);width: 20px;">&#xe3a0;</i></td><td class="arrvNode">'
+                                        + dprtName + '</td><th style="font-size: 15px;"></th><td><i class="material-icons">&#xe154;</i></td><td style="width: 5px;"> <i class="material-icons" style="color: rgb(255, 150, 80);width: 20px;">&#xe3a0;</i></td><td class="arrvNode">'
                                         + arrvName + '</td></tr></table></div></div></td></tr></table></div><br><br>');
                                 }
                                 //		$("#resRoute").text(resRsps.routeno); // DEPRECATED!!!!!
@@ -843,7 +859,7 @@
                                     // 리스트로 뽑을 때 수정할 것 ajax 를 for에 돌려
                                     url: 'https://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoSpcifyRouteBusArvlPrearngeInfoList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=10&_type=json&cityCode=24&nodeId=' + dprtNodeId + '&routeId=' + routeResult[t],
                                     success: function (rsps88) {
-                                        console.log("도착정보 5초마다 갱신중");
+                                        console.log("도착정보 4초마다 갱신중");
                                  //     console.log(rsps88);
 
                                         try {
@@ -863,84 +879,19 @@
                                     }
                                 });
                             }
-                        }, 5000);
+                        }, 4000);
 
                     }).catch(function (error) {
                         console.log(error);
                     });
 
-                    // ####################결과 정류장########################
-                    //	console.log(resStop); // THE MONEY CODE ####
-                    // ####################결과 노선##########################
-                    //	console.log(routeResult); // THE SECOND MONEY CODE ####
-                    // #####################################################
+                });//////////////////// 검색 버튼 on click  끝////////////////////////////
 
-                });// 검색 버튼 on click  끝
-
-                // 즐겨찾기 버튼 클릭
-                // TODO : 
-                // 리스트로 뽑을 때 수정할거 (클래스로 바꾸고 알고리즘 추가)
-                $(".favBtn").on("click", function () {
-                    let routeToSend = $("#resRouteId").text();
-                    let routeNameToSend = $("#resRoute").text();
-                    $.ajax({
-                        method: 'GET',
-                        url: 'AddFav',
-                        //		contentType : "text/html;charset=UTF-8",
-                        // 리스트로 뽑을 때 수정할 거
-                        data: { routeName: routeNameToSend, routeInfo: routeToSend, dprtNode: dprtNodeId, arrvNode: arrvNodeId },
-                        success: function (favRsps) {
-                            //		console.log("insert result:"+favRsps);
-                            if (parseInt(favRsps) == 1) {
-                                // 또는 숨기던지
-                            //  $("#favBtn").attr("value", "추가완료!");
-                                $(this).attr("disabled");
-                            }
-                        },
-                        error: function (error) {
-                            console.error(error);
-                        }
-                    });
-                });
-
-                // 아래 : 페이지 로딩시(또는 새로고침) 즐겨찾기 갱신
-                $.ajax({
-                    url: 'GetFav',
-                    success: function (sucResp) {
-                        //			console.log(sucResp);
-                        if (sucResp !== null || sucResp !== undefined) {
-                            $("#favBtn").hide();
-                            for (let y = 0; y < sucResp.length; y++) {
-                                $("#bookmarkList").html("<li><a href='#'>" + sucResp[y].routeno + "</a></li>");
-                            }
-                        } else {
-                            $("#favBtn").show();
-                        }
-                    },
-                    error: function (error) {
-                        console.error(error);
-                    }
-                });
-                $.ajax({
-                    url: 'GetRecent',
-                    success: function (sucResp2) {
-                        console.log(sucResp2);
-                        for (let x = 0; x < sucResp2.length; x++) {
-                            $("#recentSearch").html("<li><a href='#'>" + sucResp2[x].rec_dprt + "에서 " + sucResp2[x].rec_arrv + "까지</a></li>");
-                        }
-                    }
-                });
-
-                // 버스 알람 버튼!!!! #####################TODOTODOTODOTODOTODOTODOTODOTODOTODO
-
-                // $("#searchResultTable .busAlarm").on('click', 
-
+                // 알림 예약 버튼 클릭
                 function alarmBtnAction(btn) {
-                    console.log("alarm clicked!!");
+                    console.log("Booking button clicked!!");
                     let routeno = $(btn).siblings("strong").text();
                     let routeid = $(btn).parent().siblings(".resRouteId").text();
-                    let dprtid = dprtNodeId;
-                    let arrvid = arrvNodeId;
                     $.ajax({
                         url: 'BookingPrev',
                         data: { routeno: routeno, routeid: routeid, dprtid: dprtNodeId, arrvid: arrvNodeId, dprtnm: dprtName, arrvnm: arrvName },
@@ -953,11 +904,73 @@
                         }
                     });
                 };
-
-
-
-
-                // 동현 코드
+                // 즐겨찾기 버튼 클릭
+				function favBtnAction(thisBtn){
+					console.log("Bookmark button clicked!");
+					let routeToSend = $(thisBtn).parent().siblings(".resRouteId").text();
+					let routeNameToSend = $(thisBtn).siblings("strong").text();
+					$.ajax({
+                        method: 'GET',
+                        url: 'AddFav',
+                        //		contentType : "text/html;charset=UTF-8",
+                        // 리스트로 뽑을 때 수정할 거
+                        data: { routeName: routeNameToSend, routeInfo: routeToSend, dprtNode: dprtName, arrvNode: arrvName, dprtId: dprtNodeId, arrvId: arrvNodeId},
+                        success: function (favRsps) {
+                            //		console.log("insert result:"+favRsps);
+                            if (parseInt(favRsps) == 1) {
+                                // 또는 숨기던지
+                            //  $("#favBtn").attr("value", "추가완료!");
+                                $(this).attr("disabled");
+                            }
+                        },
+                        error: function (error) {
+                            console.error(error);
+                        }
+                    });
+				}
+                // 페이지 로딩시 북마크, 최근검색 리스트 백지로
+				$("#bookmarkList").empty();
+				$("#recentSearch").empty();
+                // 페이지 로딩시(또는 새로고침) 즐겨찾기 갱신 일단은 출발-목적만 나오게
+                $.ajax({
+                    url: 'GetFav',
+                    success: function (sucResp) {
+                        //			console.log(sucResp);
+                        if (sucResp !== null || sucResp !== undefined) {
+                            for (let y = 0; y < sucResp.length; y++) { // BEAUTIFUL
+                                $("#bookmarkList").append("<li><span class=\"bookmark\" onclick=\"addThese(\'"+sucResp[y].f_dprt+"\', \'"+sucResp[y].f_arrv+"\')\">" + sucResp[y].f_dprt + "에서 " + sucResp[y].f_arrv + "까지</span></li>");
+                            }
+                        }
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+				// 페이지 로딩시 최근검색 갱신
+                $.ajax({
+                    url: 'GetRecent',
+                    success: function (sucResp2) {
+                        console.log(sucResp2);
+                        for (let x = 0; x < sucResp2.length; x++) { // Dynamically using functions!!!!
+                            $("#recentSearch").append("<li><span class=\"recent\" onclick=\"addThese(\'"+sucResp2[x].rec_dprt+"\', \'"+sucResp2[x].rec_arrv+"\')\">" + sucResp2[x].rec_dprt + "에서 " + sucResp2[x].rec_arrv + "까지</span></li>");
+                        }
+                    },
+                    error : function(xhr, status, error){
+                    	console.log(error);
+                    }
+                });
+				// 즐찾, 최근검색 눌럿을때 바로 검색창에 추가해줄거
+				function addThese(departure, arrival){
+					$("#departure").val(departure);
+					$("#arrival").val(arrival);
+					$("#srchBtn").removeAttr("disabled");
+					dprtName = departure;
+					arrvName = arrival;
+					$("#srchBtn").click();
+					$("#srchBtn").attr("disabled");
+				}
+                
+				////////////////////////THE GREAT DIVIDER//////////////////////////
                 // 뉴스 시작
                 // 뉴스 헤더를 갱신할 시간 간격 (5초)
                 var intervalTime = 3000;

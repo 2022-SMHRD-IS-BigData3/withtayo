@@ -105,7 +105,6 @@
 
         }
 
-
         .check-title {
             margin-left: 5px;
         }

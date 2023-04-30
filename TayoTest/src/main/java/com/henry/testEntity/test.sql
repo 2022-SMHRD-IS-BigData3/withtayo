@@ -181,3 +181,13 @@ delete from recent;
 delete from fav;
 delete from book_info;
 select * from book_record;
+
+alter table fav
+add f_dprt_id varchar2(100);
+alter table fav
+add f_arrv_id varchar2(100);
+select * from recent;
+alter table recent
+add rec_dprt_id varchar2(100);
+alter table recent
+add rec_arrv_id varchar2(100);

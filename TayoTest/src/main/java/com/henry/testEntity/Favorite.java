@@ -8,11 +8,29 @@ public class Favorite {
 	private String f_dprt;
 	private String f_arrv;
 	private String routeno;
+	private String f_dprt_id;
+	private String f_arrv_id;
 	
 	@Override
 	public String toString() {
 		return "Favorite [f_id=" + f_id + ", p_id=" + p_id + ", routeid=" + routeid + ", f_dprt=" + f_dprt + ", f_arrv="
-				+ f_arrv + ", routeno=" + routeno + "]";
+				+ f_arrv + ", routeno=" + routeno + ", f_dprt_id=" + f_dprt_id + ", f_arrv_id=" + f_arrv_id + "]";
+	}
+	
+	public String getF_dprt_id() {
+		return f_dprt_id;
+	}
+
+	public void setF_dprt_id(String f_dprt_id) {
+		this.f_dprt_id = f_dprt_id;
+	}
+
+	public String getF_arrv_id() {
+		return f_arrv_id;
+	}
+
+	public void setF_arrv_id(String f_arrv_id) {
+		this.f_arrv_id = f_arrv_id;
 	}
 
 	public String getRouteno() {
@@ -67,13 +85,16 @@ public class Favorite {
 		// stub
 	}
 
-	public Favorite(String f_id, String p_id, String routeid, String f_dprt, String f_arrv, String routeno) {
+	public Favorite(String f_id, String p_id, String routeid, String f_dprt, String f_arrv, String routeno,
+			String f_dprt_id, String f_arrv_id) {
 		this.f_id = f_id;
 		this.p_id = p_id;
 		this.routeid = routeid;
 		this.f_dprt = f_dprt;
 		this.f_arrv = f_arrv;
 		this.routeno = routeno;
+		this.f_dprt_id = f_dprt_id;
+		this.f_arrv_id = f_arrv_id;
 	}
 	
 }
