@@ -510,7 +510,6 @@
             </div>
 
             <script>
-                // 동원 코드
                 // TODO : geolocation / fav / recent
                 // 검색 버튼 클릭시 전송용
                 let dprtNodeId = "";
@@ -527,28 +526,6 @@
                 let dprtCheck = false;
                 let arrvCheck = false;
                 
-                // TESTING FOR HOISTING ISSUES
-                function secondOne(rsp, routeRes) {
-                    let dupes = {};
-                    for (let n = 0; n < rsp.length; n++) {
-                        //		console.log("looping");
-                        if (dupes[rsp[n]] === undefined) {
-                            dupes[rsp[n]] = 1;
-                        } else {
-                            dupes[rsp[n]]++;
-                        }
-	                    console.log(dupes[rsp[n]]);
-                    }
-                    for (let stuff in dupes) {
-                        if (dupes[stuff] > 2) {
-                            if (!routeRes.includes(stuff)) {
-                                routeRes.push(stuff);
-                            }
-                        }
-                    }
-                    return routeRes;
-                }
-
                 $(document).ready(function () {
                     // 출발지 검색용!!!!!############################
                     $("#departure").on("keyup", function () {
@@ -663,15 +640,16 @@
                     }
                 });
                 
-                // 동현 코드---------------------------------------
                 // 버튼 스위칭 코드 시작------------------------------
                 $(document).ready(function () {
                     $("#switchBtn").click(function () {
-                        var dprtName = $("#departure").val();  // 출발지 입력값 가져오기
-                        var arrvName = $("#arrival").val();  // 도착지 입력값 가져오기
+                        var dprt = $("#departure").val();  // 출발지 입력값 가져오기
+                        var arrv = $("#arrival").val();  // 도착지 입력값 가져오기
                         // 출발지와 도착지 입력값 서로 바꾸기
-                        $("#departure").val(arrvName);
-                        $("#arrival").val(dprtName);
+                        $("#departure").val(arrv);
+                        $("#arrival").val(dprt);
+                        dprtName = arrv;
+                        arrvName = dprt;
                     });
                 });
                 // 버튼 스위칭 끝-------------------------------------
@@ -679,83 +657,95 @@
 
                 // 대망으 검섁버튼#########################################################
                 $("#srchBtn").on("click", function () {
+                	// 검색 버튼 연타했을 때 다른 노선들 중복되서 쌓이지 않도록 초기화 와 설명 친절하다
+                    resStop.length = 0;
+                    responses.length = 0;
+                    routeResult.length = 0;
+                    resRsps = null;
                     // alert("ㅎㅇㅇ");
                     // 먼저 출발지 도착지 둘다 경유하는 노선 cross reference
                     // callback hell 방지, response 2개 동시에 받기
                     let requests = [];
-                    
-                    // 동현 코드 ----------------------------
-                    // 스위칭 버튼이 있으니까
-                    var dprtName = $("#departure").val();
-                    var arrvName = $("#arrival").val();
-                    // 검색 할때 스위칭이 됬을 수도 있으니 각 값을 받고 검색 시작
-                    // 스위칭 -------------------------------
-
-
-
+					let resArr = [];
+					let resColl = [];
                     $.ajax({
                         // 두방향 같은이름 정류소
                         url: 'Search2',
                         method: 'post',
                         data: { dprtnm: dprtName, arrvnm: arrvName },
                         // 첫번째 then
-                    }).then(function (results) {
-
-                        let resArr = results.replace("[", "").replace("]", "").split(", ");
-                        // 4개 정류소 조회
-                        $.ajax({
+                    }).then(function(tossed1st){
+                    	console.log("The 1st then()");
+                        resArr = tossed1st.replace("[", "").replace("]", "").split(", ");
+                        return resArr.length;
+                    
+                    // 4개 정류소 조회
+                    }).then(function (tossed2nd) {
+                    	console.log("The 2nd then() ... fetching nodes");
+                    	console.log(tossed2nd + " nodes detected.");
+                        return $.ajax({
                             url: 'https://apis.data.go.kr/1613000/BusSttnInfoInqireService/getSttnThrghRouteList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=100&_type=json&cityCode=24&nodeid=' + resArr[0],
-                            success: function (rsp) {
-                                for (let k = 0; k < rsp.response.body.items.item.length; k++) {
-                                    responses.push(rsp.response.body.items.item[k].routeid);
-                                }
-                            },
-                            error: function (error) {
-                                console.log(error);
-                            }
                         });
-                        $.ajax({
+                    }).then(function(tossed3rd){
+                    	console.log("The 3rd then() ... fetching nodes");
+                    	resColl.push(tossed3rd);
+                        return $.ajax({
                             url: 'https://apis.data.go.kr/1613000/BusSttnInfoInqireService/getSttnThrghRouteList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=100&_type=json&cityCode=24&nodeid=' + resArr[1],
-                            success: function (rsp) {
-                                for (let k = 0; k < rsp.response.body.items.item.length; k++) {
-                                    responses.push(rsp.response.body.items.item[k].routeid);
-                                }
-                            },
-                            error: function (error) {
-                                console.log(error);
-                            }
                         });
-                        $.ajax({
+                    }).then(function(tossed4th){
+                        console.log("The 4th then() ... fetching nodes");
+                        resColl.push(tossed4th);
+                        return $.ajax({
                             url: 'https://apis.data.go.kr/1613000/BusSttnInfoInqireService/getSttnThrghRouteList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=100&_type=json&cityCode=24&nodeid=' + resArr[2],
-                            success: function (rsp) {
-                                for (let k = 0; k < rsp.response.body.items.item.length; k++) {
-                                    responses.push(rsp.response.body.items.item[k].routeid);
-                                }
-                            },
-                            error: function (error) {
-                                console.log(error);
-                            }
                         });
-                        $.ajax({
+                    }).then(function(tossed5th){
+                    	console.log("The 5th then() ... fetching nodes");
+                    	resColl.push(tossed5th);
+                        return $.ajax({
                             url: 'https://apis.data.go.kr/1613000/BusSttnInfoInqireService/getSttnThrghRouteList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=100&_type=json&cityCode=24&nodeid=' + resArr[3],
-                            success: function (rsp) {
-                                for (let k = 0; k < rsp.response.body.items.item.length; k++) {
-                                    responses.push(rsp.response.body.items.item[k].routeid);
-                                }
-                            },
-                            error: function (error) {
-                                console.log(error);
-                            }
                         });
-                        			console.log(responses); // this works
-                        // 최강 n번째 then?
-                    }).then(function (dump2) {
-                        // 	responses에는 4개정류장 지나는 노선 이름들 들어있음 다음 함수에서는 중복찾아 제거
-                        routeResult = secondOne(responses, routeResult);
-                        //			console.log(dump2);
-                        //			routeResultObject = '함수추가';
-                        			console.log(routeResult); // 드디어 된다 이 솥가튼
-                        routeResult.forEach(function (element) {
+                    // 최강 n번째 then? : processing a json array instead of a promise array because i can lolololololol
+                    }).then(function(tossed6th){
+                    	console.log("The 6th then() : For data processing.");
+                    	resColl.push(tossed6th); // 정류장 쇼핑 끝
+                    	
+                    	for(let lol = 0 ; lol < resColl.length ; lol++){
+                    		for (let k = 0; k < resColl[lol].response.body.items.item.length; k++) {
+                                responses.push(resColl[lol].response.body.items.item[k].routeid);
+                            }
+                    	}
+                        // console.log(responses);
+                        // responses에는 4개정류장 지나는 노선아이디들 들어있음 다음 함수에서는 중복찾아 제거
+                        function secondOne(rsp, routeRes) {
+                            let dupes = {};
+                            for (let n = 0; n < rsp.length; n++) {
+                                //		console.log("looping");
+                                if (dupes[rsp[n]] == undefined) {
+                                    dupes[rsp[n]] = 1;
+                                } else {
+                                    dupes[rsp[n]]++;
+                                }
+        	                //    console.log(dupes[rsp[n]]);
+                            }
+                            for (let stuff in dupes) {
+                                if (dupes[stuff] > 2) {
+                                    if (!routeRes.includes(stuff)) {
+                                        routeRes.push(stuff);
+                                    }
+                                }
+                            }
+                            return routeRes;
+                        }
+						routeResult = secondOne(responses, routeResult);
+                        
+                        // console.log(dump2);
+                        // routeResultObject = '함수추가';
+    					// console.log(routeResult); // 드디어 된다 이 솥가튼 lest we make broken promises heheheheheheaehahahahahahahao
+                        return routeResult;
+                        
+                    }).then(function (tossed7th) {
+                    	console.log("The 7th then()");
+                        tossed7th.forEach(function (element) {
                             $.ajax({
                                 url: 'https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=200&_type=json&cityCode=24&routeId=' + element,
                                 success: function (rsps77) {
@@ -763,7 +753,7 @@
                                     let compArr = [];
                                     // arr 은 정류장 object 리스트임
                                     arr.forEach(function (elem) {
-                                        //		console.log(elem);
+                                        // console.log(elem);
                                         compArr.push(elem.nodenm);
                                         // 준비해둔 dprtName, arrvName로 조회
                                     });
@@ -787,7 +777,7 @@
 
                         })
                         // 마지막에서 몇번째인지 모르는 then
-                    }).then(function (dumpThisAARGH) {
+                    }).then(function() {
                         //		console.log(dumpThis);
                         //		console.log(routeResult);
                         //		console.log(resStop);
@@ -824,11 +814,28 @@
                             }
                         });
 
+                    }).then(function(){
+                    	// 최근검색
+                        //		console.log(dprtName);
+                        //		console.log(arrvName);
+                        $.ajax({
+                            url: 'AddRecent',
+                            data: { dprtName: dprtName, arrvName: arrvName },
+                            success: function (rsps777) {
+
+                                console.log(rsps777 + "RECENT SEARCH HISTORY ADDED.");
+
+                                // 최근 검색 추가 완료
+                            },
+                            error: function (error) {
+                                console.log(error);
+                            }
+                        });
+                    	
                         // 진짜 마지막 then ㅋㅋㅋㅋ (도착정보 갱신용)
-                    }).then(function (dumpThisShite) {
+                    }).then(function () {
                     //  console.log("INSIDE THE LAST THEN");
                         setInterval(function () {
-
                             for (let t = 0; t < routeResult.length; t++) {
                                 //			console.log(routeResult[t]);
                                 //			console.log(resRsps[t].routeid);
@@ -837,7 +844,7 @@
                                     url: 'https://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoSpcifyRouteBusArvlPrearngeInfoList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=10&_type=json&cityCode=24&nodeId=' + dprtNodeId + '&routeId=' + routeResult[t],
                                     success: function (rsps88) {
                                         console.log("도착정보 5초마다 갱신중");
-                                        console.log(rsps88);
+                                 //     console.log(rsps88);
 
                                         try {
                                             console.log("TRY SUCCESSFUL");
@@ -858,29 +865,6 @@
                             }
                         }, 5000);
 
-                    }).then(function (dumper) {
-                        // 최근검색
-                        //		console.log(dprtName);
-                        //		console.log(arrvName);
-                        $.ajax({
-                            url: 'AddRecent',
-                            data: { dprtName: dprtName, arrvName: arrvName },
-                            success: function (rsps777) {
-
-                                console.log(rsps777 + "RECENT SEARCH HISTORY ADDED.");
-
-                                // 최근 검색 추가 완료
-
-                                // 검색 버튼 연타했을 때 다른 노선들 중복되서 쌓이지 않도록 초기화 와 설명 친절하다
-                                resStop.length = 0;
-                                responses.length = 0;
-                                routeResult.length = 0;
-                                resRsps = null;
-                            },
-                            error: function (error) {
-                                console.log(error);
-                            }
-                        });
                     }).catch(function (error) {
                         console.log(error);
                     });
@@ -909,8 +893,8 @@
                             //		console.log("insert result:"+favRsps);
                             if (parseInt(favRsps) == 1) {
                                 // 또는 숨기던지
-                                $("#favBtn").attr("value", "추가완료!");
-                                $("#favBtn").attr("disabled");
+                            //  $("#favBtn").attr("value", "추가완료!");
+                                $(this).attr("disabled");
                             }
                         },
                         error: function (error) {
@@ -924,7 +908,7 @@
                     url: 'GetFav',
                     success: function (sucResp) {
                         //			console.log(sucResp);
-                        if (sucResp != null) {
+                        if (sucResp !== null || sucResp !== undefined) {
                             $("#favBtn").hide();
                             for (let y = 0; y < sucResp.length; y++) {
                                 $("#bookmarkList").html("<li><a href='#'>" + sucResp[y].routeno + "</a></li>");
