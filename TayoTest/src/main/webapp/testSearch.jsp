@@ -526,8 +526,28 @@
                 // 출발 도착 다 입력됐는지 확인
                 let dprtCheck = false;
                 let arrvCheck = false;
-
-
+                
+                // TESTING FOR HOISTING ISSUES
+                function secondOne(rsp, routeRes) {
+                    let dupes = {};
+                    for (let n = 0; n < rsp.length; n++) {
+                        //		console.log("looping");
+                        if (dupes[rsp[n]] === undefined) {
+                            dupes[rsp[n]] = 1;
+                        } else {
+                            dupes[rsp[n]]++;
+                        }
+	                    console.log(dupes[rsp[n]]);
+                    }
+                    for (let stuff in dupes) {
+                        if (dupes[stuff] > 2) {
+                            if (!routeRes.includes(stuff)) {
+                                routeRes.push(stuff);
+                            }
+                        }
+                    }
+                    return routeRes;
+                }
 
                 $(document).ready(function () {
                     // 출발지 검색용!!!!!############################
@@ -727,14 +747,14 @@
                                 console.log(error);
                             }
                         });
-                        //			console.log(responses); // this works
-                        // 	responses에는 4개정류장 지나는 노선 이름들 들어있음 다음 함수에서는 중복찾아 제거
-                        routeResult = secondOne(responses, routeResult);
+                        			console.log(responses); // this works
                         // 최강 n번째 then?
                     }).then(function (dump2) {
+                        // 	responses에는 4개정류장 지나는 노선 이름들 들어있음 다음 함수에서는 중복찾아 제거
+                        routeResult = secondOne(responses, routeResult);
                         //			console.log(dump2);
                         //			routeResultObject = '함수추가';
-                        //			console.log(routeResult); // 드디어 된다 이 솥가튼
+                        			console.log(routeResult); // 드디어 된다 이 솥가튼
                         routeResult.forEach(function (element) {
                             $.ajax({
                                 url: 'https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=200&_type=json&cityCode=24&routeId=' + element,
@@ -768,7 +788,7 @@
                         })
                         // 마지막에서 몇번째인지 모르는 then
                     }).then(function (dumpThisAARGH) {
-                        //			console.log(dumpThis);
+                        //		console.log(dumpThis);
                         //		console.log(routeResult);
                         //		console.log(resStop);
                         $("#searchResultTable").empty();
@@ -797,7 +817,7 @@
                                 //		$("#resRoute").text(resRsps.routeno); // DEPRECATED!!!!!
                                 //		$("#resRouteId").text(resRsps.routeid);
                                 //			console.log(resRsps);
-                                console.log($(".busAlarm"));
+                //                console.log($(".busAlarm"));
                             },
                             error: function (error) {
                                 console.log(error);
@@ -806,7 +826,7 @@
 
                         // 진짜 마지막 then ㅋㅋㅋㅋ (도착정보 갱신용)
                     }).then(function (dumpThisShite) {
-                        console.log("INSIDE THE LAST THEN");
+                    //  console.log("INSIDE THE LAST THEN");
                         setInterval(function () {
 
                             for (let t = 0; t < routeResult.length; t++) {
@@ -898,28 +918,6 @@
                         }
                     });
                 });
-
-                // 함. 수 .들
-                // nested
-                function secondOne(responses, routeResult) {
-                    const dupes = {};
-                    for (let n = 0; n < responses.length; n++) {
-                        //		console.log("looping");
-                        if (dupes[responses[n]] === undefined) {
-                            dupes[responses[n]] = 1;
-                        } else {
-                            dupes[responses[n]]++;
-                        }
-                    }
-                    for (let stuff in dupes) {
-                        if (dupes[stuff] > 2) {
-                            if (!routeResult.includes(stuff)) {
-                                routeResult.push(stuff);
-                            }
-                        }
-                    }
-                    return routeResult;
-                }
 
                 // 아래 : 페이지 로딩시(또는 새로고침) 즐겨찾기 갱신
                 $.ajax({

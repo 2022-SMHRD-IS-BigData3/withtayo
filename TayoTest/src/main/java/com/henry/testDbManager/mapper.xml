@@ -45,7 +45,7 @@
   </select>
   
   <delete id="trimRecent" parameterType="com.henry.testEntity.Recent">
-  	delete from recent where p_id=#{p_id} and rownum=1;
+  	delete from recent where p_id=#{p_id} and rownum=1
   </delete>
   
   <insert id="addRecent" parameterType="com.henry.testEntity.Recent">

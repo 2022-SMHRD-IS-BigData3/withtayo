@@ -176,3 +176,8 @@ modify column booktime drop default; -- this don't work on this version?
 create sequence bookrec_seq
 increment by 1
 start with 1;
+
+delete from recent;
+delete from fav;
+delete from book_info;
+select * from book_record;
