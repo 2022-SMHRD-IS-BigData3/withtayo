@@ -126,4 +126,16 @@
   <update id="updateBusLoc" parameterType="com.henry.testEntity.Shift">
    update bus_shift set nodeid=#{nodeid}, nodenm=#{nodenm}, nodeord=#{nodeord} where b_id=#{b_id}
   </update>
+  
+  <select id="getBooking" parameterType="com.henry.testEntity.Book_Info" resultType="com.henry.testEntity.Book_Info">
+  	select * from book_info where blog_id=#{blog_id}
+  </select>
+  
+  <delete id="delBookInfo" parameterType="java.lang.String">
+  	delete from book_info where blog_id=#{blog_id}
+  </delete>
+  
+  <insert id="archiveBookingLog" parameterType="com.henry.testEntity.Book_Info">
+	insert into book_info (bookrec_id, accepted, b_id, arrvname, dprtname, booktime, p_id, arrvnode, dprtnode, routeno, routeid) values(seq_shift_log.NEXTVAL, #{accepted}, #{b_id}, #{arrvname}, #{dprtname}, #{booktime}, #{p_id}, #{arrvnode}, #{dprtnode}, #{routeno}, #{routeid}
+  </insert>
 </mapper>

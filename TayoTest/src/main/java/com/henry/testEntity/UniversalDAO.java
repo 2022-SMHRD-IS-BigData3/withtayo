@@ -180,6 +180,7 @@ public class UniversalDAO {
 			overflowCheck = sesh.selectList("recentOFCheck", rec);
 			if(overflowCheck.size()>3) {
 				sesh.delete("trimRecent", rec);
+				sesh.commit();
 				result = sesh.insert("addRecent", rec);
 			}else {
 				result = sesh.insert("addRecent", rec);
@@ -399,6 +400,7 @@ public class UniversalDAO {
 		try {
 			sesh = seshFac.openSession();
 			result = sesh.update("updatePsgNum", b_id);
+			sesh.commit();
 		}finally {
 			sesh.close();
 		}
@@ -414,6 +416,28 @@ public class UniversalDAO {
 		try {
 			sesh = seshFac.openSession();
 			result = sesh.update("updateBusLoc", thisBus);
+			sesh.commit();
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+	}
+
+	public int rejectionUpdate(Book_Info bookInfo) {
+		
+		SqlSession sesh = null;
+		int result = 0;
+		
+		try {
+			sesh = seshFac.openSession();
+			Book_Info intermed = sesh.selectOne("getBooking", bookInfo);
+			intermed.setAccepted(false);
+			
+			sesh.delete("delBookInfo", bookInfo.getBlog_id());
+			sesh.commit();
+			
+			result = sesh.insert("archiveBookingLog",intermed);
 			sesh.commit();
 		}finally {
 			sesh.close();

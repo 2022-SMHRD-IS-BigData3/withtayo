@@ -234,10 +234,6 @@
         </div>
         <div class="section big">
             <!-- 중앙 컨텐츠 -->
-
-            <div class="greenbox">
-                <div class="coment">대 기</div>
-
                 <!-- 모달 시작 -->
                 <div class="busDriverModal">
                   <button type="button" id="modActivation" class="btn btn-primary">
@@ -253,7 +249,7 @@
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    <div><strong> N 정거장 </strong></div><span style="font-size: 30px;">뒤 탑승 예약</span>
+                                    <div><strong> <span id="#remainder"></span> 정거장 </strong></div><span style="font-size: 30px;">뒤 탑승 예약</span>
                                 </div>
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
@@ -266,6 +262,10 @@
                         </div>
                     </div>
                     <!-- 모달 끝 -->
+
+            <div class="greenbox">
+                <div class="coment">대 기</div>
+
 
                 </div>
 
@@ -401,8 +401,20 @@
         				}
         				// 겹치면
         				if(overlapCheck(theIterated, comparisonTarget)){
-        					// 자동 거부, 디비 등록, 순번 트리오에서 지우기
-        					prevListLength = bookingList.length;
+        					// 자동 거부, 예약정보 삭제, 내역으로 이동, 순번 트리오에서 지우기
+        					console.log("Automatically rejected due to the fact that the passengers have overlapping shits with other.");
+        					$.ajax({
+        						url : 'Reject',
+        						contentType : 'application/json',
+        						data : {theBooker : JSON.stringify(bookingList[bookingList.length-1])}
+        					}).then(function(result){
+        						bookingList.pop();
+        						bookedDprt.pop();
+        						bookedArrv.pop();
+	        					prevListLength = bookingList.length; // !!!! this line has to be placed last inside of its scope !!!!
+        					}).catch(function(error){
+        						console.log(error);
+        					});
         				// 안겹치면
         				}else{
         					if(modalClicked){
@@ -616,6 +628,8 @@
 									// 버스의 nodeord가 예약자의 bookedArrv보다 크거나 같으면
 			    					}else{
 			    						// 하차버튼 활성화, gotOn필터에서 해당 승객 제거
+			    						$("#offTheBus").removeAttr("disabled");
+			    						gotOn = gotOn.filter((elem) => elem !== targetArrvIdx);
 			    						// **표시** : 0, 하차버튼 활성
 			    					}
 			    				
