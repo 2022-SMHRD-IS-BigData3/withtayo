@@ -862,12 +862,8 @@ body {
 
                                         try {
                                             console.log("TRY SUCCESSFUL");
-<<<<<<< HEAD
                                             $("#infoIdx" + resRsps[t].routeid).html("<span style='color:red'>" + rsps88.response.body.items.item.vehicletp + "</span>약 " + Math.floor(parseInt(rsps88.response.body.items.item.arrtime) / 60) + "분 뒤 도착 " + rsps88.response.body.items.item.arrprevstationcnt + " 정거장 남음");
-=======
-                                            $("#infoIdx" + resRsps[t].routeid).html("<span style='color:red'>" + rsps88.response.body.items.item.vehicletp + "</span>약 " + Math.floor(parseInt(rsps88.response.body.items.item.arrtime) / 60) + "분 뒤 도착   ll   " + rsps88.response.body.items.item.arrprevstationcnt + " 정거장 남음");
                                             // 리스트로 뽑을 때 수정 할 것(클래스로 바꿔)
->>>>>>> branch 'master' of https://github.com/2022-SMHRD-IS-BigData3/withtayo.git
                                             $(".favBtn").show();
                                         } catch (error) {
                                             console.log("TRY FAILED");
