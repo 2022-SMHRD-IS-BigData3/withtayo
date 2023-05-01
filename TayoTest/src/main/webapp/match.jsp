@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -143,6 +142,21 @@
 
         /*뉴스 시작*/
 
+        /*뉴스 시작*/
+        .News_area {
+            margin-top: 5px;
+            margin-left: 10px;
+            margin-bottom: 5px;
+            background-color: #f7f9fa;
+            border: 1px solid #dae1e6;
+            margin-right: 10px;
+            color-scheme: light;
+            font-size: 12px;
+            color: #202020;
+            padding: 1px 1px 1px 10px;
+            border-radius: 6px;
+        }
+
         .News_area,
         #news-header {
             display: inline;
@@ -150,6 +164,12 @@
 
         .News {
             width: 100%;
+        }
+
+        .News_area {
+            display: flex;
+            /* 영역 가운데 정렬을 위해 flex를 사용 */
+            align-items: center;
         }
 
         #news-header {
@@ -165,14 +185,24 @@
         .endbar {
             position: inline-block;
             bottom: 0;
-            width: 95.6%;
-            padding-left: 15px;
+            width: 96.5%;
+            padding-left: 12px;
         }
 
         .a {
             padding: 0px;
-            height: 1.2cm;
+            height: 1.5cm;
             text-align: center;
+        }
+
+        .navbar-toggler {
+            width: 70px;
+        }
+
+        .container-fluid {
+            display: flex;
+            text-align: center;
+            width: 100%;
         }
 
         /*뉴스 끝*/
@@ -191,8 +221,7 @@
                     </button>
                     <div class="col-9 d-flex  align-items-center"
                         style="font-size:large; font-style: italic; font-weight: 900; font-size: 30px; color: whitesmoke;">
-                        <span
-                            style="margin-left: 15px; text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);">withTAYO</span>
+                        <span style="margin-left: 15px; text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);">withTAYO</span>
                     </div>
                     <div class="container offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                         aria-labelledby="offcanvasNavbarLabel"> <!-- Offcanvas 시작 -->
@@ -240,25 +269,24 @@
                     <div><span><strong> 편의기능 </strong></span></div>
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <div><img src="../예약사항보기.gif" alt="" class="aniicon"><span> 예약 정보 확인</span></div>
+                    <div><img src="IMG/예약사항보기.gif" alt="" class="aniicon"><span> 예약 정보 확인</span></div>
                 </a>
-               
+
                 <a href="#" class="list-group-item list-group-item-action">
-                    <div><img src="../즐겨찾기.gif" alt="" class="aniicon"><span> 즐겨찾기 등록</span></div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                    <div><img src="../고객센터.gif" alt="" class="aniicon"><span> 고객센터 연결</span></div>
+                    <div><img src="IMG/즐겨찾기.gif" alt="" class="aniicon"><span> 즐겨찾기 등록</span></div>
                 </a>
                 <a href="#" class="list-group-item list-group-item-action">
-                    <div><img src="../예약취소.gif" alt="" class="aniicon"><span> 예약취소</span></div>
+                    <div><img src="IMG/고객센터.gif" alt="" class="aniicon"><span> 고객센터 연결</span></div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div><img src="IMG/예약취소.gif" alt="" class="aniicon"><span> 예약취소</span></div>
                 </a>
             </div>
         </div>
         <div class="endbar">
             <div class="row">
                 <div class="a">
-                    <img src="../스인개광고판.png" alt="" id="image"
-                        style="width: 100%; height: 100%; border: solid 1px black;">
+                    <img alt="" id="image" style="width: 100%; height: 100%; border: solid 1px black;">
                 </div>
             </div>
         </div>
