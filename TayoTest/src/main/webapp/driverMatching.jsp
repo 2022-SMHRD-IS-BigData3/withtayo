@@ -194,6 +194,21 @@
         #noShow{
         color:salmon;
         }
+        .colorBox {
+            margin: 20px;
+            border-radius: 30px;
+            width: 300px;
+            height: 300px;
+            background-color: rgb(236, 55, 55);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .drivercoment {
+            font-size: 150px;
+            font-weight: bold;
+        }
     </style>
 
 </head>
@@ -265,12 +280,14 @@
                         </div>
                     </div>
                     <!-- 모달 끝 -->
-
+			
             <div class="greenbox">
                 <div class="coment">대 기</div>
-
-
-                </div>
+            </div>
+            <div class="colorBox">
+                <div class="drivercoment">N</div>
+            </div>
+            
 
             </div>
 
@@ -336,7 +353,7 @@
     	
     	// #### 3-thread-system! i.e., fetch booking - prompt - node counter ####
     	$(document).ready(function(){
-    		
+    		$(".colorBox").hide();
 			/////////////////////SEPARATOR/////////////////////
     		// Ambient functions : 페이지 로딩 되자 마자 실행, 또는 반복 실행
     		// 기록 하려면 세션에서 운행 정보 가져와
@@ -609,13 +626,14 @@
     					console.log("위치정보 없음 Have patience!");
     					///// 색깔 큰숫자: 초록--->중간:주황---> 작은숫자 : 빨강 통일
     					// **표시** : 대기화면
+    					$(".greenbox").show();
     				}else{
     					$("#offTheBus").attr("disabled");
     					$("#noShow").attr("disabled");
     					// 예약자 리스트가 비어있으면 --->
     					if(bookingList.length <= 0){
     						// **표시** : 대기화면
-							
+							$(".greenbox").show();
     					// 예약자 리스트가 null이 아니면 --->
     					}else{
 	    					// gotOn 필터 적용
@@ -633,7 +651,15 @@
 			    					if(resp005.nodeord < dprtMin){
 			    						// 아직 도착 안함
 			    						// **표시** : 탑승까지 '예약자dprt - 버스' 남음 
-			    						
+			    						let remNodes = dprtMin-resp005.nodeord;
+			    						if(remNodes>10){ // 카운트색상
+				    						$(".colorBox").css("background-color", "green");
+			    						}else if(remNodes>5){
+			    							$(".colorBox").css("background-color", "orange");
+			    						}else{
+			    							$(".colorBox").css("background-color", "red");
+			    						}
+			    						$(".drivercoment").text("탑승까지<br>"+remNodes+"<br>정류장 남음");
 			    						
 			    					// 버스의 nodeord가 예약자의 bookedDprt와 크거나 같으면
 			    					}else{
@@ -648,6 +674,8 @@
 				    						noShowClicked = false;
 			    						}
 			    						// **표시** :  승객승차'0' 남음
+				    					$(".colorBox").css("background-color", "green");
+			    						$(".drivercoment").text("탑승 정류장<br>도착!");
 			    					}
 			    				
 			    				// 도착인 경우
@@ -656,13 +684,25 @@
 									// 버스의 nodeord가 예약자의 bookedArrv보다 작으면
 			    					if(resp005.nodeord < arrvMin){
 			    						// **표시** : 하차까지 '예약자arrv - 버스'남음
-			    					
+			    						let remNodes = dprtMin-resp005.nodeord;
+			    						if(remNodes>10){ // 카운트색상
+				    						$(".colorBox").css("background-color", "green");
+			    						}else if(remNodes>5){
+			    							$(".colorBox").css("background-color", "orange");
+			    						}else{
+			    							$(".colorBox").css("background-color", "red");
+			    						}
+			    						$(".drivercoment").text("하차까지<br>"+remNodes+"<br>정류장 남음");
 									// 버스의 nodeord가 예약자의 bookedArrv보다 크거나 같으면
 			    					}else{
 			    						// 하차버튼 활성화, gotOn필터에서 해당 승객 제거
 			    						$("#offTheBus").removeAttr("disabled");
 			    						gotOn = gotOn.filter((elem) => elem !== targetArrvIdx);
 			    						// **표시** : 0, 하차버튼 활성
+			    						let remNodes = dprtMin-resp005.nodeord;
+			    						
+				    					$(".colorBox").css("background-color", "green");
+			    						$(".drivercoment").text("하차 정류장<br>도착!");
 			    					}
 			    				
 			    				// 출발지와 도착지에서 타고내리는경우
