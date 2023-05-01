@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+    pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 
@@ -56,10 +56,16 @@
 
 /* 은혜 컨텐츠 시작 */
 body {
-	margin: 0;
-	padding: 0;
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
-	font-size: 14px;
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        font-family: 'NanumSquareNeo-Variable', sans-serif;
+    }
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 
 #form-inner-container {
@@ -375,17 +381,6 @@ li:last-child::after {
 	content: "";
 }
 
-/* 은혜 컨텐츠 끝 */
-/* Font를 적용할 클래스를 지정합니다. */
-.my-font {
-	font-family: "gg";
-}
-
-@font-face {
-	font-family: "gg";
-	src: url("../빛고을광주_Medium.ttf");
-}
-
 #navbarNavAltMarkup {
 	position: fixed;
 	top: 70px;
@@ -399,7 +394,7 @@ li:last-child::after {
 
 .offcanvas {
 	max-width: 250px;
-	max-height: 350px;
+	max-height: 250px;
 	position: absolute;
 	left: 150px;
 	background-color: #fff8f8;
@@ -480,7 +475,7 @@ li:last-child::after {
 
 <body>
 	<div class="container">
-		<div class="navbar" style="font-family: gg;">
+		<div class="navbar">
 			<nav class="navbar">
 				<nav class="navbar">
 					<!-- navbar 시작 -->
@@ -549,23 +544,21 @@ li:last-child::after {
 							</form>
 							<form action="">
 								<br>
-								<div style="margin-left: -10px;">
+								<div style="margin-left: -10px; margin-top: 5px;">
 									<ul>
 										<li><a href="#" id="driverJoin"
-											style="text-decoration: none" align="left">회원가입</a></li>
+											style="text-decoration: none">회원가입</a></li>
 										<li><a href="#" style="text-decoration: none">ID/PW찾기</a></li>
 									</ul>
 								</div>
 								<br> <br>
 							</form>
 							<!-- <hr width="295px" align="left" noshade="0.1px"> -->
-							<hr width="237px" align="left"
-								style="border: 0; height: 1px; background: #bbb; margin-bottom: 0px; margin-top: 0px;">
-							<br>
-							<div class="aTag">
-								<a href="loggingMain.jsp" style="color: rgb(129, 128, 128);">승객
-									로그인</a>
-							</div>
+                            <hr width="237px" style="border:0; height:1px; background: #bbb;">
+                            <div class="aTag" style="margin-top: 10px; margin-left: 7px;">
+                                <a href="loggingMain.jsp" style="color: rgb(129, 128, 128);">기사님
+                                    로그인</a>
+                            </div>
 
 						</div>
 
@@ -602,13 +595,13 @@ li:last-child::after {
 												<!-- 노선번호 -->
 											<input type="button" id="button-ld" value="버스 번호판 조회"
 												class="btn btn-block ifRoute">
-												
 												<!-- 차량번호 -->
 											<input type="submit" id="submit" value="운행시작"
-                class="btn btn-block ifTailNum button-l" style="background-color: rgb(231, 177, 10);font-weight:bold; height:40px; color: #fff; font-size: 20px">
+                class="btn btn-block ifTailNum button-l" style="background-color: rgb(231, 177, 10);font-weight:bold; height:40px; color: #fff; font-size: 20px" width="197px">
 									</div>
+									<hr>
 									<div>
-										<input type="button" id="button-rd" class="btn btn-block"
+										<input type="button" id="button-rd" class="btn" style="font-weight:bold;"
 											value="로그아웃" onclick="location.href='DriverLogout'">
 									</div>
 								</div>
@@ -623,7 +616,7 @@ li:last-child::after {
 		<div class="endbar">
 			<div class="row">
 				<div class="a">
-					<img src="../스인개광고판.png" alt="" id="image"
+					<img src="" alt="" id="image"
 						style="width: 100%; height: 100%; border: solid 1px black;">
 				</div>
 			</div>

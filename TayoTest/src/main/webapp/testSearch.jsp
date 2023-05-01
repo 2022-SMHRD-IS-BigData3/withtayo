@@ -72,23 +72,23 @@
                 width: 100%;
             }
 
-            body {
-                margin: 0;
-                padding: 0;
-            }
+body {
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        font-family: 'NanumSquareNeo-Variable', sans-serif;
+    }
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 
             .big {
                 height: 12.7cm;
             }
 
-            /* Font를 적용할 클래스를 지정합니다. */
-            /* * {
-            font-family: "gg";
-        } */
-            @font-face {
-                font-family: "gg";
-                src: url("../빛고을광주_Medium.ttf");
-            }
 
             #navbarNavAltMarkup {
                 position: fixed;
@@ -192,7 +192,6 @@
 
             #loginip {
                 user-select: none;
-                font-family: notosanskr, Malgun Gothic, 맑은 고딕, Dotum, 돋움, sans-serif;
                 font-size: 12px;
                 color: #767676;
                 letter-spacing: -.2px;
@@ -394,44 +393,43 @@
 
         <body>
             <div class="container">
-                <div class="navbar" style="font-family: gg;">
+                <div class="navbar" >
                     <nav class="navbar">
-                        <nav class="navbar"> <!-- navbar 시작 -->
-                            <div class="container-fluid">
-                                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                                    <span class="navbar-toggler-icon"></span> <!-- navbar 토글 버튼 아이콘 -->
-                                </button>
-                                <div class="col-9 d-flex  align-items-center"
-                                    style="font-size:large; font-style: italic; font-weight: 900; font-size: 30px; color: whitesmoke;">
-                                    <span
-                                        style="margin-left: 15px; text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7);">withTAYO</span>
-                                </div>
-                                <div class="container offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
-                                    aria-labelledby="offcanvasNavbarLabel"> <!-- Offcanvas 시작 -->
-                                    <div class="offcanvas-header" id="offcanvas-header">
-                                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">withTAYO</h5>
-                                        <!-- Offcanvas 헤더 -->
-                                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-                                            aria-label="Close"></button>
-                                        <!-- Offcanvas 닫기 버튼 -->
-                                    </div>
-                                    <div class="offcanvas-body" id="offcanvas-body"> <!-- Offcanvas 내용 -->
-                                        <div class="navbar-nav" style="text-align: center;">
-                                            <a class="nav-link active" href="#">공지 사항</a>
-                                            <hr>
-                                            <a class="nav-link active" href="../1차프로젝트/노선정보겅색.html">길찾기</a>
-                                            <a class="nav-link active" href="../1차프로젝트/예약확인.html">예약 정보</a>
-                                            <a class="nav-link active" href="#">개인정보 변경</a>
-                                            <a class="nav-link active" href="#">고객센터</a>
-                                            <a class="nav-link active" href="#"></a>
-                                            <hr>
-                                            <a class="nav-link active" href="#">로그아웃</a>
-                                        </div>
-                                    </div>
-                                </div> <!-- Offcanvas 끝 -->
+          <nav class="navbar"> <!-- navbar 시작 -->
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                        <span class="navbar-toggler-icon"></span> <!-- navbar 토글 버튼 아이콘 -->
+                    </button>
+                    <div class="col-9 d-flex  align-items-center"
+                        style="font-size:large; font-style: italic; font-weight: 900; font-size: 30px; color: whitesmoke; padding-left: 0px;">
+                        <span style="margin-left: 15px; text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.7); ">withTAYO</span>
+                    </div>
+                    <div class="container offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+                        aria-labelledby="offcanvasNavbarLabel"> <!-- Offcanvas 시작 -->
+                        <div class="offcanvas-header" id="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">withTAYO</h5>
+                            <!-- Offcanvas 헤더 -->
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                            <!-- Offcanvas 닫기 버튼 -->
+                        </div>
+                        <div class="offcanvas-body" id="offcanvas-body"> <!-- Offcanvas 내용 -->
+                            <div class="navbar-nav" style="text-align: center;">
+                                <a class="nav-link active" href="#">공지 사항</a>
+                                <hr>
+                                <a class="nav-link active" href="../1차프로젝트/노선정보겅색.html">길찾기</a>
+                                <a class="nav-link active" href="../1차프로젝트/예약확인.html">예약 정보</a>
+                                <a class="nav-link active" href="#">개인정보 변경</a>
+                                <a class="nav-link active" href="#">고객센터</a>
+                                <a class="nav-link active" href="#"></a>
+                                <hr>
+                                <a class="nav-link active" href="#">로그아웃</a>
                             </div>
-                        </nav> <!-- navbar 끝 -->
+                        </div>
+                    </div> <!-- Offcanvas 끝 -->
+                </div>
+            </nav> <!-- navbar 끝 -->
                 </div>
 
                 <div class="section big">
@@ -485,7 +483,7 @@
                                 <div class="lists">
                                     <div class="instant_box">
                                         <div class="title-box">
-                                            <strong class="instant_tilte">+ 즐겨찾기</strong>
+                                            <strong class="instant_tilte">+   즐겨찾기</strong>
                                             <ul id="bookmarkList">
                                                 <a href="#"> 자주 가는 곳 등록</a>
                                             </ul>
@@ -493,7 +491,7 @@
                                     </div>
                                     <div class="instant_box">
                                         <div class="title-box">
-                                            <strong class="instant_tilte" id="in_ti_c">- 최근 검색</strong>
+                                            <strong class="instant_tilte" id="in_ti_c">-   최근 검색</strong>
                                             <ul id="recentSearch">
                                                 <a href="#">검색 내역이 없습니다.</a>
                                             </ul>
@@ -508,7 +506,7 @@
                 <div class="endbar">
                     <div class="row">
                         <div class="a">
-                            <img src="../스인개광고판.png" alt="" id="image"
+                            <img src="" alt="" id="image"
                                 style="width: 100%; height: 100%; border: solid 1px black;">
                         </div>
                     </div>
@@ -864,7 +862,12 @@
 
                                         try {
                                             console.log("TRY SUCCESSFUL");
+<<<<<<< HEAD
                                             $("#infoIdx" + resRsps[t].routeid).html("<span style='color:red'>" + rsps88.response.body.items.item.vehicletp + "</span>약 " + Math.floor(parseInt(rsps88.response.body.items.item.arrtime) / 60) + "분 뒤 도착 " + rsps88.response.body.items.item.arrprevstationcnt + " 정거장 남음");
+=======
+                                            $("#infoIdx" + resRsps[t].routeid).html("<span style='color:red'>" + rsps88.response.body.items.item.vehicletp + "</span>약 " + Math.floor(parseInt(rsps88.response.body.items.item.arrtime) / 60) + "분 뒤 도착   ll   " + rsps88.response.body.items.item.arrprevstationcnt + " 정거장 남음");
+                                            // 리스트로 뽑을 때 수정 할 것(클래스로 바꿔)
+>>>>>>> branch 'master' of https://github.com/2022-SMHRD-IS-BigData3/withtayo.git
                                             $(".favBtn").show();
                                         } catch (error) {
                                             console.log("TRY FAILED");
