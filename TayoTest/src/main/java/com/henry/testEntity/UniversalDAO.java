@@ -405,5 +405,21 @@ public class UniversalDAO {
 		
 		return result;
 	}
+
+	public int updateBusLoc(Shift thisBus) {
+		
+		SqlSession sesh = null;
+		int result = 0;
+		
+		try {
+			sesh = seshFac.openSession();
+			result = sesh.update("updateBusLoc", thisBus);
+			sesh.commit();
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+	}
 	
 }

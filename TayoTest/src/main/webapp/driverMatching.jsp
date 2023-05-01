@@ -324,6 +324,9 @@
     	let prevListLength = 0;
     	let modalClicked = false;
     	
+    	// 승차 판단용
+    	let gotOn = [];
+    	
     	// #### 3-thread-system! i.e., fetch booking - prompt - node counter ####
     	$(document).ready(function(){
     		
@@ -511,7 +514,7 @@
     		}, 3000);
 			/////////////////////SEPARATOR/////////////////////
 			// 승객 하차 버튼
-			$("#OffTheBus").on("click", function(){
+			$("#offTheBus").on("click", function(){
 				//순서리스트 트리오에서 shift, 예약정보에서 딜리트 후 예약 내역으로// 운행정보에서 승객수 처리 //
 				let theBailer = bookingList.shift();
 				bookedDprt.shift();
@@ -532,45 +535,106 @@
 			});
 			
     		// TODO : // 고객센터 // 신고 //
-			
+			let thisBus = null;
     		/////////////////////SEPARATOR/////////////////////
     		// 버스 현 위치 갱신해서 카운타다운 계산과 동시에 자신 운행정보에 위치 저장
     		setInterval(function(){
     			// Procedure
-    			// 노선 운행 조회 > 이 차량 GET > FETCH : nodeid, nodenm, nodeord  //  카운트다운에서 승차 처리(운행정보의 관련 컬럼 업데이트) // 탑승객 목적지 도착시 #OffTheBus disabled 제거
+    			console.log("Proc 1 - Fetch all the cars of the right routeid")
     			$.ajax({
 	    			url : 'https://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=50&_type=json&cityCode=24&routeId='+currentShift.routeid,
-	    			success : function(resp003){
-	    				let allCars = [];
-	    				console.log("Fetching position data!");
-	    				allCars = resp003.response.body.items.item;
-	    				allCars.forEach(function(elem){
-	    					if(elem['vehicleno'] == currentShift.b_id){
-	    						console.log("Currently at" + elem['nodenm']);
-	    						
-	    					}
-	    				});
-	    			},
-	    			error : function(xhr, status, error){
-	    				console.log(error);
-	    			}
-    			}).then(function(resp004){
-    				
-    				// 
-    				$.ajax({
-    					url : '',
-    					success : function(resp004){
-    						
-    					},
-    					error : function(xhr, status, error){
-    						console.log(error);
+    			// 
+    			}).then(function(resp003){
+    				let allCars = [];
+    				console.log("Proc 2 - Find this bus by tail number.");
+    				allCars = resp003.response.body.items.item;
+    				allCars.forEach(function(elem){
+    					if(elem['vehicleno'] == currentShift.b_id){
+    						console.log("Currently at" + elem['nodenm']);
+    						// 이건 API에서 온 json임 POJO가 아님!!!!!
+    						thisBus = elem;
     					}
     				});
+    				return thisBus;
+    			// 위치 업데이트 위해서 서블릿으로 전송 (승객이 조회하려면 필요)
+    			}).then(function(resp004){
+    				console.log("Proc 3 - Use the bus json to determine its location and insert into the shift table.");
+    				return $.ajax({
+    					url : 'BusLocation',
+    					contentType : 'application/json',
+    					data : {thisShift : JSON.stringify(currentShift), busCurrNodeId : thisBus.nodeid, busCurrNodeNm : thisBus.nodenm, busCurrNodeOrd : thisBus.nodeord},
+    				});
+    			
+    			// 예약자 정류자 순번대로 도착정보 화면에 표시
+    			}).then(function(resp005){
+    				console.log("Proc 4 - Fetching the processed json with the location data.");
+    				if(resp005 === 0 || resp005 === undefined || resp005 === null){
+    					console.log("위치정보 없음 Have patience!");
+    					///// 색깔 큰숫자: 초록--->중간:주황---> 작은숫자 : 빨강 통일
+    					// **표시** : 대기화면
+    				}else{
+    					$("#offTheBus").attr("disabled");
+    					// 예약자 리스트가 비어있으면 --->
+    					if(bookingList.length <= 0){
+    						// **표시** : 대기화면
+							
+    					// 예약자 리스트가 null이 아니면 --->
+    					}else{
+	    					// gotOn 필터 적용
+							let filteredArr = bookedDprt.filter((_, indices) => !gotOn.include(indices));
+    						// dprt와 arrv 통틀어 가장 작은 숫자 : 가장 먼저 표시할 인덱스와 출발/도착지 판단
+    						let dprtMin = Math.min(...bookedDprt);
+    						let arrvMin = Math.min(...bookedArrv); 
+    						let targetDprtIdx = bookedDprt.indexOf(dprtMin);
+    						let targetArrvIdx = bookedArrv.indexOf(arrvMin);
+								
+    							// 출발이 더 작은수인 경우
+								if(dprtMin < arrvMin){
+			    					
+									// 버스의 nodeord가 예약자의 bookedDprt 보다 작으면
+			    					if(resp005.nodeord < dprtMin){
+			    						// 아직 도착 안함
+			    						// **표시** : 탑승까지 '예약자dprt - 버스' 남음 
+			    						
+			    						
+			    					// 버스의 nodeord가 예약자의 bookedDprt와 크거나 같으면
+			    					}else{
+			    						// 버스 도착 및 탑승 > 해당 예약정보 gotOn list에 추가, 중복시 X // 탑승여부 판단해야하지않나?
+			    						if(!gotOn.include(targetDprtIdx)){gotOn.push(targetDprtIdx);}
+			    						// (승차버튼 도입하면)노쇼는 신고 후 bookingList에서 제거?
+			    						// **표시** : (승차버튼 도입하면 승차버튼 활성-루프에서 리셋도 할것) 승객승차'0' 남음
+			    					}
+			    				
+			    				// 도착인 경우
+								}else if(arrvMin<dprtMin){
+			    					
+									// 버스의 nodeord가 예약자의 bookedArrv보다 작으면
+			    					if(resp005.nodeord < arrvMin){
+			    						// 해당 승객 목적지 도착 전 카운트
+			    						// **표시** : 하차까지 '예약자arrv - 버스'남음
+			    					
+									// 버스의 nodeord가 예약자의 bookedArrv보다 크거나 같으면
+			    					}else{
+			    						// 하차버튼 활성화, gotOn필터에서 해당 승객 제거
+			    						// **표시** : 0, 하차버튼 활성
+			    					}
+			    				
+			    				// 출발지와 도착지에서 타고내리는경우
+								}else{
+			    					// 출발 승객 승차 : gotOn에 추가
+									if(!gotOn.include(targetDprtIdx)){gotOn.push(targetDprtIdx);}
+			    					// 도착 승객 하차 : 하차 버튼 활성화, gotOn에서 제거
+			    					$("#offTheBus").removeAttr("disabled");
+									gotOn = gotOn.filter((elem) => elem !== targetArrvIdx);
+								}
+    					
+    					}
     				
+    				}
     			}).catch(function(error){
-    				console.log("안된당꼐! 이유는 다음과 갛읍니다: "+error);
+    				console.log(error);
     			});// END OF A MAJOR SCOPE
-    		}, 15000);
+    		}, 9000);
 			/////////////////////SEPARATOR/////////////////////	
 			
     	});// DOCUMENT-READY SCOPE

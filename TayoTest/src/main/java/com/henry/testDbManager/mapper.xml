@@ -122,4 +122,8 @@
   <update id="updatePsgNum" parameterType="java.lang.String">
   	update bus_shift set num_psg=num_psg-1 where b_id=#{b_id}
   </update>
+  
+  <update id="updateBusLoc" parameterType="com.henry.testEntity.Shift">
+   update bus_shift set nodeid=#{nodeid}, nodenm=#{nodenm}, nodeord=#{nodeord} where b_id=#{b_id}
+  </update>
 </mapper>
