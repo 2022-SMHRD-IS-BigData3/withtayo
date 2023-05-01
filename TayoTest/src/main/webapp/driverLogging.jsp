@@ -556,7 +556,7 @@ li:last-child::after {
 							<!-- <hr width="295px" align="left" noshade="0.1px"> -->
                             <hr width="237px" style="border:0; height:1px; background: #bbb;">
                             <div class="aTag" style="margin-top: 10px; margin-left: 7px;">
-                                <a href="loggingMain.jsp" style="color: rgb(129, 128, 128);">기사님
+                                <a href="loggingMain.jsp" style="color: rgb(129, 128, 128);">승객
                                     로그인</a>
                             </div>
 
