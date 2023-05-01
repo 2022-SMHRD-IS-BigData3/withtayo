@@ -865,12 +865,10 @@
                                         try {
                                             console.log("TRY SUCCESSFUL");
                                             $("#infoIdx" + resRsps[t].routeid).html("<span style='color:red'>" + rsps88.response.body.items.item.vehicletp + "</span>약 " + Math.floor(parseInt(rsps88.response.body.items.item.arrtime) / 60) + "분 뒤 도착 " + rsps88.response.body.items.item.arrprevstationcnt + " 정거장 남음");
-                                            // 리스트로 뽑을 때 수정 할 것(클래스로 바꿔)
                                             $(".favBtn").show();
                                         } catch (error) {
                                             console.log("TRY FAILED");
-                                            $("#infoIdx" + resRsps[t].routeid).html("버스 실시간 체크 중");
-                                            // 리스트로 뽑을 때 수정 할 것
+                                            $("#infoIdx" + resRsps[t].routeid).html("출차 정보가 없습니다.");
                                             $(".favBtn").show();
                                         }
                                     },

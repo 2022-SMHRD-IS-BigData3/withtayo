@@ -331,36 +331,23 @@
     		// Ambient functions : 페이지 로딩 되자 마자 실행, 또는 반복 실행
     		// 기록 하려면 세션에서 운행 정보 가져와
     		console.log("1st procedure : Get session attribute");
+  			// 운행정보 가져옴
     		$.ajax({
     			url : 'GetSessionForShift',
-    			success : function(resp001){
-    				// 운행정보 가져옴
-    				currentShift = resp001;
-    				console.log(currentShift);
-    			},
-    			error : function(xhr, status, error){
-					console.log(error);    				
-    			}
 			// 노선이 가는 정류장들 조회 (예약자 순서 비교용)    		
-    		}).then(function(duuuuumpin){
+    		}).then(function(resp001){
+    			currentShift = resp001;
     			console.log("2nd procedure : Get nodeords of all the nodes that this bus swings by");
-    			$.ajax({
+    			return $.ajax({
     				url : 'https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=300&_type=json&cityCode=24&routeId='+currentShift.routeid,
-    				success : function(resp002){
-    					// 모든 정류장 어레이
-    					allNodes = resp002.response.body.items.item;
-    					console.log(allNodes);
-    				},
-    				error : function(xhr, status, error){
-    					console.log(error);
-    				}
     			});
     		// Pseudo-communication : 예약정보 조회 반복실행으로 통신 미믹
-    		}).then(function(alwaysBeDumpin){
+    		}).then(function(resp002){
+    			allNodes = resp002.response.body.items.item;
+    			console.log(allNodes);
     			console.log("3rd procedure : Loop to retrieve booking info from database.");
     			
     			// 예약 반복 조회용 method
-    			let bookingCheckInterval = setInterval(checkForBooking ,6000);
     			function checkForBooking(){
     				if(bookingStat==1){
 	    				console.log("Looping every 6 sec");
@@ -396,6 +383,7 @@
 		    			}); 
     				}
     			}
+    			let bookingCheckInterval = setInterval(checkForBooking ,6000);
     			// STILL INSIDE THE AJAX!!!!!!!!!!!!!!!
     			// 모달 팝업용
     			setInterval(function(){
@@ -501,7 +489,7 @@
 			/////////////////////SEPARATOR/////////////////////
     		// 예약 취소 핸들링용 루프
     		setInterval(function(){
-    			// 취소 컬럼 select 조회
+    			// 취소 컬럼 조회
     			if(bookingList.length != 0){
 	    			$.ajax({
 	    				url : 'CancelCheck',
