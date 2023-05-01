@@ -191,6 +191,9 @@
             left: 30%;
             transform: translate(-50%, -50%);
         }
+        #noShow{
+        color:salmon;
+        }
     </style>
 
 </head>
@@ -236,8 +239,8 @@
             <!-- 중앙 컨텐츠 -->
                 <!-- 모달 시작 -->
                 <div class="busDriverModal">
-                  <button type="button" id="modActivation" class="btn btn-primary">
-                        <span>모달 버튼</span>
+             <!--      <button type="button" id="modActivation" class="btn btn-primary">
+                        <span>모달 버튼</span>  테스트용 버튼  -->
                     </button>
                     <div class="modal fade" id="myModal" data-backdrop="static">
                         <div class="modal-dialog modal-sm modal-dialog-centered">
@@ -249,7 +252,7 @@
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    <div><strong> <span id="#remainder"></span> 정거장 </strong></div><span style="font-size: 30px;">뒤 탑승 예약</span>
+                                    <div><strong> <span id="#remainder"></span> 정거장 </strong></div><span style="font-size: 30px;">탑승 예약</span>
                                 </div>
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
@@ -275,6 +278,8 @@
             <div class="btnbb">
                 <button style="font-size:20px" class="btnbus" disabled id="offTheBus"> <i class="material-icons"
                         style="font-size: 50px;">&#xe8d7;</i><br>하차 완료</button>
+                <button style="font-size:20px" class="btnbus" disabled id="noShow"> <i class="material-icons"
+                        style="font-size: 50px;">&#xe8d7;</i><br>승차 안함</button>
                 <button style="font-size:20px" class="btnbus"> <i class="material-icons"
                         style="font-size: 50px;">&#xe61d;</i><br>고객 센터</button>
             </div>
@@ -326,6 +331,8 @@
     	
     	// 승차 판단용
     	let gotOn = [];
+    	
+    	let noShowClicked = false;
     	
     	// #### 3-thread-system! i.e., fetch booking - prompt - node counter ####
     	$(document).ready(function(){
@@ -417,12 +424,14 @@
         					});
         				// 안겹치면
         				}else{
+        					// 승낙거부 클릭이 안됐으면 계속 띄우기
         					if(modalClicked){
   						  		bookingStat = 1;	    				
 	    	    				prevListLength = bookingList.length;
     		    			}else{
     	    					// 위 인터벌 스킵하고 모달창을 띄워부랑꼐 으아아리마릐만으리믁함ㄱㅎ	
     	    					bookingStat = 0;
+    	    					$("#remainder").text(bookingList[bookingList.length-1].nodenm);
     	    					$("#myModal").modal("show"); // prolly a bootstrap method that's so rogue
     		    				console.log("**Waiting for the driver to click on any of the buttons.");
     		    			}
@@ -546,6 +555,22 @@
 				
 			});
 			
+			// 노쇼 버튼 클릭 bookingList에서 제거, db 제거, 승객 warning
+			$("#noShow").on("click", function(){
+				console.log("No show hobo is a bad mojo! XDXDXDXDXDXD");
+				$.ajax({
+					url : 'NoShow',
+					data : {targetBooking : bookingList[bookingList.length-1].blog_id, targetPsg : bookingList[bookingList.length-1].p_id},
+					success : function(noShowHandleRes){
+						console.log(noShowHandleRes); // result can be 0 1 2 . 2 means it was executed successfully.
+					},
+					error : function(xhr, status, error){
+						console.log(error);
+					}
+				});
+				noShowClicked = true;
+			});
+			
     		// TODO : // 고객센터 // 신고 //
 			let thisBus = null;
     		/////////////////////SEPARATOR/////////////////////
@@ -586,6 +611,7 @@
     					// **표시** : 대기화면
     				}else{
     					$("#offTheBus").attr("disabled");
+    					$("#noShow").attr("disabled");
     					// 예약자 리스트가 비어있으면 --->
     					if(bookingList.length <= 0){
     						// **표시** : 대기화면
@@ -611,10 +637,17 @@
 			    						
 			    					// 버스의 nodeord가 예약자의 bookedDprt와 크거나 같으면
 			    					}else{
-			    						// 버스 도착 및 탑승 > 해당 예약정보 gotOn list에 추가, 중복시 X // 탑승여부 판단해야하지않나?
-			    						if(!gotOn.include(targetDprtIdx)){gotOn.push(targetDprtIdx);}
-			    						// (승차버튼 도입하면)노쇼는 신고 후 bookingList에서 제거?
-			    						// **표시** : (승차버튼 도입하면 승차버튼 활성-루프에서 리셋도 할것) 승객승차'0' 남음
+			    						// 버스 도착 및 탑승 > 해당 예약정보 gotOn list에 추가, 중복시 X
+			    						// 수정 필요할듯 
+			    						if(noShowClicked){
+			    							$("#noShow").attr("disabled");
+			    							noShowClicked = false;
+			    						}else if(!noShowClicked && resp005.nodeord > dprtMin){
+				    						if(!gotOn.include(targetDprtIdx)){gotOn.push(targetDprtIdx);}
+				    						$("#noShow").attr("disabled");
+				    						noShowClicked = false;
+			    						}
+			    						// **표시** :  승객승차'0' 남음
 			    					}
 			    				
 			    				// 도착인 경우
@@ -622,7 +655,6 @@
 			    					
 									// 버스의 nodeord가 예약자의 bookedArrv보다 작으면
 			    					if(resp005.nodeord < arrvMin){
-			    						// 해당 승객 목적지 도착 전 카운트
 			    						// **표시** : 하차까지 '예약자arrv - 버스'남음
 			    					
 									// 버스의 nodeord가 예약자의 bookedArrv보다 크거나 같으면
@@ -641,9 +673,7 @@
 			    					$("#offTheBus").removeAttr("disabled");
 									gotOn = gotOn.filter((elem) => elem !== targetArrvIdx);
 								}
-    					
     					}
-    				
     				}
     			}).catch(function(error){
     				console.log(error);

@@ -2,6 +2,7 @@ package com.henry.testEntity;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -11,6 +12,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 public class UniversalDAO {
 
 	private static SqlSessionFactory seshFac;
+	private static final int MAX_RETRIES = 3;
+	private static final long RETRY_DELAY_MS = 1000;
 
 	static {
 		try {
@@ -27,14 +30,37 @@ public class UniversalDAO {
 	
 	// 기사 로그인용
 	public Driver login(Driver vo) {
+		
 		SqlSession sesh = null;
 		Driver result = null;
-		try {
-			sesh = seshFac.openSession();
-			result = sesh.selectOne("dLogin", vo);
-		}finally {
-			sesh.close();
-		}
+
+		int retries = 0;
+        boolean success = false;
+
+        while (!success && retries < MAX_RETRIES) {
+            try {
+            	sesh = seshFac.openSession();
+    			result = sesh.selectOne("dLogin", vo);
+                success = true;
+            } catch (Exception e) {
+                retries++;
+
+                if (retries < MAX_RETRIES) {
+                    System.out.println("Transaction failed. Retrying in " + RETRY_DELAY_MS + " ms.");
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(RETRY_DELAY_MS);
+                    } catch (InterruptedException ex) {
+                        // Handle interruption
+                    }
+                } else {
+                    // If the maximum number of retries has been reached, throw an exception or handle the failure
+                    throw new RuntimeException("Transaction failed after " + MAX_RETRIES + " retries.", e);
+                }
+            }finally {
+            	sesh.close();
+            }
+        }
+		
 		return result;
 	}
 	
@@ -44,11 +70,30 @@ public class UniversalDAO {
 		SqlSession sesh = null;
 		Bus result = null;
 		
-		try {
-			sesh = seshFac.openSession();
-			result = sesh.selectOne("busCheck", vo);
-		}finally {
-			sesh.close();
+		int retries = 0;
+	    boolean success = false;
+		while(!success && retries < MAX_RETRIES) {
+			
+			try {
+				sesh = seshFac.openSession();
+				result = sesh.selectOne("busCheck", vo);
+				success = true;
+			}catch(Exception e){
+				retries++;
+				
+				if (retries < MAX_RETRIES) {
+                    System.out.println("Transaction failed. Retrying in " + RETRY_DELAY_MS + " ms.");
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(RETRY_DELAY_MS);
+                    } catch (InterruptedException ex) {
+                    }
+                } else {
+                    throw new RuntimeException("Transaction failed after " + MAX_RETRIES + " retries.", e);
+                }
+				
+			}finally {
+				sesh.close();
+			}
 		}
 		
 		return result;
@@ -60,15 +105,30 @@ public class UniversalDAO {
 		SqlSession sesh = null;
 		Passenger result = null;
 		
-		try {
-			
-			sesh = seshFac.openSession();
-			result = sesh.selectOne("pLogin", pVO);
-			
-		}finally {
-			sesh.close();
-		}
-		
+		int retries = 0;
+        boolean success = false;
+        
+        while (!success && retries < MAX_RETRIES) {
+			try {
+				sesh = seshFac.openSession();
+				result = sesh.selectOne("pLogin", pVO);
+				success = true;
+			}catch(Exception e) {
+				retries++;
+
+                if (retries < MAX_RETRIES) {
+                    System.out.println("Transaction failed. Retrying in " + RETRY_DELAY_MS + " ms.");
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(RETRY_DELAY_MS);
+                    } catch (InterruptedException ex) {
+                    }
+                } else {
+                    throw new RuntimeException("Transaction failed after " + MAX_RETRIES + " retries.", e);
+                }
+			}finally {
+				sesh.close();
+			}
+        }
 		return result;
 	}
 	
@@ -78,15 +138,30 @@ public class UniversalDAO {
 		SqlSession sesh = null;
 		List<B_Stop> result = null;
 		
-		try {
-			
-			sesh = seshFac.openSession();
-			result = sesh.selectList("getStops", stop);
-			
-		}finally {
-			sesh.close();
-		}
+		int retries = 0;
+        boolean success = false;
 		
+        while (!success && retries < MAX_RETRIES) {
+			try {
+				sesh = seshFac.openSession();
+				result = sesh.selectList("getStops", stop);
+				success = true;
+			}catch(Exception e) {
+				retries++;
+
+                if (retries < MAX_RETRIES) {
+                    System.out.println("Transaction failed. Retrying in " + RETRY_DELAY_MS + " ms.");
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(RETRY_DELAY_MS);
+                    } catch (InterruptedException ex) {
+                    }
+                } else {
+                    throw new RuntimeException("Transaction failed after " + MAX_RETRIES + " retries.", e);
+                }
+			}finally {
+				sesh.close();
+			}
+        }
 		return result;
 	}
 	
@@ -96,15 +171,31 @@ public class UniversalDAO {
 		List<B_Stop> resultList = null;
 		SqlSession sesh = null;
 		
-		try {
-			
-			sesh = seshFac.openSession();
-			resultList = sesh.selectList("getStops2", node);
-			
-		}finally {
-			sesh.close();
-		}
-		
+		int retries = 0;
+        boolean success = false;
+        while (!success && retries < MAX_RETRIES) {
+			try {
+				sesh = seshFac.openSession();
+				resultList = sesh.selectList("getStops2", node);
+				success = true;
+			}catch(Exception e) {
+				retries++;
+
+                if (retries < MAX_RETRIES) {
+                    System.out.println("Transaction failed. Retrying in " + RETRY_DELAY_MS + " ms.");
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(RETRY_DELAY_MS);
+                    } catch (InterruptedException ex) {
+                        // Handle interruption
+                    }
+                } else {
+                    // If the maximum number of retries has been reached, throw an exception or handle the failure
+                    throw new RuntimeException("Transaction failed after " + MAX_RETRIES + " retries.", e);
+                }
+			}finally {
+				sesh.close();
+			}
+        }
 		return resultList;
 	}
 	
@@ -114,13 +205,29 @@ public class UniversalDAO {
 		SqlSession sesh = null;
 		R_Info result = null;
 		
-		try {
-			sesh = seshFac.openSession();
-			result = sesh.selectOne("getRoute", routeID);
-		}finally {
-			sesh.close();
-		}
-		
+		int retries = 0;
+        boolean success = false;
+        while (!success && retries < MAX_RETRIES) {
+			try {
+				sesh = seshFac.openSession();
+				result = sesh.selectOne("getRoute", routeID);
+				success = true;
+			}catch(Exception e) {
+				retries++;
+
+                if (retries < MAX_RETRIES) {
+                    System.out.println("Transaction failed. Retrying in " + RETRY_DELAY_MS + " ms.");
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(RETRY_DELAY_MS);
+                    } catch (InterruptedException ex) {
+                    }
+                } else {
+                    throw new RuntimeException("Transaction failed after " + MAX_RETRIES + " retries.", e);
+                }
+			}finally {
+				sesh.close();
+			}
+        }
 		return result;
 	}
 	
@@ -130,23 +237,41 @@ public class UniversalDAO {
 		SqlSession sesh = null;
 		int addResult = 0;
 		
-		try {
-			sesh=seshFac.openSession();
-			
-			// 조건문(이미 있으면 삽입 ㄴ)
-			if(sesh.selectOne("checkDupeFav", fav)!=null) {
-				addResult = 0;
-			}else {
-				addResult = sesh.insert("addFav", fav);
+		int retries = 0;
+        boolean success = false;
+        
+        while (!success && retries < MAX_RETRIES) {
+			try {
+				sesh=seshFac.openSession();
+				
+				// 조건문(이미 있으면 삽입 ㄴ)
+				if(sesh.selectOne("checkDupeFav", fav)!=null) {
+					addResult = 0;
+				}else {
+					addResult = sesh.insert("addFav", fav);
+				}
+				sesh.commit();
+				
+				// 너무 많아지면 뒤부터 데이터 삭제
+				success = true;
+			}catch(Exception e) {
+				retries++;
+
+                if (retries < MAX_RETRIES) {
+                    System.out.println("Transaction failed. Retrying in " + RETRY_DELAY_MS + " ms.");
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(RETRY_DELAY_MS);
+                    } catch (InterruptedException ex) {
+                        // Handle interruption
+                    }
+                } else {
+                    // If the maximum number of retries has been reached, throw an exception or handle the failure
+                    throw new RuntimeException("Transaction failed after " + MAX_RETRIES + " retries.", e);
+                }
+			}finally {
+				sesh.close();
 			}
-			sesh.commit();
-			
-			// 너무 많아지면 뒤부터 데이터 삭제
-			
-		}finally {
-			sesh.close();
-		}
-		
+        }
 		return addResult;
 	}
 	
@@ -212,18 +337,22 @@ public class UniversalDAO {
 		SqlSession sesh = null;
 		Book_Info resultVO = null;
 		
-		try {
-			// handle dupe or not?
-			sesh = seshFac.openSession();
-			sesh.insert("bookPreview", binfo);
-			sesh.commit();
-			
-			resultVO = sesh.selectOne("getBookPrev", binfo);
-			
-		}finally {
-			sesh.close();
-		}
-		
+		int retries = 0;
+        boolean success = false;
+        while (!success && retries < MAX_RETRIES) {
+			try {
+				// handle dupe or not?
+				sesh = seshFac.openSession();
+				sesh.insert("bookPreview", binfo);
+				sesh.commit();
+				
+				resultVO = sesh.selectOne("getBookPrev", binfo);
+				success = true;
+			}catch(Exception e) {
+			}finally {
+				sesh.close();
+			}
+        }
 		return resultVO;
 	}
 	
@@ -233,17 +362,34 @@ public class UniversalDAO {
 		SqlSession sesh = null;
 		Book_Info resultVO = null;
 		Book_Info finalVO = null;
-		try {
-			sesh = seshFac.openSession();
-			resultVO = sesh.selectOne("getBookingPSG", blog_id);
-			resultVO.setB_id(b_id);
-			sesh.update("packageBooking", resultVO);
-			sesh.commit();
-			finalVO = sesh.selectOne("getBookingPSG", blog_id);
-		}finally {
-			sesh.close();
-		}
 		
+		int retries = 0;
+        boolean success = false;
+        while (!success && retries < MAX_RETRIES) {
+			try {
+				sesh = seshFac.openSession();
+				resultVO = sesh.selectOne("getBookingPSG", blog_id);
+				resultVO.setB_id(b_id);
+				sesh.update("packageBooking", resultVO);
+				sesh.commit();
+				finalVO = sesh.selectOne("getBookingPSG", blog_id);
+				success = true;
+			}catch(Exception e) {
+				retries++;
+
+                if (retries < MAX_RETRIES) {
+                    System.out.println("Transaction failed. Retrying in " + RETRY_DELAY_MS + " ms.");
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(RETRY_DELAY_MS);
+                    } catch (InterruptedException ex) {
+                    }
+                } else {
+                    throw new RuntimeException("Transaction failed after " + MAX_RETRIES + " retries.", e);
+                }
+			}finally {
+				sesh.close();
+			}
+        }
 		return finalVO;
 	}
 	
@@ -271,13 +417,31 @@ public class UniversalDAO {
 		SqlSession sesh = null;
 		Book_Info result = null;
 		
-		try {
-			sesh = seshFac.openSession();
-			result = sesh.selectOne("getBookingByBID", b_id);
-		}finally {
-			sesh.close();
-		}
-		
+		int retries = 0;
+        boolean success = false;
+        while (!success && retries < MAX_RETRIES) {
+			try {
+				sesh = seshFac.openSession();
+				result = sesh.selectOne("getBookingByBID", b_id);
+				success = true;
+			}catch(Exception e) {
+				retries++;
+
+                if (retries < MAX_RETRIES) {
+                    System.out.println("Transaction failed. Retrying in " + RETRY_DELAY_MS + " ms.");
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(RETRY_DELAY_MS);
+                    } catch (InterruptedException ex) {
+                        // Handle interruption
+                    }
+                } else {
+                    // If the maximum number of retries has been reached, throw an exception or handle the failure
+                    throw new RuntimeException("Transaction failed after " + MAX_RETRIES + " retries.", e);
+                }
+			}finally {
+				sesh.close();
+			}
+        }
 		return result;
 	}
 	
@@ -350,14 +514,20 @@ public class UniversalDAO {
 
 		SqlSession sesh = null;
 		int result = 0;
-		try {
-			sesh = seshFac.openSession();
-			result = sesh.update("updateAcceptance", bookInfo);
-			sesh.commit();
-		}finally {
-			sesh.close();
-		}
 		
+		int retries = 0;
+        boolean success = false;
+        while (!success && retries < MAX_RETRIES) {
+			try {
+				sesh = seshFac.openSession();
+				result = sesh.update("updateAcceptance", bookInfo);
+				sesh.commit();
+				success = true;
+			}catch(Exception e) {
+			}finally {
+				sesh.close();
+			}
+        }
 		return result;
 	}
 
@@ -366,13 +536,31 @@ public class UniversalDAO {
 		SqlSession sesh = null;
 		Book_Info result = null;
 		
-		try {
-			sesh = seshFac.openSession();
-			result = sesh.selectOne("cancelCheck", blog_id);
-		}finally {
-			sesh.close();
-		}
-		
+		int retries = 0;
+        boolean success = false;
+        while (!success && retries < MAX_RETRIES) {
+			try {
+				sesh = seshFac.openSession();
+				result = sesh.selectOne("cancelCheck", blog_id);
+				success = true;
+			}catch(Exception e) {
+				retries++;
+
+                if (retries < MAX_RETRIES) {
+                    System.out.println("Transaction failed. Retrying in " + RETRY_DELAY_MS + " ms.");
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(RETRY_DELAY_MS);
+                    } catch (InterruptedException ex) {
+                        // Handle interruption
+                    }
+                } else {
+                    // If the maximum number of retries has been reached, throw an exception or handle the failure
+                    throw new RuntimeException("Transaction failed after " + MAX_RETRIES + " retries.", e);
+                }
+			}finally {
+				sesh.close();
+			}
+        }
 		return result;
 	}
 
@@ -381,14 +569,32 @@ public class UniversalDAO {
 		SqlSession sesh = null;
 		int result = 0;
 		
-		try {
-			sesh = seshFac.openSession(true);
-			sesh.delete("writeOff", toProcess);
-			result = sesh.insert("archivePsg", toProcess);
-		}finally {
-			sesh.close();
-		}
-		
+		int retries = 0;
+        boolean success = false;
+        while (!success && retries < MAX_RETRIES) {
+			try {
+				sesh = seshFac.openSession(true);
+				sesh.delete("writeOff", toProcess);
+				result = sesh.insert("archivePsg", toProcess);
+				success = true;
+			}catch(Exception e) {
+				 retries++;
+
+	                if (retries < MAX_RETRIES) {
+	                    System.out.println("Transaction failed. Retrying in " + RETRY_DELAY_MS + " ms.");
+	                    try {
+	                        TimeUnit.MILLISECONDS.sleep(RETRY_DELAY_MS);
+	                    } catch (InterruptedException ex) {
+	                        // Handle interruption
+	                    }
+	                } else {
+	                    // If the maximum number of retries has been reached, throw an exception or handle the failure
+	                    throw new RuntimeException("Transaction failed after " + MAX_RETRIES + " retries.", e);
+	                }
+			}finally {
+				sesh.close();
+			}
+        }
 		return result;
 	}
 
@@ -397,14 +603,32 @@ public class UniversalDAO {
 		SqlSession sesh = null;
 		int result = 0 ;
 		
-		try {
-			sesh = seshFac.openSession();
-			result = sesh.update("updatePsgNum", b_id);
-			sesh.commit();
-		}finally {
-			sesh.close();
-		}
-		
+		int retries = 0;
+	    boolean success = false;
+	    while (!success && retries < MAX_RETRIES) {
+			try {
+				sesh = seshFac.openSession();
+				result = sesh.update("updatePsgNum", b_id);
+				sesh.commit();
+				success = true;
+			}catch(Exception e) {
+				retries++;
+
+                if (retries < MAX_RETRIES) {
+                    System.out.println("Transaction failed. Retrying in " + RETRY_DELAY_MS + " ms.");
+                    try {
+                        TimeUnit.MILLISECONDS.sleep(RETRY_DELAY_MS);
+                    } catch (InterruptedException ex) {
+                        // Handle interruption
+                    }
+                } else {
+                    // If the maximum number of retries has been reached, throw an exception or handle the failure
+                    throw new RuntimeException("Transaction failed after " + MAX_RETRIES + " retries.", e);
+                }
+			}finally {
+				sesh.close();
+			}
+	    }
 		return result;
 	}
 
@@ -438,6 +662,38 @@ public class UniversalDAO {
 			sesh.commit();
 			
 			result = sesh.insert("archiveBookingLog",intermed);
+			sesh.commit();
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+	}
+
+	public int addWarning(String p_id) {
+		
+		SqlSession sesh = null;
+		int result = 0;
+		
+		try {
+			sesh = seshFac.openSession();
+			result = sesh.update("addWarning", p_id);
+			sesh.commit();
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+	}
+
+	public int delBookById(String blog_id) {
+		
+		SqlSession sesh = null;
+		int result = 0;
+		
+		try {
+			sesh = seshFac.openSession();
+			result = sesh.delete("delBookById", blog_id);
 			sesh.commit();
 		}finally {
 			sesh.close();
