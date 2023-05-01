@@ -1,4 +1,4 @@
-package com.henry.bookingController;
+package com.henry.routeController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,41 +8,36 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
 import com.henry.testEntity.Book_Info;
 import com.henry.testEntity.UniversalDAO;
 
-@WebServlet("/Book")
-public class BookingController extends HttpServlet {
+@WebServlet("/DropOff")
+public class DropOffHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		request.setCharacterEncoding("UTF-8");
+
+		String blog_id = request.getParameter("ousted");
 		
-		String b_id = request.getParameter("b_id"); // vehicleno;
-		String blog_id = request.getParameter("blog_id");
-	
 		UniversalDAO dao = new UniversalDAO();
-		Book_Info processed = dao.packageBooking(b_id, blog_id);
 		
-		Gson gson = new Gson();
+		// 먼저 지울 예약정보 가져오고
+		Book_Info midProcess = dao.getBookingByBID(blog_id);
 		
-		String json = gson.toJson(processed);
+		// DELEEEEEEEEETE and hope somebody gets the reference lolz
+		int delArchResult = dao.delThenArchive(midProcess);
 		
-		response.setContentType("application/json;charset=utf-8");
+		//승객수도 처리
+		int psgSubResult = dao.updatePsgNum(midProcess.getB_id());
 		
-		HttpSession sesh = request.getSession();
+		response.setCharacterEncoding("UTF-8");
 		
-		sesh.setAttribute("bookedInfo", json);
 		PrintWriter out = response.getWriter();
 		
-		out.write(json);
-		
-		System.out.println("JSON PACKAGED AND SET TO bookedInfo sesh attrib");
-		
+		out.write(psgSubResult+delArchResult);
 	}
 
 }

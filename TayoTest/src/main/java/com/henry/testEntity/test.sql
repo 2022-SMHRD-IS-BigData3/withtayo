@@ -147,3 +147,47 @@ alter table bus_shift
 add nodenm varchar(100);
 
 select * from bus_shift;
+select * from book_info;
+delete from book_info;
+delete from bus_shift;
+alter table book_log
+drop constraint 예약내역_fk2;
+drop table book_log;
+
+create table book_log
+as select * from book_info;
+
+alter table book_log
+drop column blog_id;
+
+rename book_log to book_record;
+
+delete from book_record;
+
+alter table book_record
+add bookrec_id varchar2(100) primary key;
+
+alter table book_record
+add disembtime date default sysdate;
+
+alter table book_record
+modify column booktime drop default; -- this don't work on this version?
+
+create sequence bookrec_seq
+increment by 1
+start with 1;
+
+delete from recent;
+delete from fav;
+delete from book_info;
+select * from book_record;
+
+alter table fav
+add f_dprt_id varchar2(100);
+alter table fav
+add f_arrv_id varchar2(100);
+select * from recent;
+alter table recent
+add rec_dprt_id varchar2(100);
+alter table recent
+add rec_arrv_id varchar2(100);

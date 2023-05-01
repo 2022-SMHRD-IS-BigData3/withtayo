@@ -2,7 +2,6 @@ package com.henry.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.henry.testEntity.Driver;
-import com.henry.testEntity.Passenger;
 import com.henry.testEntity.UniversalDAO;
 
 

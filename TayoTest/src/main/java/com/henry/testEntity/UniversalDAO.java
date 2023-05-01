@@ -344,4 +344,66 @@ public class UniversalDAO {
 		
 	}
 
+	// 승낙 거부 정보 업데이트용
+	public int updateAcceptance(Book_Info bookInfo) {
+
+		SqlSession sesh = null;
+		int result = 0;
+		try {
+			sesh = seshFac.openSession();
+			result = sesh.update("updateAcceptance", bookInfo);
+			sesh.commit();
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+	}
+
+	public Book_Info cancelCheck(String blog_id) {
+
+		SqlSession sesh = null;
+		Book_Info result = null;
+		
+		try {
+			sesh = seshFac.openSession();
+			result = sesh.selectOne("cancelCheck", blog_id);
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+	}
+
+	public int delThenArchive(Book_Info toProcess) {
+
+		SqlSession sesh = null;
+		int result = 0;
+		
+		try {
+			sesh = seshFac.openSession(true);
+			sesh.delete("writeOff", toProcess);
+			result = sesh.insert("archivePsg", toProcess);
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+	}
+
+	public int updatePsgNum(String b_id) {
+	
+		SqlSession sesh = null;
+		int result = 0 ;
+		
+		try {
+			sesh = seshFac.openSession();
+			result = sesh.update("updatePsgNum", b_id);
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+	}
+	
 }

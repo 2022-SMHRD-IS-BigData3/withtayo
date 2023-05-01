@@ -106,7 +106,6 @@
             align-items: center;
 
         }
-
         .btn {
             width: 100px;
         }
@@ -282,7 +281,11 @@
             <hr>
             <div class="bookinginfor">
                 <div>만약 <a href="#" data-toggle="tooltip" title="휠체어와 유모차 동행자"><strong> 교통약자(!)</strong></a>가 아닌 경우, <br>
-                    이 예약 서비스의 이용은 형법 제185조 <br> 일반교통방해죄에 해당할 수 있으므로,<br> <strong> 법적 처벌 대상</strong>이 될 수 있습니다.</div>
+                    이 예약 서비스의 이용은 형법 제185조 <br> 일반교통방해죄에 해당할 수 있으므로,<br> <strong> 법적 처벌 대상</strong>이 될 수 있습니다.<span>      </span><div class="form-check-inline">
+  <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" value="">
+  </label>
+</div></div>
             </div>
         </div>
         <div id="btnTbl">
@@ -294,7 +297,7 @@
         <div class="endbar">
             <div class="row">
                 <div class="a">
-                    <img src="../스인개광고판.png" alt="" id="image"
+                    <img src="" alt="" id="image"
                         style="width: 100%; height: 100%; border: solid 1px black;">
                 </div>
             </div>

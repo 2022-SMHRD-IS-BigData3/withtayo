@@ -571,7 +571,7 @@ body {
         <div class="endbar">
             <div class="row">
                 <div class="a">
-                    <img src="../스인개광고판.png" alt="" id="image"
+                    <img src="" alt="" id="image"
                         style="width: 100%; height: 100%; border: solid 1px black;">
                 </div>
             </div>

@@ -27,8 +27,6 @@ public class RouteCheckServlet extends HttpServlet {
 		
 		String jsonString = request.getReader().lines().collect(Collectors.joining());
 		
-		System.out.println(jsonString);
-		
 		Gson gson = new Gson();
 		
 		List<String> parsedList = gson.fromJson(jsonString, new TypeToken<List<String>>() {}.getType());

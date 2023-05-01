@@ -240,15 +240,15 @@
 
                 <!-- 모달 시작 -->
                 <div class="busDriverModal">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                  <button type="button" id="modActivation" class="btn btn-primary">
                         <span>모달 버튼</span>
                     </button>
-                    <div class="modal fade" id="myModal">
+                    <div class="modal fade" id="myModal" data-backdrop="static">
                         <div class="modal-dialog modal-sm modal-dialog-centered">
                             <div class="modal-content">
                                 <!-- Modal Header -->
                                 <div class="modal-header">
-                                    <h4 class="modal-title">New 예약 알림</span></h4>
+                                    <h4 class="modal-title">New 예약 알림</h4>
                                 </div>
 
                                 <!-- Modal body -->
@@ -257,9 +257,9 @@
                                 </div>
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-lg busDriverModal_cancel"
+                                    <button type="button" id="reject" class="btn btn-lg busDriverModal_cancel"
                                         data-dismiss="modal">거 부</button>
-                                    <button type="button" class="btn btn-lg" data-dismiss="modal">승 낙</button>
+                                    <button type="button" class="btn btn-lg" id="accept" data-dismiss="modal">승 낙</button>
                                 </div>
 
                             </div>
@@ -273,7 +273,7 @@
 
             <hr style="padding-bottom: 10px;">
             <div class="btnbb">
-                <button style="font-size:20px" class="btnbus" disabled> <i class="material-icons"
+                <button style="font-size:20px" class="btnbus" disabled id="offTheBus"> <i class="material-icons"
                         style="font-size: 50px;">&#xe8d7;</i><br>하차 완료</button>
                 <button style="font-size:20px" class="btnbus"> <i class="material-icons"
                         style="font-size: 50px;">&#xe61d;</i><br>고객 센터</button>
@@ -282,7 +282,7 @@
         <div class="endbar">
             <div class="row">
                 <div class="a">
-                    <img src="../스인개광고판.png" alt="" id="image"
+                    <img src="" alt="" id="image"
                         style="width: 100%; height: 100%; border: solid 1px black;">
                 </div>
             </div>
@@ -291,6 +291,12 @@
 
 
     <script>
+    // ****ALWAYS USE STRICT EQUALITY COMPARISON (===) FOR NULL AND UNDEFINED****
+    $("#modActivation").on("click", function(){
+    	console.log("clicked");
+    	$("#myModal").modal("show");
+    });
+    
     	// 세션의 운행정보
     	let currentShift = null;
     	
@@ -298,20 +304,30 @@
     	// 아길다
     	let bookedInfoQueryResult = null;
     	
-    	// 화면 표시 판단용 대기 상태 번호 : 0-승객도 없고 예약도 없음(대기), 1-승객은 있고 예약은 없음, 2-예약있음 
-    	// 사용 임시 보류
+    	// 화면 표시 판단용 대기 상태 번호 : 0 - 조회 정지 / 1 - 조회 실행 
+    	// on click 시 후처리
     	let bookStat = 0;
     	
-    	// 현재 탑승자
+    	// 노선이 거치는 모든 정류장
+    	let allNodes = [];
+    	
+    	// 현재 탑승자 **REDUNDANT
     	let currPsg = null;
     	
-    	// 예약자 리스트
+    	// 예약자 리스트 : **********1번째는 승객으로 변함*********** (1명만 타거든)
     	let bookingList = [];
+    	// 예약자 리스트에 대응하는 출발-도착 정류장 순서 어떤 인덱스의 예약자의 카운트다운을 보여줄건지
+    	let bookedDprt = [];
+    	let bookedArrv = []; // 세 배열은 항상 같이 다닐 것
     	
+    	// 모달 인터벌 안에서 쓸거
+    	let prevListLength = 0;
+    	let modalClicked = false;
     	
-    	
+    	// #### 3-thread-system! i.e., fetch booking - prompt - node counter ####
     	$(document).ready(function(){
     		
+			/////////////////////SEPARATOR/////////////////////
     		// Ambient functions : 페이지 로딩 되자 마자 실행, 또는 반복 실행
     		// 기록 하려면 세션에서 운행 정보 가져와
     		console.log("1st procedure : Get session attribute");
@@ -325,56 +341,227 @@
     			error : function(xhr, status, error){
 					console.log(error);    				
     			}
-    		
+			// 노선이 가는 정류장들 조회 (예약자 순서 비교용)    		
+    		}).then(function(duuuuumpin){
+    			console.log("2nd procedure : Get nodeords of all the nodes that this bus swings by");
+    			$.ajax({
+    				url : 'https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=300&_type=json&cityCode=24&routeId='+currentShift.routeid,
+    				success : function(resp002){
+    					// 모든 정류장 어레이
+    					allNodes = resp002.response.body.items.item;
+    					console.log(allNodes);
+    				},
+    				error : function(xhr, status, error){
+    					console.log(error);
+    				}
+    			});
     		// Pseudo-communication : 예약정보 조회 반복실행으로 통신 미믹
     		}).then(function(alwaysBeDumpin){
-    			console.log("2nd procedure : Loop to retrieve booking info from database.");
+    			console.log("3rd procedure : Loop to retrieve booking info from database.");
     			
-    			// 인터벌 루프 시켜야됨!!!!###############################
+    			// 예약 반복 조회용 method
+    			let bookingCheckInterval = setInterval(checkForBooking ,6000);
+    			function checkForBooking(){
+    				if(bookingStat==1){
+	    				console.log("Looping every 6 sec");
+		    			$.ajax({
+		    				url : 'GetPsg',
+		    				data : {b_id : currentShift.b_id},
+		    				success : function(resp003){
+		    					// 예약 조회 결과(리스트 아님 selectOne으로 하나씩 반복)
+		    					bookedInfoQueryResult = resp003; // 예약 대기상태
+								
+								// 조회 결과 있음
+		    					if(bookedInfoQueryResult != null){
+	
+			    					// 일단 예약자 리스트와 순서리스트에 넣는다.
+		    						bookingList.push(bookedInfoQueryResult);
+		    						allNodes.forEach(function(elem){
+		    							if(elem.nodeid == bookedInfoQueryResult.dprtnode){
+			    							bookedDprt.push(elem.nodeord);
+			    						}
+			    						if(elem.nodeid == bookedInfoQueryResult.arrvnode){
+			    							bookedArrv.push(elem.nodeord);
+			    						}
+		    						});
+	    						
+	    						// 조회결과 없음
+		    					}else{
+		    						console.log("No man to pick up!");
+		    					}
+		    				},
+		    				error : function(xhr, status, error){
+		    					console.log(error);
+		    				}
+		    			}); 
+    				}
+    			}
+    			// STILL INSIDE THE AJAX!!!!!!!!!!!!!!!
+    			// 모달 팝업용
     			setInterval(function(){
+    				// 조회시 리스트 길이가 늘어나있으면
+        			if(prevListLength < bookingList.length){
+        				let theIterated = [];
+        				let comparisonTarget = [];
+        				// 겹치는 정류장 있는지 체크 (예약자 전체 - 방금 예약한사람)
+        				for(let eff = 0 ; eff < bookingList.length-1 ; eff++){
+        					theIterated = generateSeries(bookedDprt[eff], bookedArrv[eff]);
+        					comparisonTarget = generateSeries(bookedDprt[bookedDprt.length-1], bookedArrv[bookedArrv.length-1]);
+        				}
+        				// 겹치면
+        				if(overlapCheck(theIterated, comparisonTarget)){
+        					// 자동 거부, 디비 등록, 순번 트리오에서 지우기
+        					prevListLength = bookingList.length;
+        				// 안겹치면
+        				}else{
+        					if(modalClicked){
+  						  		bookingStat = 1;	    				
+	    	    				prevListLength = bookingList.length;
+    		    			}else{
+    	    					// 위 인터벌 스킵하고 모달창을 띄워부랑꼐 으아아리마릐만으리믁함ㄱㅎ	
+    	    					bookingStat = 0;
+    	    					$("#myModal").modal("show"); // prolly a bootstrap method that's so rogue
+    		    				console.log("**Waiting for the driver to click on any of the buttons.");
+    		    			}
+    		    		}
+        			// 조회시 리스트 길이가 줄어있으면 (하차햇겟구나나아아아아아아아아아아아아아)
+        			}else if(prevListLength > bookingList.length){
+        				bookingStat = 1;
+        				prevListLength = bookingList.length;
+    				// 리스트 길이에 변화가 없으면 부릉부릉
+        			}else{
+        				bookingStat = 1;
+        			}
+        			
+    			}, 2000);
+    			
+    		}).catch(function(error){
+    			console.log("안되용! 이유:" + error);
+    		}); // END OF A MAJOR SCOPE
+    		
+    		/////////////////////SEPARATOR/////////////////////
+    		// 모달 내부 버튼 핸들 : 예약 리스트 마지막의 예약정보에 승낙 정보 업데이트
+    		$("#accept").on("click", function(){
+    			console.log("accepted");
+    			$.ajax({
+    				url : 'AcceptCheck',
+    				contentType : 'application/json',
+    				data : {bookInfo : JSON.stringify(bookingList[bookingList.length-1]), accepted:1},
+    				success : function(modalResp){
+    					console.log("Acceptance updated to the booking info.");
+    				},
+    				error : function(xhr, status, error){
+    					console.log(error);
+    				}
+    			});
+    			$("#myModal").modal("hide");
+    			modalClicked = true;
+  			});
+    		$("#reject").on("click", function(){
+    			console.log("rejected");
+    			$.ajax({
+    				url : 'AcceptCheck',
+    				contentType : 'application/json',
+    				data : {bookInfo : JSON.stringify(bookingList[bookingList.length-1]), accepted:0},
+    				success : function(modalResp){
+    					console.log("Rejection updated to the booking info.");
+    				},
+    				error : function(xhr, status, error){
+    					console.log(error);
+    				}
+    			});
+    			$("#myModal").modal("hide");
+    			bookingList.pop();
+    			bookedDprt.pop();
+    			bookedArrv.pop();
+    			modalClicked = true;
+    		});
+    		
+    		// 겹치는 정류장 체크용 method
+    		function overlapCheck(list1, list2){
+    			for(let i = 0 ; i < list1.length; i++){
+    				for(let k = 0 ; k < list2.length; k++){
+    					if(list1[i] === list2[k]){
+    						return true;
+    					}
+    				}
+    			}
+    			return false;
+    		}
+    		
+    		// 경유 정류장 번호 list 생성용 method
+    		function generateSeries(start, end){
+    			let resultArr = [];
+    			for(let i = start ; i <= end ; i++ ){
+    				resultArr.push(i);
+    			}
+    			return resultArr;
+    		}
+    		
+			/////////////////////SEPARATOR/////////////////////
+    		// 예약 취소 핸들링용 루프
+    		setInterval(function(){
+    			// 취소 컬럼 select 조회
+    			if(bookingList.length != 0){
 	    			$.ajax({
-	    				url : 'GetPsg',
-	    				// 임시데이터임 currentShift.b_id 로 바꿀것
-	    				data : {b_id : currentShift.b_id},
-	    				success : function(resp002){
-	    					// 예약 조회 결과(리스트 아님 selectOne으로 하나씩 반복)
-	    					bookedInfoQueryResult = resp002;
-	    	//				console.log(bookedInfoQueryResult);
-	    					// 1루프 (1조회)에 대해 비교하는거임 햇갈리지 말기!!!!!
-	    					if(bookedInfoQueryResult != null){
-	    						// 차에 승객이 있고 다른 예약이 조회된 경우
-	    						if(currentShift.num_psg > 0){
-	    							bookStat = 2;
-	    							if(//판단: 예약자 리스트 2개 이상인지 체크)
-	    						// 차에 승객이 없고 다른 예약이 조회된 경우 : 승낙시 예약자 리스트에 일단 담는다. 아직 전 예약자가 탑승 안했는데 또 예약 온 경우
-	    						}else{
-	    							bookStat = 2;
-	    						}
-	    					}else{
-	    						// 차에 승객이 있고 다른 예약이 없는 경우
-	    						if(currentShift.num_psg > 0){
-	    							bookStat = 1;
-	    						// 차에 승객이 없고 예약도 없는 경우
-	    						}else{
-		    						bookStat = 0;
-	    						}
-	    					}
+	    				url : 'CancelCheck',
+	    				contentType : 'application/json',
+	    				data : {subjects : JSON.stringify(bookingList)},
+	    				success : function(theCancelers){ // the weaklings!!!!! going crazy ^ _ ^ 
+							console.log(theCancelers.length + " passengers have canceled."); // NEED TO CHECK STRUCTURE OF THE JSON!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+							// filter out the list!! YOU are the weakest link!!!
+							// 캔슬한사람 리스트ㅇ에서 필터링
+							theCancelers.forEach(function(stuff){
+								bookingList = bookingList.filter(elem => elem.blog_id != stuff.blog_id);
+							});
 	    				},
 	    				error : function(xhr, status, error){
 	    					console.log(error);
 	    				}
 	    			});
-    			}, 6000);
-    		}); // ajax-then scope CATCH NEEDED##############################
-    		
+    			}
+    		}, 3000);
+			/////////////////////SEPARATOR/////////////////////
+			// 승객 하차 버튼
+			$("#OffTheBus").on("click", function(){
+				//순서리스트 트리오에서 shift, 예약정보에서 딜리트 후 예약 내역으로// 운행정보에서 승객수 처리 //
+				let theBailer = bookingList.shift();
+				bookedDprt.shift();
+				bookedArrv.shift();
+				console.log(theBailer.p_id + " has gotten off the bus! You kicked'm out, you monster.");
+				$.ajax({
+					url : 'DropOff',
+					data : {ousted : theBailer.blog_id},
+					success : function(kickResp){ // lmfao 
+						console.log("You kicked them derriere!!! LOLOLOLOLOLOLOLOLOLOLOLOLOL");
+						console.log("Result num : " + kickResp);
+					},
+					error : function(xhr, status, error){
+						console.log(error);
+					}
+				});
+				
+			});
+			
+    		// TODO : // 고객센터 // 신고 //
+			
+    		/////////////////////SEPARATOR/////////////////////
     		// 버스 현 위치 갱신해서 카운타다운 계산과 동시에 자신 운행정보에 위치 저장
     		setInterval(function(){
-    			// 노선 운행 조회 > 이 차량 GET > FETCH : nodeid, nodenm, nodeord 
+    			// Procedure
+    			// 노선 운행 조회 > 이 차량 GET > FETCH : nodeid, nodenm, nodeord  //  카운트다운에서 승차 처리(운행정보의 관련 컬럼 업데이트) // 탑승객 목적지 도착시 #OffTheBus disabled 제거
     			$.ajax({
 	    			url : 'https://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=50&_type=json&cityCode=24&routeId='+currentShift.routeid,
 	    			success : function(resp003){
+	    				let allCars = [];
 	    				console.log("Fetching position data!");
-	    				
+	    				allCars = resp003.response.body.items.item;
+	    				allCars.forEach(function(elem){
+	    					if(elem['vehicleno'] == currentShift.b_id){
+	    						console.log("Currently at" + elem['nodenm']);
+	    						
+	    					}
+	    				});
 	    			},
 	    			error : function(xhr, status, error){
 	    				console.log(error);
@@ -391,11 +578,13 @@
     					}
     				});
     				
-    			});// CATCH NEEDED!########################################
+    			}).catch(function(error){
+    				console.log("안된당꼐! 이유는 다음과 갛읍니다: "+error);
+    			});// END OF A MAJOR SCOPE
     		}, 15000);
-    		
-    			
-    	});// document ready scope
+			/////////////////////SEPARATOR/////////////////////	
+			
+    	});// DOCUMENT-READY SCOPE
     </script>
 </body>
 

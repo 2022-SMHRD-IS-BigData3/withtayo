@@ -15,13 +15,14 @@ public class Book_Info {
 	private String arrvname;
 	private String b_id;
 	private boolean accepted;
+	private boolean canceled;
 
 	public Book_Info() {
 		
 	}
-	
+
 	public Book_Info(String blog_id, String routeid, String routeno, String dprtnode, String arrvnode, String p_id,
-			Date booktime, String dprtname, String arrvname, String b_id, boolean accepted) {
+			Date booktime, String dprtname, String arrvname, String b_id, boolean accepted, boolean canceled) {
 		this.blog_id = blog_id;
 		this.routeid = routeid;
 		this.routeno = routeno;
@@ -33,6 +34,15 @@ public class Book_Info {
 		this.arrvname = arrvname;
 		this.b_id = b_id;
 		this.accepted = accepted;
+		this.canceled = canceled;
+	}
+
+	public boolean isCanceled() {
+		return canceled;
+	}
+
+	public void setCanceled(boolean canceled) {
+		this.canceled = canceled;
 	}
 
 	public String getB_id() {
@@ -127,7 +137,8 @@ public class Book_Info {
 	public String toString() {
 		return "Book_Info [blog_id=" + blog_id + ", routeid=" + routeid + ", routeno=" + routeno + ", dprtnode="
 				+ dprtnode + ", arrvnode=" + arrvnode + ", p_id=" + p_id + ", booktime=" + booktime + ", dprtname="
-				+ dprtname + ", arrvname=" + arrvname + ", b_id=" + b_id + ", accepted=" + accepted + "]";
+				+ dprtname + ", arrvname=" + arrvname + ", b_id=" + b_id + ", accepted=" + accepted + ", canceled="
+				+ canceled + "]";
 	}
 
 }

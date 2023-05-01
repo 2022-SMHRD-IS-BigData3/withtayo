@@ -26,6 +26,8 @@ public class AddFavController extends HttpServlet {
 		String favDprtNode = request.getParameter("dprtNode");
 		String favArrvNode = request.getParameter("arrvNode");
 		String favRouteName = request.getParameter("routeName");
+		String favDprtId = request.getParameter("dprtId");
+		String favArrvId = request.getParameter("arrvId");
 		
 		System.out.println(favRouteId);
 		System.out.println(favDprtNode);
@@ -43,6 +45,8 @@ public class AddFavController extends HttpServlet {
 		favVO.setF_dprt(favDprtNode);
 		favVO.setF_arrv(favArrvNode);
 		favVO.setRouteno(favRouteName);
+		favVO.setF_dprt_id(favArrvId);
+		favVO.setF_arrv_id(favArrvId);
 		
 		UniversalDAO dao = new UniversalDAO();
 		int result = dao.addFav(favVO);
