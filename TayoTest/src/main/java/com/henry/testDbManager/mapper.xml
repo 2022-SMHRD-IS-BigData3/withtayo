@@ -83,12 +83,12 @@
   
   <insert id="pjoin" parameterType="com.henry.testEntity.Passenger">
 	  insert into passenger
-	  values(#{p_id},#{p_pw},#{p_ph})
+	  values(#{p_id},#{p_pw},#{p_ph},null)
   </insert>
   
   <insert id="djoin" parameterType="com.henry.testEntity.Driver">
 	  insert into b_driver
-	  values(#{d_id},#{d_pw})
+	  values(#{d_id},#{d_pw},null)
   </insert>
   
   <select id="getBookingByBID" parameterType="java.lang.String" resultType="com.henry.testEntity.Book_Info">
@@ -158,4 +158,32 @@
   <insert id="archiveShift" parameterType="com.henry.testEntity.Shift">
   	insert into bus_shift_log (slog_id, shift_id, b_id, d_id, total_psg, routeid, routeno) values(seq_shift_log.NEXTVAL, #{shift_id}, #{b_id}, #{d_id}, #{total_psg}, #{routeid}, #{routeno})
   </insert>
+  
+  <delete id="revoke" parameterType="com.henry.testEntity.Passenger">
+  delete from passenger
+  where p_pw = #{p_pw}
+  </delete>
+  
+  <delete id="D_revoke" parameterType="com.henry.testEntity.Driver">
+  delete from b_driver
+  where d_pw = #{d_pw}
+  </delete>
+  
+  <update id="np_pw" parameterType="com.henry.testEntity.Passenger">
+  update passenger
+  set p_pw=#{np_pw}
+  where p_id=#{p_id}
+  </update>
+  
+  <update id="p_ph" parameterType="com.henry.testEntity.Passenger">
+  update passenger
+  set p_ph=#{p_ph}
+  where p_id =#{p_id}
+  </update>
+  
+  <update id="nd_pw" parameterType="com.henry.testEntity.Driver">
+  update b_driver
+  set d_pw=#{nd_pw}
+  where d_id =#{d_id}
+  </update>
 </mapper>

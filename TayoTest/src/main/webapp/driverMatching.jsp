@@ -230,7 +230,7 @@ body {
                             <div class="navbar-nav" style="text-align: center;">
                                 <a class="nav-link active" href="#">공지 사항</a>
                                 <hr>
-                                <a class="nav-link active" href="#">개인정보 변경</a>
+                                <a class="nav-link active" href="driverMypage.jsp">개인정보 변경</a>
                                 <a class="nav-link active" href="#">고객센터</a>
                                 <a class="nav-link active" href="#"></a>
                                 <hr>

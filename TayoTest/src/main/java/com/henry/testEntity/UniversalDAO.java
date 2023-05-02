@@ -766,5 +766,75 @@ public class UniversalDAO {
 		return result;
 
 	}
+	
+	// 승객 회원 탈퇴
+		public int revoke(Passenger vo) {
+			int row=0;
+			SqlSession sesh= null;
+			try {
+				sesh=seshFac.openSession();
+				row=sesh.delete("revoke",vo);
+				sesh.commit();
+			} finally {
+				sesh.close();
+			}
+			return row;
+		}
+
+	// 버스 회원 탈퇴
+		public int D_revoke(Driver vo) {
+			int row=0;
+			SqlSession sesh= null;
+			try {
+				sesh=seshFac.openSession();
+				row=sesh.delete("D_revoke",vo);
+				sesh.commit();
+			} finally {
+				sesh.close();
+			}
+			return row;
+		}
+		
+		// 마이페이지 승객 비밀번호 변경
+		public int np_pw(Passenger vo) {
+			SqlSession sesh=null;
+			int row=0;
+			try {
+				sesh=seshFac.openSession();
+				row=sesh.update("np_pw",vo);
+				sesh.commit();
+			} finally {
+				sesh.close();
+			}
+			return row;
+		}
+			
+		// 마이페이지 휴대폰 변경
+		public int p_ph(Passenger vo) {
+			SqlSession sesh = null;
+			int row =0;
+			try {
+				sesh=seshFac.openSession();
+				row=sesh.update("p_ph",vo);
+				sesh.commit();
+			} finally {
+				sesh.close();
+			}
+				return row;
+		}
+			
+		// 마이페이지 기사 비밀번호 변경
+			public int nd_pw(Driver vo) {
+				SqlSession sesh=null;
+				int row=0;
+				try {
+					sesh=seshFac.openSession();
+					row=sesh.update("nd_pw",vo);
+					sesh.commit();
+				} finally {
+					sesh.close();
+				}
+				return row;
+			}
 
 }
