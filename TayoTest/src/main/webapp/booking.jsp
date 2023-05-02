@@ -289,7 +289,7 @@
             </div>
         </div>
         <div id="btnTbl">
-            <button type="button" class="btn btn-secondary" id="button"
+            <button type="button" class="btn btn-secondary" id="cancelBtn"
                 style="background-color: rgb(192, 190, 190); border: 0; margin-right: 50px;">취 소</button>
             <button class="btn btn-warning" id="bookingBtn"
                 style="color: white;background-color: rgb(231, 177, 10); margin-left: 50px;">예 약</button>
@@ -324,7 +324,25 @@
 
 
         $(document).ready(function () {
-
+        	// 약관 체크용
+        	$("#bookingBtn").prop("disabled", "disabled");
+        	$(".form-check-input").on("change", function(){
+        		if($(this).prop("checked")){
+        			console.log("End user agreement checked");
+        			$("#bookingBtn").removeAttr("disabled");
+        		}else{
+        			$("#bookingBtn").prop("disabled", "disabled");
+        		}
+        	});
+        	
+        	// 취소 버튼
+			$("#cancelBtn").on("click", function(){
+				$.ajax({
+					url : '',
+					
+				});
+			});
+        	
             // 예약 버튼 클릭시
             $('#bookingBtn').on('click', function () {
                 console.log("1st procedure : Get session attribute 'bookedInfo'");
