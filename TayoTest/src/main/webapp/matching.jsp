@@ -275,7 +275,6 @@
 		    			});
 	    				
 	    			}else if(thisBooking.accepted){
-	    				alert("승낙 되었습니다!");
 	    				window.location.replace("match.jsp");
 	    			}else{
 	    				console.log("놀고이써")

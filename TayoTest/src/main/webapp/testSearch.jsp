@@ -404,6 +404,23 @@
     	margin: 20px;
     	
     }
+    .dropdown{
+    	position: relative;
+    }
+    #dprtSrchDropdown{
+    	position: absolute;
+    	top: 100%; /* 목록을 드롭다운 버튼 아래에 위치시킴 */
+    	width : 300px;
+  		left: 5px;
+  		background-color: white;
+    }
+    #arrvSrchDropdown{
+        position: absolute;
+    	top: 100%; /* 목록을 드롭다운 버튼 아래에 위치시킴 */
+    	width : 300px;
+  		left: 5px;
+  		background-color: white;
+    }
 </style>
 
 <body>
