@@ -193,3 +193,7 @@ alter table recent
 add rec_arrv_id varchar2(100);
 select * from bus_shift;
 select * from book_info;
+alter table bus_shift_log
+add routeno varchar(100);
+alter table bus_shift_log
+add routeid varchar(100);

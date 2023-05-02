@@ -723,5 +723,22 @@ public class UniversalDAO {
 		
 		return result;
 	}
+
+	public int offTheShift(Shift thisShift) {
+		
+		SqlSession sesh = null;
+		int result = 0;
+		
+		try {
+			sesh = seshFac.openSession(true);
+			Shift intermed = sesh.selectOne("getShift", thisShift);
+			sesh.delete("delShift", intermed);
+			result = sesh.insert("archiveShift", thisShift);
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+	}
 	
 }

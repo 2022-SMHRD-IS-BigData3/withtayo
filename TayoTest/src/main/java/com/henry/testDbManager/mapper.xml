@@ -146,4 +146,16 @@
   <delete id="delBookById" parameterType="java.lang.String">
   	delete from book_info where blog_id=#{blog_id}
   </delete>
+  
+  <select id="getShift" parameterType="com.henry.testEntity.Shift" resultType="com.henry.testEntity.Shift">
+  	select * from bus_shift where shift_id=#{shift_id}
+  </select>
+  
+  <delete id="delShift" parameterType="com.henry.testEntity.Shift">
+  	delete from bus_shift where shift_id=#{shift_id}
+  </delete>
+  
+  <insert id="archiveShift" parameterType="com.henry.testEntity.Shift">
+  	insert into bus_shift_log (slog_id, shift_id, b_id, d_id, total_psg, routeid, routeno) values(seq_shift_log.NEXTVAL, #{shift_id}, #{b_id}, #{d_id}, #{total_psg}, #{routeid}, #{routeno})
+  </insert>
 </mapper>

@@ -234,7 +234,7 @@ body {
                                 <a class="nav-link active" href="#">고객센터</a>
                                 <a class="nav-link active" href="#"></a>
                                 <hr>
-                                <a class="nav-link active" href="#">로그아웃</a>
+                                <a class="nav-link active" href="/test/ShiftOff">운행종료</a>
                             </div>
                         </div>
                     </div> <!-- Offcanvas 끝 -->
@@ -339,7 +339,11 @@ body {
     	// 승차 판단용
     	let gotOn = [];
     	
+    	// 노쇼 버튼!!
     	let noShowClicked = false;
+    	
+    	// 알람 사운드
+    	let alarmSound = new Audio('./bookingAlarm.wav');
     	
     	// #### 3-thread-system! i.e., fetch booking - prompt - node counter ####
     	$(document).ready(function(){
@@ -440,6 +444,7 @@ body {
     	    					bookingStat = 0;
     	    					$("#remainder").text(bookingList[bookingList.length-1].nodenm);
     	    					$("#myModal").modal("show"); // prolly a bootstrap method that's so rogue
+    	    					alarmSound.play();
     		    				console.log("**Waiting for the driver to click on any of the buttons.");
     		    			}
     		    		}
