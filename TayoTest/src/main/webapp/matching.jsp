@@ -235,32 +235,85 @@
 	//받아온 예약정보
 	let bookMatch = null;
 	// 운행정보
-	let currentShift = null;
+	let targetShift = null;
+	
+	let thisBooking = null;
 
-	$(function(){
+	$(document).ready(function(){
+		
+	
 	// 승객 대기화면 기능
 		setInterval(function(){
-    		$.ajax({
-    			url : 'GetSessionForShift',
-    			success : function(resp005){
-	    			//운행정보!!
-	    			currentShift = resp005;
-	    			console.log(currentShift);
-	    			// 대기 상태에서 계속 조회할꺼다
-	    			
-	    		},
-	    		error : function(xhr, status, error){
-	    			console.log(error);
-	    		}
+    		
+			// 타겟 차량 정보 Fetch
+    		targetShift = "${bookedInfo.b_id}";
+			console.log(targetShift);
+    		// 다시 예약정보 조회 (accepted);
+    		if(targetShift != null){
+    			
+    			// 내 예약정보에 타겟 차량 업데이트
+				$.ajax({
+	    				url : 'UpdateMyBooking',
+	    				data : {b_id : targetShift}
+				
+	    		// 내 예약정보가 승낙되었는지 조회
+	    		}).then(function(resp001){
+		    		thisBooking = resp001;
+		    		
+		    		if(thisBooking.rejected){
+		    			$.ajax({
+		    				url : 'RejectTerminal',
+		    				data : {blog_id : thisBooking.blog_id},
+		    				success : function(rejectResp){
+		    					console.log(rejectResp);
+		    					window.location.replace("testSearch.jsp");
+		    				},
+		    				error : function(xhr, status, error){
+		    					console.log(error);
+		    				}
+		    				
+		    			});
+	    				
+	    			}else if(thisBooking.accepted){
+	    				alert("승낙 되었습니다!");
+	    				window.location.replace("match.jsp");
+	    			}else{
+	    				console.log("놀고이써")
+	    			}
 	    		
-	    	});
-	    },6000);
+	    		}).catch(function(error){
+    				console.log(error);
+    			});
+    		}else{
+    			console.log("페이지 로딩이 안된듯?")
+    		}
+				//예약정보
+				
+			//	  console.log(${bookedInfo});
+			//	  bookedMatch = ${bookedInfo}
+			//	  console.log(bookedMatch.accepted);
+				// 넘어온 예약정보 출력
+				// 기사 버스번호와 승객이 예약한 버스번호 조건문
+				
+			//	if(bookMatch.accepted == true){
+			//		console.log('들어옴');
+					// 승낙 == accepted == 1
+					//BookedMatch.accepted=true;
+			//		alert("예약에 성공했습니다!");
+					//window.location.href ='match.jsp';
+			//	}else {
+			//		console.log("대기중");
+					// 대기 == accepted == null
+			//	}
+	    	
+	    },4000);
 		
+	/*
 		setInterval(function(){
 			$.ajax({
 				url : 'GetMyBooking',
-				success : function(resp006){
-					console.log(resp006);
+				success : function(resp002){
+					console.log(resp002);
 					//예약정보
 				//	  console.log(${bookedInfo});
 				//	  bookedMatch = ${bookedInfo}
@@ -288,8 +341,8 @@
 			});
 		},6000);
 		
+	*/
 	});
-
 
     var imageIndex = 0;
 

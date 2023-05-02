@@ -116,7 +116,7 @@
   </delete>
   
   <insert id="archive" parameterType="com.henry.testEntity.Book_Info">
-  	insert into book_record (bookrec_id, canceled, accepted, b_id, arrvname, dprtname, booktime, p_id, arrvnode, dprtnode, routeno, routeid) values(bookrec_seq.NEXTVAL, #{canceled}, #{accepted}, #{b_id}, #{arrvname}, #{dprtname}, #{booktime}, #{p_id}, #{arrvnode}, #{dprtnode}, #{routeno}, #{routeid})
+  	insert into book_record (bookrec_id, rejected, canceled, accepted, b_id, arrvname, dprtname, booktime, p_id, arrvnode, dprtnode, routeno, routeid) values(bookrec_seq.NEXTVAL, #{rejected}, #{canceled}, #{accepted}, #{b_id}, #{arrvname}, #{dprtname}, #{booktime}, #{p_id}, #{arrvnode}, #{dprtnode}, #{routeno}, #{routeid})
   </insert>
   
   <update id="updatePsgNum" parameterType="java.lang.String">
@@ -185,5 +185,14 @@
   update b_driver
   set d_pw=#{nd_pw}
   where d_id =#{d_id}
+  </update>
+  
+  <!-- 안씀!! 예비용 -->
+  <select id="getMyBus" parameterType="java.lang.String" resultType="com.henry.testEntity.Shift">
+  	select * from bus_shift where b_id=#{b_id}
+  </select>
+  
+  <update id="updateBookingPSG" parameterType="com.henry.testEntity.Book_Info">
+  	update book_info set b_id=#{b_id} where blog_id=#{blog_id}
   </update>
 </mapper>

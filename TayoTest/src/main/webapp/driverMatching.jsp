@@ -484,9 +484,9 @@ body {
     		$("#reject").on("click", function(){
     			console.log("rejected");
     			$.ajax({
-    				url : 'AcceptCheck',
+    				url : 'Reject',
     				contentType : 'application/json',
-    				data : {bookInfo : JSON.stringify(bookingList[bookingList.length-1]), accepted:0},
+    				data : {theBooker : JSON.stringify(bookingList[bookingList.length-1])},
     				success : function(modalResp){
     					console.log("Rejection updated to the booking info.");
     				},

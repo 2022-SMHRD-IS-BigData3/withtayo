@@ -662,13 +662,8 @@ public class UniversalDAO {
 		try {
 			sesh = seshFac.openSession();
 			Book_Info intermed = sesh.selectOne("getBooking", bookInfo);
-			intermed.setAccepted(false);
-
-			sesh.delete("delBookInfo", bookInfo.getBlog_id());
-			sesh.commit();
-
-			result = sesh.insert("archiveBookingLog", intermed);
-			sesh.commit();
+			intermed.setRejected(true);
+			
 		} finally {
 			sesh.close();
 		}
@@ -748,16 +743,19 @@ public class UniversalDAO {
 		return result;
 	}
 
-	public Book_Info getBookingByBlogID(String blog_id) {
+	public Book_Info updateBookingByBlogID(String blog_id, String b_id) {
 
 		SqlSession sesh = null;
 		Book_Info result = null;
 
 		try {
-
+			Book_Info temp = new Book_Info();
+			temp.setBlog_id(blog_id);
+			temp.setB_id(b_id);
 			sesh = seshFac.openSession();
-			result = sesh.selectOne("getBookingPSG", blog_id);
+			sesh.update("updateBookingPSG", temp);
 			sesh.commit();
+			result = sesh.selectOne("getBookingPSG", blog_id);
 
 		} finally {
 			sesh.close();
@@ -835,6 +833,40 @@ public class UniversalDAO {
 					sesh.close();
 				}
 				return row;
+			}
+			
+			// 안씀 -- 예비용
+			public Shift getTargetBus(String b_id) {
+			
+				SqlSession sesh = null;
+				Shift resultShift = null;
+				
+				try {
+					sesh = seshFac.openSession();
+					sesh.selectOne("getMyBus", b_id);
+				}finally {
+					sesh.close();
+				}
+				
+				return resultShift;
+			}
+
+			public int delAndArchiveBooking(String blog_id) {
+				
+				SqlSession sesh = null;
+				int result = 0;
+				
+				try{
+					sesh = seshFac.openSession(true);
+					Book_Info intermed = sesh.selectOne("getBookingPSG", blog_id);
+					sesh.delete("writeOff", blog_id);
+					result = sesh.insert("archive", intermed);
+					
+				}finally {
+					sesh.close();
+				}
+				
+				return result;
 			}
 
 }

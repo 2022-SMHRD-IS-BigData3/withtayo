@@ -12,37 +12,37 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.henry.testEntity.Book_Info;
+import com.henry.testEntity.Shift;
 import com.henry.testEntity.UniversalDAO;
 
-@WebServlet("/Book")
-public class BookingController extends HttpServlet {
+// 안씀 -- 예비용
+@WebServlet("/GetTargetBus")
+public class GetTargetBusController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		request.setCharacterEncoding("UTF-8");
+
+		HttpSession sesh = request.getSession();
 		
-		String b_id = request.getParameter("b_id"); // vehicleno;
-		String blog_id = request.getParameter("blog_id");
-	
+		Book_Info myBooking = (Book_Info) sesh.getAttribute("bookedInfo");
+		
 		UniversalDAO dao = new UniversalDAO();
-		Book_Info processed = dao.packageBooking(b_id, blog_id);
+		
+		Shift targetShift = dao.getTargetBus(myBooking.getB_id());
 		
 		Gson gson = new Gson();
 		
-		String json = gson.toJson(processed);
+		String json = gson.toJson(targetShift);
 		
+		// shift  json으로 보낵ㄹ것
 		response.setContentType("application/json;charset=utf-8");
 		
-		HttpSession sesh = request.getSession();
-		
-		sesh.setAttribute("bookedInfo", processed);
 		PrintWriter out = response.getWriter();
 		
 		out.write(json);
 		
-		System.out.println("JSON PACKAGED AND SET TO bookedInfo sesh attrib");
-		
+		out.flush();
+	
 	}
 
 }

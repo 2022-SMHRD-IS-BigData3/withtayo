@@ -14,8 +14,8 @@ import com.google.gson.Gson;
 import com.henry.testEntity.Book_Info;
 import com.henry.testEntity.UniversalDAO;
 
-@WebServlet("/GetMyBooking")
-public class GetMyBookingController extends HttpServlet {
+@WebServlet("/UpdateMyBooking")
+public class UpdateMyBookingController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -24,20 +24,25 @@ public class GetMyBookingController extends HttpServlet {
 		HttpSession sesh = request.getSession();
 
 		Book_Info myBooking = (Book_Info)sesh.getAttribute("bookedInfo");
+		
+		String b_id = request.getParameter("b_id");
 
 		UniversalDAO dao = new UniversalDAO();
 		
-		Book_Info bookResult = dao.getBookingByBlogID(myBooking.getBlog_id());
+		Book_Info result = dao.updateBookingByBlogID(myBooking.getBlog_id(), b_id);
 		
 		Gson gson = new Gson();
 
-		String json = gson.toJson(bookResult, Book_Info.class);
+		String json = gson.toJson(result);
 
+		sesh.setAttribute("bookedInfo", result);
+		
 		response.setContentType("application/json;charset=utf-8");
 		
 		PrintWriter out = response.getWriter();
 
 		out.write(json);
+		
 		out.flush();
 	}
 

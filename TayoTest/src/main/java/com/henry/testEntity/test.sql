@@ -197,3 +197,5 @@ alter table bus_shift_log
 add routeno varchar(100);
 alter table bus_shift_log
 add routeid varchar(100);
+
+select accepted from book_info;
