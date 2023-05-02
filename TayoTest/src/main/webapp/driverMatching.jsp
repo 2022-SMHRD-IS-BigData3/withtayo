@@ -43,37 +43,28 @@
             width: 100%;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-        }
 
-        .jumbotron {
-            background-color: gray;
-            width: 100%;
-            height: 1.5cm;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+body {
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        font-family: 'NanumSquareNeo-Variable', sans-serif;
+    }
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 
         .big {
             height: 12.7cm;
         }
 
-        .jumbotron>.container {
-            max-width: unset;
-        }
 
-        /* Font를 적용할 클래스를 지정합니다. */
-        .my-font {
-            font-family: "gg";
-        }
 
-        @font-face {
-            font-family: "gg";
-            src: url("../빛고을광주_Medium.ttf");
-        }
 
         #navbarNavAltMarkup {
             position: fixed;
@@ -215,7 +206,7 @@
 
 <body>
     <div class="container">
-        <div class="navbar" style="font-family: gg;">
+        <div class="navbar" >
             <nav class="navbar"> <!-- navbar 시작 -->
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
@@ -291,12 +282,11 @@
 
             </div>
 
-            <hr style="padding-bottom: 10px;">
             <div class="btnbb">
                 <button style="font-size:20px" class="btnbus" disabled id="offTheBus"> <i class="material-icons"
                         style="font-size: 50px;">&#xe8d7;</i><br>하차 완료</button>
                 <button style="font-size:20px" class="btnbus" disabled id="noShow"> <i class="material-icons"
-                        style="font-size: 50px;">&#xe8d7;</i><br>승차 안함</button>
+                        style="font-size: 50px;">&#xe8fd;</i><br>승차 안함</button>
                 <button style="font-size:20px" class="btnbus"> <i class="material-icons"
                         style="font-size: 50px;">&#xe61d;</i><br>고객 센터</button>
             </div>
@@ -722,6 +712,29 @@
 			/////////////////////SEPARATOR/////////////////////	
 			
     	});// DOCUMENT-READY SCOPE
+    	
+        // 하단 광고판 이미지 변경 코드
+        var imageIndex = 0;
+        var images = ["IMG/광고1.png", "IMG/광고2.png", "IMG/광고3.png", "IMG/광고4.png"];
+        var intervalTime = 5000; // 3초마다 이미지 변경
+
+        function changeImage() {
+            // 이미지 인덱스 계산
+            imageIndex = (imageIndex + 1) % images.length;
+
+            // 다음 이미지 표시
+            var imgElement = document.getElementById("image");
+            imgElement.src = images[imageIndex];
+        }
+
+        // 초기 이미지 표시
+        var imgElement = document.getElementById("image");
+        imgElement.src = images[0];
+
+        // 일정 시간마다 이미지 변경
+        setInterval(changeImage, intervalTime);
+
+        // 광고판 이미지 변경 끝
     </script>
 </body>
 

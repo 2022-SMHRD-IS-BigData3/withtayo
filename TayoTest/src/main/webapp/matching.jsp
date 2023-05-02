@@ -18,7 +18,7 @@
         crossorigin="anonymous"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	
+
     <title>Document</title>
     <style>
         .container {
@@ -43,26 +43,24 @@
         }
 
         body {
+            font-size: 14px;
             margin: 0;
             padding: 0;
+            font-family: 'NanumSquareNeo-Variable', sans-serif;
         }
 
-
+        @font-face {
+            font-family: 'NanumSquareNeo-Variable';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
 
         .big {
             height: 12.7cm;
         }
 
 
-
-        /* Font를 적용할 클래스를 지정합니다. */
-        /* * {
-        font-family: "gg";
-    } */
-        @font-face {
-            font-family: "gg";
-            src: url("../빛고을광주_Medium.ttf");
-        }
 
         #navbarNavAltMarkup {
             position: fixed;
@@ -150,7 +148,7 @@
 
         .a {
             padding: 0px;
-            height: 1.2cm;
+            height: 1.5cm;
             text-align: center;
         }
 
@@ -170,7 +168,7 @@
 <body>
     <form action="succedmatching.jsp">
         <div class="container">
-            <div class="navbar" style="font-family: gg;">
+            <div class="navbar">
                 <nav class="navbar">
                     <nav class="navbar"> <!-- navbar 시작 -->
                         <div class="container-fluid">
@@ -214,19 +212,18 @@
                 <div id="waitsection">
                     <p id="waittext0">우리 함께 타는 withTAYO</p>
                     <img src="IMG/대기이미지.jpg" width="280" height="150" id="waitimg">
-                    <p id="waittext1" style="font-family: gg;">서버와 통신 중</p>
+                    <p id="waittext1" style="font-family: gg;"><strong>서버와 통신 중</strong></p>
                     <p id="waittext2" style="font-family: gg;">잠시만 기다려주세요.</p>
                     <img src="IMG/대기노란점.gif" id="waiticon">
                 </div>
 
-                
+
 
             </div>
             <div class="endbar">
                 <div class="row">
                     <div class="a">
-                        <img src="../스인개광고판.png" alt="" id="image"
-                            style="width: 100%; height: 55px; border: solid 1px black;">
+                        <img alt="" id="image111" style="width: 100%; height: 100%; border: solid 1px black;">
                     </div>
                 </div>
             </div>
@@ -235,79 +232,80 @@
 </body>
 <!-- 예약 성공시 예약 성공 페이지로 넘어갈 스크립트 -->
 <script>
-	$(function(){
-		// 승객 대기화면 기능
-		setInterval(function(){
-        	$.ajax({
-        		url : 'GetSessionForShift',
-        		success : function(resp005){
-        			//운행정보!!
-        			currentShift = resp005;
-        			console.log(currentShift);
-        			// 대기 상태에서 계속 조회할꺼다
-        			
-        		},
-        		error : function(xhr, status, error){
-        			console.log(error);
-        		}
-        		
-        	});
-        },6000);
-		
-		setInterval(function(){
-			$.ajax({
-				url : 'matching.jsp',
-				success : function(resp006){
-					// 넘어온 예약정보 출력
-					BookedMatch = ${bookedInfo};
-					console.log(BookedMatch);
-					// 기사 버스번호와 승객이 예약한 버스번호 조건문
-					if(BookedMatch.b_id==currentShift.b_id){
-						console.log('들어옴');
-						// 승낙 == accepted == 1
-						BookedMatch.accepted=true;
-						alert("예약에 성공했습니다!");
-						window.location.href ='match.jsp';
-					}else if(BookedMatch.b_id!=currentShift.b_id) {
-						console.log('거부로 들어옴');
-						// 거부 == accepted == 0
-						BookedMatch.accepted=false;
-						//alert("기사님이 버렸어요..");
-						//window.location.href ='testSearch.jsp';
-						
-					}else {
-						console.log("대기중");
-						// 대기 == accepted == null
-					}
-				
-					
-				},
-				error: function(xhr, status, error){
-					console.log(error);
-					console.log('잘들어갔다가 왜나감?');
-				}
-			});
-		},6000);
-		
-	});
-	
+    $(function () {
+        // 승객 대기화면 기능
+        setInterval(function () {
+            $.ajax({
+                url: 'GetSessionForShift',
+                success: function (resp005) {
+                    //운행정보!!
+                    currentShift = resp005;
+                    console.log(currentShift);
+                    // 대기 상태에서 계속 조회할꺼다
+
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+
+            });
+        }, 6000);
+
+        setInterval(function () {
+            $.ajax({
+                url: 'matching.jsp',
+                success: function (resp006) {
+                    // 넘어온 예약정보 출력
+                    BookedMatch = ${ bookedInfo };
+                    console.log(BookedMatch);
+                    // 기사 버스번호와 승객이 예약한 버스번호 조건문
+                    if (BookedMatch.b_id == currentShift.b_id) {
+                        console.log('들어옴');
+                        // 승낙 == accepted == 1
+                        BookedMatch.accepted = true;
+                        alert("예약에 성공했습니다!");
+                        window.location.href = 'match.jsp';
+                    } else if (BookedMatch.b_id != currentShift.b_id) {
+                        console.log('거부로 들어옴');
+                        // 거부 == accepted == 0
+                        BookedMatch.accepted = false;
+                        //alert("기사님이 버렸어요..");
+                        //window.location.href ='testSearch.jsp';
+
+                    } else {
+                        console.log("대기중");
+                        // 대기 == accepted == null
+                    }
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                    console.log('잘들어갔다가 왜나감?');
+                }
+            });
+        }, 6000);
+
+    });
+
 
     var imageIndex = 0;
-    var images = ["IMG/광고1.png", "IMG/광고2.png", "IMG/광고3.png", "IMG/광고4.png"];
+
+    var images1 = ["IMG/광고1.png", "IMG/광고2.png", "IMG/광고3.png", "IMG/광고4.png"];
     var intervalTime = 5000; // 3초마다 이미지 변경
 
     function changeImage() {
         // 이미지 인덱스 계산
-        imageIndex = (imageIndex + 1) % images.length;
+        imageIndex = (imageIndex + 1) % images1.length;
 
         // 다음 이미지 표시
-        var imgElement = document.getElementById("image");
-        imgElement.src = images[imageIndex];
+        var imgElement = document.getElementById("image111");
+        imgElement.src = images1[imageIndex];
     }
 
     // 초기 이미지 표시
-    var imgElement = document.getElementById("image");
-    imgElement.src = images[0];
+    var imgElement = document.getElementById("image111");
+    imgElement.src = images1[0];
 
     // 일정 시간마다 이미지 변경
     setInterval(changeImage, intervalTime);

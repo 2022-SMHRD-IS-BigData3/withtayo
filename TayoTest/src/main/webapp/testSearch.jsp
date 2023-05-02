@@ -389,6 +389,10 @@ body {
             .recent{
             	color: gold;
             }
+            .favBtn{
+        	background-color: white;
+        	border: 0px;
+        }
         </style>
 
         <body>
