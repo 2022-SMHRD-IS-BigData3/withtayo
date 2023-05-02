@@ -318,7 +318,7 @@ body {
     	
     	// 화면 표시 판단용 대기 상태 번호 : 0 - 조회 정지 / 1 - 조회 실행 
     	// on click 시 후처리
-    	let bookStat = 0;
+    	let bookStat = 1;
     	
     	// 노선이 거치는 모든 정류장
     	let allNodes = [];
