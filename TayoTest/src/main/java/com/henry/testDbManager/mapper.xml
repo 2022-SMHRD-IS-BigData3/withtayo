@@ -195,4 +195,8 @@
   <update id="updateBookingPSG" parameterType="com.henry.testEntity.Book_Info">
   	update book_info set b_id=#{b_id} where blog_id=#{blog_id}
   </update>
+  
+  <select id="getPreAccepted" parameterType="java.lang.String" resultType="com.henry.testEntity.Book_Info">
+  	select * from book_info where b_id=#{b_id} and accepted=0
+  </select>
 </mapper>

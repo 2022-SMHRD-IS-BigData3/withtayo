@@ -22,10 +22,10 @@ public class GetPsgController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String b_id = request.getParameter("b_id");
-		
+
 		UniversalDAO dao = new UniversalDAO();
-		
-		Book_Info bookinfo = dao.getBookingByBID(b_id);
+		// 승낙 상태가 false인 사람만 조회
+		Book_Info bookinfo = dao.getPreAccepted(b_id);
 		
 		Gson gson = new Gson();
 		
@@ -36,6 +36,8 @@ public class GetPsgController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		out.write(json);
+		
+		out.flush();
 	}
 
 }

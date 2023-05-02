@@ -869,4 +869,21 @@ public class UniversalDAO {
 				return result;
 			}
 
+			public Book_Info getPreAccepted(String b_id) {
+
+				SqlSession sesh = null;
+				Book_Info result = null;
+				
+				try {
+					sesh = seshFac.openSession();
+					result = sesh.selectOne("getPreAccepted", b_id);
+					
+				}finally {
+					sesh.close();
+				}
+				
+				return result;
+			}
+			
+
 }

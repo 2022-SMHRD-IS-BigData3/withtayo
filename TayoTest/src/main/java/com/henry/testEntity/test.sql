@@ -197,5 +197,10 @@ alter table bus_shift_log
 add routeno varchar(100);
 alter table bus_shift_log
 add routeid varchar(100);
-
 select accepted from book_info;
+alter table book_info
+modify accepted default 0;
+alter table book_info
+modify rejected default 0;
+alter table book_info
+modify canceled default 0;

@@ -197,7 +197,7 @@ body {
         }
 
         .drivercoment {
-            font-size: 150px;
+            font-size: 60px;
             font-weight: bold;
         }
     </style>
@@ -351,14 +351,14 @@ body {
 			/////////////////////SEPARATOR/////////////////////
     		// Ambient functions : 페이지 로딩 되자 마자 실행, 또는 반복 실행
     		// 기록 하려면 세션에서 운행 정보 가져와
-    		console.log("1st procedure : Get session attribute");
+   // 		console.log("1st procedure : Get session attribute");
   			// 운행정보 가져옴
     		$.ajax({
     			url : 'GetSessionForShift',
 			// 노선이 가는 정류장들 조회 (예약자 순서 비교용)    		
     		}).then(function(resp001){
     			currentShift = resp001;
-    			console.log("2nd procedure : Get nodeords of all the nodes that this bus swings by");
+    //			console.log("2nd procedure : Get nodeords of all the nodes that this bus swings by");
     			return $.ajax({
     				url : 'https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=300&_type=json&cityCode=24&routeId='+currentShift.routeid,
     			});
@@ -366,12 +366,11 @@ body {
     		}).then(function(resp002){
     			allNodes = resp002.response.body.items.item;
     			console.log(allNodes);
-    			console.log("3rd procedure : Loop to retrieve booking info from database.");
+    //			console.log("3rd procedure : Loop to retrieve booking info from database.");
     			
     			// 예약 반복 조회용 method
     			function checkForBooking(){
     				if(bookingStat==1){
-	    				console.log("Looping every 6 sec");
 		    			$.ajax({
 		    				url : 'GetPsg',
 		    				data : {b_id : currentShift.b_id},
@@ -381,7 +380,7 @@ body {
 								
 								// 조회 결과 있음
 		    					if(bookedInfoQueryResult != null){
-	
+									console.log("예약자가 있음!!!");
 			    					// 일단 예약자 리스트와 순서리스트에 넣는다.
 		    						bookingList.push(bookedInfoQueryResult);
 		    						allNodes.forEach(function(elem){
@@ -395,7 +394,7 @@ body {
 	    						
 	    						// 조회결과 없음
 		    					}else{
-		    						console.log("No man to pick up!");
+		    						console.log("예약 없음!");
 		    					}
 		    				},
 		    				error : function(xhr, status, error){
@@ -589,6 +588,7 @@ body {
     		// 버스 현 위치 갱신해서 카운타다운 계산과 동시에 자신 운행정보에 위치 저장
     		setInterval(function(){
     			// Procedure
+    			console.log(bookingList);
     			console.log("Proc 1 - Fetch all the cars of the right routeid")
     			$.ajax({
 	    			url : 'https://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=50&_type=json&cityCode=24&routeId='+currentShift.routeid,
@@ -617,10 +617,11 @@ body {
     			// 예약자 정류자 순번대로 도착정보 화면에 표시
     			}).then(function(resp005){
     				console.log("Proc 4 - Fetching the processed json with the location data.");
-    				if(resp005 === 0 || resp005 === undefined || resp005 === null){
+    				if(resp005 == 0 || resp005 == undefined || resp005 == null){
     					console.log("위치정보 없음 Have patience!");
     					///// 색깔 큰숫자: 초록--->중간:주황---> 작은숫자 : 빨강 통일
     					// **표시** : 대기화면
+    					$(".colorBox").hide();
     					$(".greenbox").show();
     				}else{
     					$("#offTheBus").attr("disabled");
@@ -628,6 +629,7 @@ body {
     					// 예약자 리스트가 비어있으면 --->
     					if(bookingList.length <= 0){
     						// **표시** : 대기화면
+    						$(".colorBox").hide();
 							$(".greenbox").show();
     					// 예약자 리스트가 null이 아니면 --->
     					}else{
@@ -654,7 +656,9 @@ body {
 			    						}else{
 			    							$(".colorBox").css("background-color", "red");
 			    						}
-			    						$(".drivercoment").text("탑승까지<br>"+remNodes+"<br>정류장 남음");
+			    						$(".greenbox").hide();
+			    						$(".colorBox").show();
+			    						$(".drivercoment").html("탑승까지<br>"+remNodes+"<br>정류장 남음");
 			    						
 			    					// 버스의 nodeord가 예약자의 bookedDprt와 크거나 같으면
 			    					}else{
@@ -670,7 +674,9 @@ body {
 			    						}
 			    						// **표시** :  승객승차'0' 남음
 				    					$(".colorBox").css("background-color", "green");
-			    						$(".drivercoment").text("탑승 정류장<br>도착!");
+			    						$(".drivercoment").html("탑승 정류장<br>도착!");
+				    					$(".greenbox").hide();
+			    						$(".colorBox").show();
 			    					}
 			    				
 			    				// 도착인 경우
@@ -687,7 +693,9 @@ body {
 			    						}else{
 			    							$(".colorBox").css("background-color", "red");
 			    						}
-			    						$(".drivercoment").text("하차까지<br>"+remNodes+"<br>정류장 남음");
+			    						$(".drivercoment").html("하차까지<br>"+remNodes+"<br>정류장 남음");
+			    						$(".greenbox").hide();
+			    						$(".colorBox").show();
 									// 버스의 nodeord가 예약자의 bookedArrv보다 크거나 같으면
 			    					}else{
 			    						// 하차버튼 활성화, gotOn필터에서 해당 승객 제거
@@ -697,7 +705,9 @@ body {
 			    						let remNodes = dprtMin-resp005.nodeord;
 			    						
 				    					$(".colorBox").css("background-color", "green");
-			    						$(".drivercoment").text("하차 정류장<br>도착!");
+			    						$(".drivercoment").html("하차 정류장<br>도착!");
+			    						$(".greenbox").hide();
+			    						$(".colorBox").show();
 			    					}
 			    				
 			    				// 출발지와 도착지에서 타고내리는경우
