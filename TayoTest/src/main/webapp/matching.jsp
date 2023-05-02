@@ -235,7 +235,7 @@
 	//받아온 예약정보
 	let bookMatch = null;
 	// 운행정보
-	currentShift = null;
+	let currentShift = null;
 
 	$(function(){
 	// 승객 대기화면 기능
@@ -258,24 +258,26 @@
 		
 		setInterval(function(){
 			$.ajax({
-				url : 'matching.jsp',
+				url : 'GetMyBooking',
 				success : function(resp006){
+					console.log(resp006);
 					//예약정보
-					  console.log(${bookedInfo});
-					  bookedMatch = ${bookedInfo};
-					  console.log(bookedMatch.accepted);
+				//	  console.log(${bookedInfo});
+				//	  bookedMatch = ${bookedInfo}
+				//	  console.log(bookedMatch.accepted);
 					// 넘어온 예약정보 출력
 					// 기사 버스번호와 승객이 예약한 버스번호 조건문
-					if(bookMatch.accepted == true){
-						console.log('들어옴');
+					
+				//	if(bookMatch.accepted == true){
+				//		console.log('들어옴');
 						// 승낙 == accepted == 1
 						//BookedMatch.accepted=true;
-						alert("예약에 성공했습니다!");
+				//		alert("예약에 성공했습니다!");
 						//window.location.href ='match.jsp';
-					}else {
-						console.log("대기중");
+				//	}else {
+				//		console.log("대기중");
 						// 대기 == accepted == null
-					}
+				//	}
 				
 					
 				},
