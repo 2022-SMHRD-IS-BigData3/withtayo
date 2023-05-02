@@ -338,7 +338,14 @@
         	// 취소 버튼
 			$("#cancelBtn").on("click", function(){
 				$.ajax({
-					url : '',
+					url : 'Cancel',
+					success : function(cancelResp){
+						console.log("You have canceled, your highness.");
+						window.location.replace("testSearch.jsp");
+					},
+					error : function(xhr, status, error){
+						console.log(error);
+					}
 					
 				});
 			});

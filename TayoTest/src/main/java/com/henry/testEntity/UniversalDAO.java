@@ -701,5 +701,27 @@ public class UniversalDAO {
 		
 		return result;
 	}
+
+	public int cancelUpdate(Book_Info theBooker) {
+
+		SqlSession sesh = null;
+		int result = 0;
+		
+		try {
+			sesh = seshFac.openSession();
+			Book_Info intermed = sesh.selectOne("getBooking", theBooker);
+			intermed.setCanceled(true);;
+			
+			sesh.delete("delBookInfo", theBooker.getBlog_id());
+			sesh.commit();
+			
+			result = sesh.insert("archiveBookingLog",intermed);
+			sesh.commit();
+		}finally {
+			sesh.close();
+		}
+		
+		return result;
+	}
 	
 }
