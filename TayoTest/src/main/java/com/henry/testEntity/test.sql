@@ -192,3 +192,4 @@ add rec_dprt_id varchar2(100);
 alter table recent
 add rec_arrv_id varchar2(100);
 select * from bus_shift;
+select * from book_info;

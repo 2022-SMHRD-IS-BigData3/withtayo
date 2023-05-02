@@ -1,6 +1,8 @@
 package com.henry.bookingController;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,18 +21,23 @@ public class CancelHandler extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
-	 	Book_Info theBooker = (Book_Info)request.getAttribute("bookedInfo");
-		
 		HttpSession sesh = request.getSession();
-		
-		// invalidate 하면 안됨!!!! (로그인까지 무효됨)
-		sesh.removeAttribute("bookedInfo");
 
+		Book_Info theBooker = (Book_Info)sesh.getAttribute("bookedInfo");
+		
 		// 예약정보 삭제
 		// 내역에 canceled 삽입해서 인서트
 		UniversalDAO dao = new UniversalDAO();
 		int result = dao.cancelUpdate(theBooker); 
+
+		// invalidate 하면 안됨!!!! (로그인까지 무효됨)
+		sesh.removeAttribute("bookedInfo");
 		
+		PrintWriter out = response.getWriter();
+		
+		out.write(result);
+		
+		out.flush();
 	 	
 	}
 

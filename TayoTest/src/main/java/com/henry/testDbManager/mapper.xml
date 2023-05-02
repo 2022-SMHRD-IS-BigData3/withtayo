@@ -136,7 +136,7 @@
   </delete>
   
   <insert id="archiveBookingLog" parameterType="com.henry.testEntity.Book_Info">
-	insert into book_info (bookrec_id, accepted, b_id, arrvname, dprtname, booktime, p_id, arrvnode, dprtnode, routeno, routeid) values(seq_shift_log.NEXTVAL, #{accepted}, #{b_id}, #{arrvname}, #{dprtname}, #{booktime}, #{p_id}, #{arrvnode}, #{dprtnode}, #{routeno}, #{routeid}
+	insert into book_record (bookrec_id, accepted, b_id, arrvname, dprtname, booktime, p_id, arrvnode, dprtnode, routeno, routeid) values(seq_shift_log.NEXTVAL, #{accepted}, #{b_id}, #{arrvname}, #{dprtname}, #{booktime}, #{p_id}, #{arrvnode}, #{dprtnode}, #{routeno}, #{routeid})
   </insert>
   
   <update id="addWarning" parameterType="java.lang.String">

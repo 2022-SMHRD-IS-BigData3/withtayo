@@ -50,7 +50,7 @@ public class BookingPreviewController extends HttpServlet {
 			
 			sesh.setAttribute("bookedInfo", result);
 			
-			response.sendRedirect("booking.jsp");
+		//	response.sendRedirect("booking.jsp");
 			
 			out.write("YES");
 		
