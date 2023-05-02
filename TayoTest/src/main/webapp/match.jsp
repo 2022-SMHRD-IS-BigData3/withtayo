@@ -267,7 +267,7 @@ body {
                 <a href="#" class="list-group-item list-group-item-action">
                     <div><img src="IMG/고객센터.gif" alt="" class="aniicon"><span> 고객센터 연결</span></div>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action">
+                <a href="#" id="" class="list-group-item list-group-item-action">
                     <div><img src="IMG/예약취소.gif" alt="" class="aniicon"><span> 예약취소</span></div>
                 </a>
             </div>
@@ -281,6 +281,35 @@ body {
         </div>
     </div>
     <script>
+    	let matchInfo = null;
+    	
+    	
+    	
+    	$(document).ready(function(){
+    		//예약성공해서 하차를 하게 되면 예약정보 조회 후 정보가 없으면 길찾기 페이지로 이동
+    		setInterval(function(){
+    			
+    			matchInfo = "${bookedInfo}";
+    			console.log(matchInfo);
+    			if(matchInfo==null){
+    				window.location.replace('testSearch.jsp');
+    			}else{
+    				console.log('하차안했다 아직');
+    			}
+    			
+    			
+    			},4000);
+    			
+    			
+    		});
+    		
+    		
+    		
+    	
+    
+    
+    
+    
         // 뉴스 시작
         // 뉴스 헤더를 갱신할 시간 간격 (5초)
         var intervalTime = 3000;
