@@ -632,7 +632,7 @@ body {
     					// 예약자 리스트가 null이 아니면 --->
     					}else{
 	    					// gotOn 필터 적용
-							let filteredArr = bookedDprt.filter((_, indices) => !gotOn.include(indices));
+							let filteredArr = bookedDprt.filter((_, indices) => !gotOn.includes(indices));
     						// dprt와 arrv 통틀어 가장 작은 숫자 : 가장 먼저 표시할 인덱스와 출발/도착지 판단
     						let dprtMin = Math.min(...bookedDprt);
     						let arrvMin = Math.min(...bookedArrv); 
@@ -664,7 +664,7 @@ body {
 			    							$("#noShow").attr("disabled");
 			    							noShowClicked = false;
 			    						}else if(!noShowClicked && resp005.nodeord > dprtMin){
-				    						if(!gotOn.include(targetDprtIdx)){gotOn.push(targetDprtIdx);}
+				    						if(!gotOn.includes(targetDprtIdx)){gotOn.push(targetDprtIdx);}
 				    						$("#noShow").attr("disabled");
 				    						noShowClicked = false;
 			    						}
@@ -703,7 +703,7 @@ body {
 			    				// 출발지와 도착지에서 타고내리는경우
 								}else{
 			    					// 출발 승객 승차 : gotOn에 추가
-									if(!gotOn.include(targetDprtIdx)){gotOn.push(targetDprtIdx);}
+									if(!gotOn.includes(targetDprtIdx)){gotOn.push(targetDprtIdx);}
 			    					// 도착 승객 하차 : 하차 버튼 활성화, gotOn에서 제거
 			    					$("#offTheBus").removeAttr("disabled");
 									gotOn = gotOn.filter((elem) => elem !== targetArrvIdx);
