@@ -419,7 +419,7 @@
                             <ul style="margin-left: 17px; margin-top: -5px;">
                                 <li><a href="#" id="passengerJoin" style="text-decoration:none">회원가입</a>
                                 </li>
-                                <li><a href="#" style="text-decoration:none">ID/PW찾기</a></li>
+                                <li><a href="findByPhone.jsp" style="text-decoration:none">ID/PW찾기</a></li>
                             </ul>
                             <br>
                             <!-- <hr width="295px" align="left" noshade="0.1px"> -->

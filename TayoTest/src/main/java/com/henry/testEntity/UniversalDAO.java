@@ -890,6 +890,37 @@ public class UniversalDAO {
 				
 				return result;
 			}
+
+			public Passenger findPSGPw(Passenger psg) {
+				
+				SqlSession sesh = null;
+				Passenger result = null;
+				
+				try {
+					sesh = seshFac.openSession();
+					result = sesh.selectOne("findPSGPw", psg);
+				}finally{
+					sesh.close();
+				}
+				
+				return result;
+			}
+
+			public Passenger getIdByPH(String p_ph) {
+				
+				SqlSession sesh = null;
+				Passenger result = null;
+				
+				try {
+					sesh = seshFac.openSession();
+					result = sesh.selectOne("findPSGIDByPhone", p_ph);
+				}finally{
+					sesh.close();
+				}
+				
+				return result;
+				
+			}
 			
 
 }

@@ -203,4 +203,12 @@
   <select id="checkPW" parameterType="com.henry.testEntity.Passenger" resultType="com.henry.testEntity.Passenger">
   	select * from passenger where p_id=#{p_id} and p_pw=#{p_pw}
   </select>
+  
+  <select id="findPSGPw" parameterType="com.henry.testEntity.Passenger" resultType="com.henry.testEntity.Passenger">
+  	select * from passenger where p_id=#{p_id} and p_ph=#{p_ph}
+  </select>
+  
+  <select id="findPSGIDByPhone" parameterType="com.henry.testEntity.Passenger" resultType="com.henry.testEntity.Passenger">
+  	select * from passenger where p_ph=#{p_ph}
+  </select>
 </mapper>
