@@ -652,7 +652,7 @@
             $("#departure").val(picked);
             $("#dprtSrchDropdown").hide();
             // 검색용 정류장 id, 이름 저장 (id = deprecated, same below)
-            dprtNodeId = $(this).next().text();
+    //        dprtNodeId = $(this).next().text();
             dprtName = picked;
             //		console.log($("#departure").val());
             // 검색 버튼 활성
@@ -670,7 +670,7 @@
             $("#arrival").val(picked);
             $("#arrvSrchDropdown").hide();
             // 검색용 정류장id 저장
-            arrvNodeId = $(this).next().text();
+ //           arrvNodeId = $(this).next().text();
             arrvName = picked;
             //		console.log(arrvNodeId);
             //		console.log($("#arrival").val());
@@ -812,7 +812,7 @@
                             	arrvNodeId = arr[compArr.indexOf(arrvName)].nodeid;
                             }
                             	
-                            let start = compArr.indexOf(dprtName);
+                     /*       let start = compArr.indexOf(dprtName);
                             let end = compArr.indexOf(arrvName);
                             if ((parseInt(arr[start].nodeord) - parseInt(arr[end].nodeord)) < 0) {
                                 resStop.push(arr[start]);
@@ -822,7 +822,7 @@
                                 let end = compArr.lastIndexOf(arrvName);
                                 resStop.push(arr[start]);
                                 resStop.push(arr[end]);
-                            }
+                            }*/
 
                         },
                         error: function (error) {
@@ -931,6 +931,9 @@
             console.log("Booking button clicked!!");
             let routeno = $(btn).siblings("strong").text();
             let routeid = $(btn).parent().siblings(".resRouteId").text();
+            console.log("서블릿전송 출발: "+dprtNodeId); 
+            console.log("서블릿전송 도착: "+arrvNodeId);
+            
             $.ajax({
                 url: 'BookingPrev',
                 data: { routeno: routeno, routeid: routeid, dprtid: dprtNodeId, arrvid: arrvNodeId, dprtnm: dprtName, arrvnm: arrvName },

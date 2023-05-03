@@ -260,7 +260,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td>${bookedInfo.dprtname} <span>정류장</span></td>
+                            <td>${bookedInfo.dprtname} <span>정류장${bookedInfo.dprtnode}</span></td>
                         </tr>
                     </table>
                     <i class="material-icons"
@@ -273,7 +273,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td>${bookedInfo.arrvname} <span>정류장</span></td>
+                            <td>${bookedInfo.arrvname} <span>정류장${bookedInfo.arrvnode}</span></td>
                         </tr>
                     </table>
                 </div>
@@ -310,6 +310,8 @@
         let allNodes = null;
         // 승차할 정류장의 정류장 DB상 순번 (방향 판단용)
         let dprtNodeOrder = 0;
+      	// 하차할 정류장
+        let arrvNodeOrder = 0;
         // 해당 노선이 거치는 모든 정류장 개수
         let numOfAllNodes = 0;
         // 출발지 정류장의 방향
@@ -376,14 +378,21 @@
                             dprtNodeOrder = elem.nodeord;
                             // use try catch to break from the loop / PRIORITY : LOW
                         }
+                        if(elem.nodeid == iAmBabo.arrvnode){
+                        	arrvNodeOrder = elem.nodeord;
+                        }
                     });
+                    
                     console.log("Departure node number of order: " + dprtNodeOrder);
+                    console.log("Arrival node number of order: "+ arrvNodeOrder);
                     // 출발지 정류장의 순서number로 방향 조회 *모든 정류장이 2개씩 있다는 가정하에 짠 코드임 ^^ 순환선에는 다르게 써야할수도있다
                     numOfAllNodes = allNodes.response.body.items.item.length;
-                    if (numOfAllNodes / 2 < dprtNodeOrder) {
+                    if (numOfAllNodes/2 < dprtNodeOrder && numOfAllNodes/2 < arrvNodeOrder) {
                         dprtNodeDirection = "Ascending";
-                    } else {
+                    } else if (numOfAllNodes/2 > dprtNodeOrder && numOfAllNodes/2 > arrvNodeOrder){
                         dprtNodeDirection = "Descending";
+                    } else{
+                    	console.log("Terminated.");
                     }
                     console.log("Departure node direction: " + dprtNodeDirection);
                     console.log("3rd procedure : Get all the bus of said route that are running.")
@@ -404,14 +413,14 @@
                         } else {
                             descBuses.push(elem);
                         }
-                        distArr.push(Math.abs(elem.nodeord - dprtNodeOrder));
+                     //   distArr.push(Math.abs(elem.nodeord - dprtNodeOrder)); 중복인듯 !! 수정코드!!!!
                     });
                     // 출발지 정류장과 맞는 방향 버스들중에서 비교
-                    if (dprtNodeDirection === "Ascending") {
+                    if (dprtNodeDirection == "Ascending") {
                         ascBuses.forEach(function (elem) {
                             distArr.push(Math.abs(elem.nodeord - dprtNodeOrder));
                         });
-                    } else {
+                    } else if(dprtNodeDirection == "Descending"){
                         descBuses.forEach(function (elem) {
                             distArr.push(Math.abs(elem.nodeord - dprtNodeOrder));
                         });
@@ -420,7 +429,11 @@
                     // 최소값의 인덱스 구함 그럴거임 ㄴㄻㄴㅇㄻㄴㅇㄻㄴㅇㄹ
                     let targetIdx = distArr.indexOf(Math.min(...distArr));
                     // 대망으 그놈 ㅇㅎㅇㅎㅇㅎㄹㅇㅇㅎ
-                    targetBus = allBuses[targetIdx];
+                    if(dprtNodeDirection == "Ascending"){
+	                    targetBus = ascBuses[targetIdx];
+                    }else if(dprtNodeDirection == "Descending"){
+                    	targetBus = descBuses[targetIdx];
+                    }
                     console.log("Target Bus Found!!!!" + targetBus);
                     console.log("4th procedure : send the vehicleno and booking info to a servlet for packaging and get redirected to the waiting area.");
                     return $.ajax({
@@ -434,12 +447,8 @@
                 }).catch(function(error){
                 	console.log(error);
                 });
-                //!!!!########!!!!!!!!!!!!!!!!!!! catch 써야댐!!!!!!!!!!!!!!!!##########!!!!!!!!!!!
-                //	window.location.href = '대기화면.html';
-
 
             });
-
 
         });
         // 하단 광고판 이미지 변경 코드
