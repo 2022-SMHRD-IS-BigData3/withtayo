@@ -29,7 +29,7 @@ public class Mypage_p_phController extends HttpServlet {
 		
 		String p_ph=req.getParameter("p_ph");
 	
-		Passenger vo =new Passenger(p_ph,p_id);
+		Passenger vo =new Passenger();
 		vo.setP_id(p_id);
 		vo.setP_ph(p_ph);
 	

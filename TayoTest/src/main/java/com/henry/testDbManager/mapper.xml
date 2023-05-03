@@ -171,7 +171,7 @@
   
   <update id="np_pw" parameterType="com.henry.testEntity.Passenger">
   update passenger
-  set p_pw=#{np_pw}
+  set p_pw=#{new_pw}
   where p_id=#{p_id}
   </update>
   
@@ -198,5 +198,9 @@
   
   <select id="getPreAccepted" parameterType="java.lang.String" resultType="com.henry.testEntity.Book_Info">
   	select * from book_info where b_id=#{b_id} and accepted=0
+  </select>
+  
+  <select id="checkPW" parameterType="com.henry.testEntity.Passenger" resultType="com.henry.testEntity.Passenger">
+  	select * from passenger where p_id=#{p_id} and p_pw=#{p_pw}
   </select>
 </mapper>

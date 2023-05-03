@@ -27,7 +27,7 @@ public class RevokeController extends HttpServlet {
 		String p_id=loggedIn.getP_id();
 		
 		String p_pw=req.getParameter("p_pw");
-        Passenger vo= new Passenger(p_id,p_pw);
+        Passenger vo= new Passenger();
         vo.setP_id(p_id);
         vo.setP_pw(p_pw);
         UniversalDAO dao = new UniversalDAO();

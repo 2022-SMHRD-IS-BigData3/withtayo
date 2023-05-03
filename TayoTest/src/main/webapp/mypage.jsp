@@ -385,17 +385,30 @@
             <button type="button" class="collapsible" onclick="collapse(this);">비밀번호 변경</button>
             <div class="content">
                 <!-- 비밀번호 변경 내 내용 -->
-                <form action="Mypage_p_pw" method="post" class="pw">
+                <form action="PsgChangePW" method="post" class="pw">
+                	<c:if test="${empty request.invalidPw}">
                     <input type="text" name="p_pw" placeholder="기존 비밀번호" aria-label="기존 비밀번호"
                         aria-describedby="addon-wrapping" id="menu1"
                         style="width:300px; height:25px; font-size:15px; border:rgb(238, 235, 235) ">
-                    <input type="password" name="np_pw" placeholder="새로운 비밀번호" aria-label="변경 비밀번호"
-                        aria-describedby="addon-wrapping" id="menu2"
-                        style="width: 300px; height: 25px; font-size: 15px; border: rgb(238, 235, 235);">
-                    <input type="password" name="np_pw1" placeholder="새로운 비밀번호 확인" aria-label="변경 비밀번호"
-                        aria-describedby="addon-wrapping" id="menu2"
-                        style="width: 300px; height: 25px; font-size: 15px; border: rgb(238, 235, 235);">
-                    </table>
+                    </c:if>
+                    <c:if test="${!empty request.invalidPw}">
+                    	<input type="text" name="p_pw" placeholder="${request.invalidPw}" aria-label="기존 비밀번호"
+                        aria-describedby="addon-wrapping" id="menu1"
+                        style="width:300px; height:25px; font-size:15px; border:rgb(238, 235, 235) ">
+                    </c:if>
+	                    <input type="password" name="new_pw" placeholder="새로운 비밀번호" aria-label="변경 비밀번호"
+	                        aria-describedby="addon-wrapping" id="menu2"
+	                        style="width: 300px; height: 25px; font-size: 15px; border: rgb(238, 235, 235);">
+                    <c:if test="${empty request.failedStat}">
+	                    <input type="password" name="new_pw_confirm" placeholder="새로운 비밀번호 확인" aria-label="변경 비밀번호"
+	                        aria-describedby="addon-wrapping" id="menu2"
+	                        style="width: 300px; height: 25px; font-size: 15px; border: rgb(238, 235, 235);">
+                    </c:if>
+                    <c:if test="${!empty request.failedStat}">
+	                    <input type="password" name="new_pw_confirm" placeholder="${request.failedStat}" aria-label="변경 비밀번호"
+	                        aria-describedby="addon-wrapping" id="menu2"
+	                        style="width: 300px; height: 25px; font-size: 15px; border: rgb(238, 235, 235);">
+                    </c:if>
                     <div class="pwgroup">
                         <button type="reset" class="reset">초기화</button>
                         <button type="submit" class="enter">등록</button>

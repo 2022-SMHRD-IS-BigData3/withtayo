@@ -796,11 +796,17 @@ public class UniversalDAO {
 		// 마이페이지 승객 비밀번호 변경
 		public int np_pw(Passenger vo) {
 			SqlSession sesh=null;
+			int pwCheck = 0;
 			int row=0;
 			try {
 				sesh=seshFac.openSession();
-				row=sesh.update("np_pw",vo);
-				sesh.commit();
+				pwCheck = sesh.selectOne("checkPW", vo);
+				if(pwCheck == 0) {
+					row = 0;
+				}else {
+					row=sesh.update("np_pw",vo);
+					sesh.commit();
+				}
 			} finally {
 				sesh.close();
 			}

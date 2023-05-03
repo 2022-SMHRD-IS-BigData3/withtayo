@@ -35,8 +35,8 @@ public class Mypage_p_pwController extends HttpServlet {
 		Passenger vo =new Passenger(p_pw,np_pw,p_id);
 		vo.setP_id(p_id);
 		vo.setP_pw(p_pw);
-		vo.setNp_pw1(np_pw1);
-		vo.setNp_pw(np_pw);
+		vo.setNew_pw(np_pw1);
+		vo.setP_pw(np_pw);
 		
 		UniversalDAO dao =new UniversalDAO();
 		

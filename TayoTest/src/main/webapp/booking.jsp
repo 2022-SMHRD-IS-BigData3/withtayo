@@ -260,7 +260,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td>${bookedInfo.dprtname} <span>정류장${bookedInfo.dprtnode}</span></td>
+                            <td>${bookedInfo.dprtname} <span>정류장</span></td>
                         </tr>
                     </table>
                     <i class="material-icons"
@@ -273,7 +273,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td>${bookedInfo.arrvname} <span>정류장${bookedInfo.arrvnode}</span></td>
+                            <td>${bookedInfo.arrvname} <span>정류장</span></td>
                         </tr>
                     </table>
                 </div>
