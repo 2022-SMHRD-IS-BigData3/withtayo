@@ -204,3 +204,4 @@ alter table book_info
 modify rejected default 0;
 alter table book_info
 modify canceled default 0;
+select * from r_info where routeno='지원45';

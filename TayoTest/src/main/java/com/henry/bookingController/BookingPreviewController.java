@@ -41,7 +41,7 @@ public class BookingPreviewController extends HttpServlet {
 		
 		// 셀렉트도 다시 할 것
 		
-		System.out.println(result.getBooktime().toString());
+	//	System.out.println(result.getBooktime().toString());
 		response.setContentType("text/html;charset=utf-8");
 		
 		PrintWriter out = response.getWriter();

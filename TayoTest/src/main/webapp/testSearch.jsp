@@ -604,7 +604,6 @@
 
             // 도착지 검색용!!!!!############################
             $("#arrival").on("keyup", function () {
-
                 // 타자 칠때마다 검색 비활성화
                 $("#srchBtn").prop("disabled", "disabled");
                 $("#srchBtn").attr("class", "btn btn-warning");
@@ -722,8 +721,8 @@
                 console.log("The 1st then()");
                 resArr = tossed1st.replace("[", "").replace("]", "").split(", ");
                 return resArr.length;
-
-                // 4개 정류소 조회
+            
+            // 4개 정류소 조회
             }).then(function (tossed2nd) {
                 console.log("The 2nd then() ... fetching nodes");
                 console.log(tossed2nd + " nodes detected.");
@@ -784,7 +783,7 @@
 
                 // console.log(dump2);
                 // routeResultObject = '함수추가';
-                // console.log(routeResult); // 드디어 된다 이 솥가튼 lest we make broken promises heheheheheheaehahahahahahahao
+                console.log(routeResult); // 드디어 된다 이 솥가튼 lest we make broken promises heheheheheheaehahahahahahahao
                 return routeResult;
 
             }).then(function (tossed7th) {
@@ -793,14 +792,26 @@
                     $.ajax({
                         url: 'https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=200&_type=json&cityCode=24&routeId=' + element,
                         success: function (rsps77) {
-                            let arr = rsps77.response.body.items.item;
-                            let compArr = [];
+                            let arr = rsps77.response.body.items.item; // nodes
+                            let firstHalf = [...Array(Math.floor(arr.length/2)).keys()];
+                            let compArr = []; // names
                             // arr 은 정류장 object 리스트임
                             arr.forEach(function (elem) {
+                               	compArr.push(elem.nodenm);
                                 // console.log(elem);
-                                compArr.push(elem.nodenm);
-                                // 준비해둔 dprtName, arrvName로 조회
                             });
+                            if(firstHalf.includes(compArr.indexOf(dprtName)) && firstHalf.includes(compArr.indexOf(arrvName))){
+                               // 준비해둔 dprtName, arrvName로 조회
+                               // 반쪽 반쪽 비교
+                           		dprtNodeId = arr[compArr.indexOf(dprtName)].nodeid;
+                            	arrvNodeId = arr[compArr.indexOf(arrvName)].nodeid;
+                               
+                            }else if(!firstHalf.includes(compArr.indexOf(dprtName)) && !firstHalf.includes(compArr.indexOf(arrvName))){
+                            	// 같은 방향일 때만 넣기
+                            	dprtNodeId = arr[compArr.indexOf(dprtName)].nodeid;
+                            	arrvNodeId = arr[compArr.indexOf(arrvName)].nodeid;
+                            }
+                            	
                             let start = compArr.indexOf(dprtName);
                             let end = compArr.indexOf(arrvName);
                             if ((parseInt(arr[start].nodeord) - parseInt(arr[end].nodeord)) < 0) {
@@ -878,6 +889,8 @@
             }).then(function () {
                 //  console.log("INSIDE THE LAST THEN");
                 setInterval(function () {
+                	console.log(dprtNodeId);
+                	console.log(arrvNodeId);
                     for (let t = 0; t < routeResult.length; t++) {
                         //			console.log(routeResult[t]);
                         //			console.log(resRsps[t].routeid);
@@ -887,6 +900,7 @@
                             success: function (rsps88) {
                                 console.log("도착정보 4초마다 갱신중");
                                 //     console.log(rsps88);
+                                console.log(rsps88);
 
                                 try {
                                     console.log("TRY SUCCESSFUL");

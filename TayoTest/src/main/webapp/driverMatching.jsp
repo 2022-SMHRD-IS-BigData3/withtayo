@@ -197,7 +197,7 @@ body {
         }
 
         .drivercoment {
-            font-size: 60px;
+            font-size: 50px;
             font-weight: bold;
         }
     </style>
@@ -640,8 +640,8 @@ body {
     						let arrvMin = Math.min(...bookedArrv); 
     						let targetDprtIdx = bookedDprt.indexOf(dprtMin);
     						let targetArrvIdx = bookedArrv.indexOf(arrvMin);
-								
-    							// 출발이 더 작은수인 경우
+								console.log("출발지최소값:"+dprtMin); console.log("도착지최소값:"+arrvMin);
+    							// 출발이 더 작은수인 경우 (가장 일찍 타는 사람)
 								if(dprtMin < arrvMin){
 			    					
 									// 버스의 nodeord가 예약자의 bookedDprt 보다 작으면
@@ -683,7 +683,7 @@ body {
 								}else if(arrvMin<dprtMin){
 			    					
 									// 버스의 nodeord가 예약자의 bookedArrv보다 작으면
-			    					if(resp005.nodeord < arrvMin){
+			    					if(dprtMin < resp005.nodeord && resp005.nodeord < arrvMin){
 			    						// **표시** : 하차까지 '예약자arrv - 버스'남음
 			    						let remNodes = dprtMin-resp005.nodeord;
 			    						if(remNodes>10){ // 카운트색상
