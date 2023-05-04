@@ -190,7 +190,7 @@
     </style>
 
 </head>
-
+<link rel="icon" type="image/png" href="./favicon.png">
 <body>
     <div class="container">
         <div class="navbar" style="font-family: gg;">

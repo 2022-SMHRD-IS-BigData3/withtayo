@@ -211,4 +211,8 @@
   <select id="findPSGIDByPhone" parameterType="com.henry.testEntity.Passenger" resultType="com.henry.testEntity.Passenger">
   	select * from passenger where p_ph=#{p_ph}
   </select>
+  
+  <select id="checkPsgArrvStat" parameterType="com.henry.testEntity.Book_Info" resultType="com.henry.testEntity.Shift">
+  	select * from bus_shift where b_id=#{b_id}
+  </select>
 </mapper>

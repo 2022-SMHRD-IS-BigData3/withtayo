@@ -16,9 +16,16 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
+    <!-- FAVICON -->
 
     <style>
+    	@font-face {
+		    font-family: 'NanumSquareNeo-Variable';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
         .container {
             width: 9cm;
             height: 16cm;
@@ -121,6 +128,7 @@
             width: 313px;
             height: 40px;
             margin-top: 60px;
+            border-radius: 10px;
         }
 
         input {
@@ -135,10 +143,6 @@
             font-family: "gg";
         }
 
-        @font-face {
-            font-family: "gg";
-            src: url("../ë¹ê³ ìê´ì£¼_Medium.ttf");
-        }
 
         #navbarNavAltMarkup {
             position: fixed;
@@ -170,14 +174,16 @@
         #offcanvas-body{
             padding: 14px;
         }
-        
+        #gap{
+        	height:50px;
+        }
     </style>
 
 </head>
-
+<link rel="icon" type="image/png" href="./favicon.png">
 <body>
     <div class="container">
-        <div class="navbar" style="font-family: gg;">
+        <div class="navbar" style="font-family: NanumSquareNeo-Variable;">
             <nav class="navbar"> <!-- navbar ìì -->
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
@@ -224,7 +230,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
     crossorigin="anonymous"></script>
-
+<script>function newPage()  {
+          window.location.href = 'findByPhone.jsp';
+        } </script> 
 <!-- Option 2: Separate Popper and Bootstrap JS -->
 <!--
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -236,23 +244,38 @@
         <div>
 
             <button class='button-ID'>아이디</button>
-            <button class='button-PW' type='button' onclick='newPage()' value='비밀번호' />
-            <script>
-        function newPage()  {
-          window.location.href = 'findByPhone.jsp';
-        }
-            </script>비밀번호</button>
+            <button class='button-PW' type='button' onclick='newPage()' value='비밀번호'>비밀번호</button>
+<hr>
             <br><br><br>
-        <b>아이디 찾기</b>
+  	<form action="FindIDByPhone" method="post">
+        <table>
+        	<tr>
+        		<td colspan="2" align="center"><b>아이디 찾기</b></td>
+        	</tr>
+        	<tr>
+        		<td colspan="2" id="gap"></td>
+        	</tr>
+        	<tr>
+        		<td><label for="phone">휴대폰:</label></td>
+        		<td><input type="text" name="phone" class="phone" placeholder="휴대폰번호를 입력" style="height: 30px;" ></td>
+        	</tr>
+        	<tr>
+        		<td colspan="2"></td>
+        	</tr>
+        	<tr>
+        		<td colspan="2"><button class="find" type="submit">찾기</button></td>
+        	</tr>
+        </table>
+ 	</form>
+  <!--      <b>아이디 찾기</b>
         <br>
-        <form action="FindIDByPhone" method="post">
+        
         <br><br>
         <label for="phone">휴대폰</label>
         <input type="text" name="phone" class="phone" placeholder="휴대폰번호를 입력" style="height: 30px;" >
         <br>
-        <button class="find" type="submit">찾기</button>
-    </form>
-</form>
+        <button class="find" type="submit">찾기</button>    -->
+    
 </div>
 </div>
 </c:if>
@@ -260,18 +283,18 @@
 	<div class="contentbox2">
 		<h3>당신의 아이디:</h3>
 		<h2 id="yourId">${yourId.p_id}</h2>
-		<input type="button" onclick="location.href='loggingMain.jsp'" value="메인으로"></button>
+		<button onclick="location.href='loggingMain.jsp'" value="메인으로"></button>
 	</div>
  </c:if>
             <!-- ìí ì»¨íì¸  ë -->
     </div>
     <div class="jumbotron jumbotron-fluid">
             <div class="row" style="background-color: gray;">
-                <div class="a" style="font-family: gg;">광고 혹은 이용설명</div>
+                <div class="a" style="font-family: NanumSquareNeo-Variable;">광고 혹은 이용설명</div>
             </div>
         </div>
     </div>
-   
+        
 </body>
 
 </html>

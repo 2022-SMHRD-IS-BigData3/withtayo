@@ -921,6 +921,21 @@ public class UniversalDAO {
 				return result;
 				
 			}
+
+			public Shift checkPsgArrivalStat(Book_Info booker) {
+				
+				SqlSession sesh = null;
+				Shift result = null;
+				
+				try {
+					sesh = seshFac.openSession();
+					result = sesh.selectOne("checkPsgArrvStat", booker);
+				}finally {
+					sesh.close();
+				}
+				
+				return result;
+			}
 			
 
 }

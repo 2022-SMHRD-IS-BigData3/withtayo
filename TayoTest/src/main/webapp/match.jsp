@@ -198,7 +198,7 @@ body {
     </style>
 
 </head>
-
+<link rel="icon" type="image/png" href="./favicon.png">
 <body>
     <div class="container">
         <div class="navbar">
@@ -247,7 +247,7 @@ body {
                 </div>
             </div>
             <div class="alert alert-warning" style="text-align: center;">
-                <strong> <span style="font-size: 18px;"> 예약 성공!</span> <br></strong> 약 5분후 도착 예정입니다.
+                <strong> <span style="font-size: 18px;"> 예약 성공!</span> <br></strong> 약 <span id="remainder"></span>분후 도착 예정입니다.
             </div>
 
             <hr>
@@ -285,25 +285,52 @@ body {
     	
     	let myBookingInfo = null;
     	
+    	let myBus = null;
+    	
+    	let busLocInfo = null;
+    	
+    	let resultText = "";
+    	
+    	let remainder = 0;
+    	
     	$(document).ready(function(){
     		//예약성공해서 하차를 하게 되면 예약정보 조회 후 정보가 없으면 길찾기 페이지로 이동
     		
     		$.ajax({
-				url : 'GetSessionAttrib',
+				url : 'GetSessionAttrib'
  			}).then(function(resp001){
 				
  				myBookingInfo = resp001;
  				
  				return $.ajax({
  					url : 'PsgArrival',
- 					data : {arrvnode : myBookingInfo.arrvnode, b_id : myBookingInfo.b_id},
+ 					data : {b_id : myBookingInfo.b_id}
  				});
  			
+ 			// The bus  that you are taking up spaces in lol
  			}).then(function(resp002){
+ 				myBus = resp002;
  				
  			}).catch(function(error){
  				console.log(error);
  			});
+    		
+    		// Loop to get the location info of the effing bus ^^
+    		setInterval(function(){
+    			$.ajax({
+ 					url : 'https://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoSpcifyRouteBusArvlPrearngeInfoList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=50&_type=json&cityCode=24&nodeId=' + myBookingInfo.dprtnode + '&routeId=' + myBus.routeid'
+ 					success : function(locationResp){
+ 						$("#remainder").html(locationResp.arrtime);
+ 						if(locationResp.nodeid == myBookingInfo.dprtnode){
+ 							window.location.href='testSearch.jsp';
+ 						}
+ 					},
+ 					error : function(xhr, status, error){
+ 						console.log(error);
+ 					}
+ 				});
+    			
+    		}, 5000);
     		
     			
     			
