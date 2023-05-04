@@ -118,8 +118,12 @@
         }
         
         .phone {
-            margin-left: 14px;
-            width: 248px;
+            margin-left: 30px;
+            width: 250px;
+            height: 300px;
+            border-color: #808080;
+            border-top: #808080;
+            border-radius: 10px;
         }
         
         .find {
@@ -256,7 +260,7 @@
         		<td colspan="2" id="gap"></td>
         	</tr>
         	<tr>
-        		<td><label for="phone">휴대폰:</label></td>
+        		<td><label for="phone" style="color: #808080; size: 14px;">휴대폰:</label></td>
         		<td><input type="text" name="phone" class="phone" placeholder="휴대폰번호를 입력" style="height: 30px;" ></td>
         	</tr>
         	<tr>
