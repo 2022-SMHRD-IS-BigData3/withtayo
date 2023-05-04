@@ -283,34 +283,28 @@ body {
     <script>
     	let bookMatch = null;
     	
-    	
+    	let myBookingInfo = null;
     	
     	$(document).ready(function(){
     		//예약성공해서 하차를 하게 되면 예약정보 조회 후 정보가 없으면 길찾기 페이지로 이동
-    		setInterval(function(){
     		
-    				$.ajax({
-    					url : 'GetSessionAttrib',
-    					success : function(resp001){
-    						bookMatch=resp001;
-	    					console.log(resp001);
-	    					//예약정보 조회하다가 안뜨면 예약종료된거! 그후 노선검색 페이지로 이동
-	    					if(bookMatch==null){
-	    						// 하차 완료
-	    						console.log("하차완료!");
-	    						//window.location.replace("testSearch.jsp");
-	    						
-	    					}else {
-	    						console.log("하차 안했다");
-	    					}
-	    				},
-	    				error : function(xhr, status, error){
-	    					console.log(error);
-	    				}
-    					
-    				});
+    		$.ajax({
+				url : 'GetSessionAttrib',
+ 			}).then(function(resp001){
+				
+ 				myBookingInfo = resp001;
+ 				
+ 				return $.ajax({
+ 					url : 'PsgArrival',
+ 					data : {arrvnode : myBookingInfo.arrvnode, b_id : myBookingInfo.b_id},
+ 				});
+ 			
+ 			}).then(function(resp002){
+ 				
+ 			}).catch(function(error){
+ 				console.log(error);
+ 			});
     		
-    		},4000);
     			
     			
     	});
@@ -320,10 +314,10 @@ body {
     		
     		$.ajax({
     			url : 'Cancel',
-    			success : function(resp002){
-    				console.log(resp002);
+    			success : function(cancelResp){
+    				console.log(cancelResp);
     				// 노선 검색으로 이동
-    				//window.location.replace("testSearch.jsp");
+    				window.location.replace("testSearch.jsp");
     				
     			},
     			error : function(xhr, status, error){

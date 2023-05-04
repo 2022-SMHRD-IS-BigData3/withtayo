@@ -258,7 +258,7 @@ body {
 
                                 <!-- Modal body -->
                                 <div class="modal-body">
-                                    <div><strong> <span id="#remainder"></span> 정거장 </strong></div><span style="font-size: 30px;">탑승 예약</span>
+                                    <div><strong> <span id="remainder"></span> 정거장 </strong></div><span style="font-size: 30px;">탑승 예약</span>
                                 </div>
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
