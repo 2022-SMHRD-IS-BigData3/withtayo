@@ -359,14 +359,14 @@
                 // 세션 속성 bookedInfo (예약 프리뷰 정보) 가져오기
                 console.log("1st procedure.");
                 $.ajax({
-                    url: 'GetSessionAttrib',
+                    url: 'GetSessionAttrib'
                     
                 // 출발 정류장의 db상 순서, 해당 노선이 거치는 정류장 개수 (방향 판단용)
                 }).then(function (resp001) {
                 	iAmBabo = resp001;
                     console.log("2nd procedure : Retrieve nodeord property of the node. And Get the number of nodes to use in operations.");
                     return $.ajax({
-                        url: 'https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=300&_type=json&cityCode=24&routeId=' + iAmBabo.routeid,
+                        url: 'https://apis.data.go.kr/1613000/BusRouteInfoInqireService/getRouteAcctoThrghSttnList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=300&_type=json&cityCode=24&routeId=' + iAmBabo.routeid
                     });
                     
                 // 현재 운행중인 해당 노선의 버스들 모두 조회, 어떤 버스 호출할지 선택
@@ -395,10 +395,10 @@
                     	console.log("Terminated.");
                     }
                     console.log("Departure node direction: " + dprtNodeDirection);
-                    console.log("3rd procedure : Get all the bus of said route that are running.")
+                    console.log("3rd procedure : Get all the bus of said route that are running.");
                     
                     return $.ajax({
-                        url: 'https://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=50&_type=json&cityCode=24&routeId=' + iAmBabo.routeid,
+                        url: 'https://apis.data.go.kr/1613000/BusLcInfoInqireService/getRouteAcctoBusLcList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=50&_type=json&cityCode=24&routeId=' + iAmBabo.routeid
                     });
                     
                 // 차량번호와 예약정보 서블렛으로 전송 -> 데이터 패키징 -> 디비 입력 -> 대기화면으로 리디렉트
@@ -429,16 +429,16 @@
                     // 최소값의 인덱스 구함 그럴거임 ㄴㄻㄴㅇㄻㄴㅇㄻㄴㅇㄹ
                     let targetIdx = distArr.indexOf(Math.min(...distArr));
                     // 대망으 그놈 ㅇㅎㅇㅎㅇㅎㄹㅇㅇㅎ
-                    if(dprtNodeDirection == "Ascending"){
+                    if(dprtNodeDirection == "Ascending" && ascBuses[targetIdx] < dprtNodeOrder){
 	                    targetBus = ascBuses[targetIdx];
-                    }else if(dprtNodeDirection == "Descending"){
+                    }else if(dprtNodeDirection == "Descending" && descBuses[targetIdx] < dprtNodeOrder){
                     	targetBus = descBuses[targetIdx];
                     }
                     console.log("Target Bus Found!!!!" + targetBus);
                     console.log("4th procedure : send the vehicleno and booking info to a servlet for packaging and get redirected to the waiting area.");
                     return $.ajax({
                         url: 'Book', // book'em! f'ing book'em! asdkadlfjgnaldkjfg
-                        data: { b_id: targetBus.vehicleno, blog_id: iAmBabo.blog_id },
+                        data: { b_id: targetBus.vehicleno, blog_id: iAmBabo.blog_id }
                     });
                 }).then(function(resp004){
                 	console.log("All packed up and ready to redirect.");

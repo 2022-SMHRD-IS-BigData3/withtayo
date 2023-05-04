@@ -41,6 +41,8 @@ public class BookingController extends HttpServlet {
 		
 		out.write(json);
 		
+		out.flush();
+		
 		System.out.println("JSON PACKAGED AND SET TO bookedInfo sesh attrib");
 		
 	}

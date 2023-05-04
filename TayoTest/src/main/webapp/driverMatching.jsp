@@ -644,6 +644,7 @@ body {
     						console.log("INSIDE THE TEST LOOP!!");
     						// 덜도탹히잉
     						if(resp005.nodeord < bookedDprt[0]){
+    							console.log("차량위치: "+resp005.nodeord); console.log("탑승지위치: "+ bookedDprt[0]);
     							let remNodes = bookedDprt[0]-resp005.nodeord;
 	    						if(remNodes>10){ // 카운트색상
 		    						$(".colorBox").css("background-color", "green");
@@ -658,7 +659,7 @@ body {
 	    					
 	    					// 탑승지 도탁ㄱㅣ기
     						}else if(resp005.nodeord == bookedDprt[0]){
-    							
+    							console.log("차량위치: "+resp005.nodeord); console.log("탑승지위치: "+ bookedDprt[0]);
     							if(noShowClicked){
 	    							$("#noShow").attr("disabled");
 	    							$("#noShow").css("color", "salmon");
@@ -679,7 +680,7 @@ body {
 	    						
 	    					// 탑승지에서 출발해서 도착지 가는중 기절 ㄱㄱ
     						}else if(bookedDprt[0] < resp005.nodeord && resp005.nodeord < bookedArrv[0]){
-    							
+    							console.log("차량위치: "+resp005.nodeord); console.log("하차지위치: "+ bookedArrv[0]);
     							let remNodes = bookedArrv[0]-resp005.nodeord;
 	    						if(remNodes>10){ // 카운트색상
 		    						$(".colorBox").css("background-color", "green");
@@ -694,7 +695,7 @@ body {
     						
 	    					// 하차지 도착 
     						}else if(resp005.nodeord == bookedArrv[0]){
-    							
+    							console.log("차량위치: "+resp005.nodeord); console.log("하차지위치: "+ bookedArrv[0]);
 	    						$("#offTheBus").removeAttr("disabled");
 	    						$("#offTheBus").css("color", "black");
 	    						let remNodes = bookedArrv[0]-resp005.nodeord;
@@ -706,6 +707,7 @@ body {
 	    					
 	    					// 하차 후 
     						}else if(bookedArrv[0] < resp005.nodeord){
+    							console.log("차량위치: "+resp005.nodeord); console.log("하차지위치: "+ bookedArrv[0]);
     							$(".greenbox").show();
 	    						$(".colorBox").hide();
     						}
@@ -843,7 +845,7 @@ body {
     			}).catch(function(error){
     				console.log(error);
     			});// END OF A MAJOR SCOPE
-    		}, 9000);
+    		}, 7000);
 			/////////////////////SEPARATOR/////////////////////	
 			
     	});// DOCUMENT-READY SCOPE
