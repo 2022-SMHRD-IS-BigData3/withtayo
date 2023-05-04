@@ -527,6 +527,17 @@ public class UniversalDAO {
 				sesh.commit();
 				success = true;
 			} catch (Exception e) {
+				retries++;
+
+				if (retries < MAX_RETRIES) {
+					System.out.println("Transaction failed. Retrying in " + RETRY_DELAY_MS + " ms.");
+					try {
+						TimeUnit.MILLISECONDS.sleep(RETRY_DELAY_MS);
+					} catch (InterruptedException ex) {
+					}
+				} else {
+					throw new RuntimeException("Transaction failed after " + MAX_RETRIES + " retries.", e);
+				}
 			} finally {
 				sesh.close();
 			}

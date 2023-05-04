@@ -318,9 +318,9 @@ body {
     		// Loop to get the location info of the effing bus ^^
     		setInterval(function(){
     			$.ajax({
- 					url : 'https://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoSpcifyRouteBusArvlPrearngeInfoList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=50&_type=json&cityCode=24&nodeId=' + myBookingInfo.dprtnode + '&routeId=' + myBus.routeid'
+ 					url : 'https://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoSpcifyRouteBusArvlPrearngeInfoList?serviceKey=38f8K%2FBb5kAAAS2jyZzjrfRmzjxFBS5HL6L256P5vOJ0ESqz2F7hUMTo%2FuzPe%2F7cBNR%2BzspWLdUHQxd6SbsXcg%3D%3D&pageNo=1&numOfRows=50&_type=json&cityCode=24&nodeId=' + myBookingInfo.dprtnode + '&routeId=' + myBus.routeid,
  					success : function(locationResp){
- 						$("#remainder").html(locationResp.arrtime);
+ 						$("#remainder").html(Math.floor(parseInt(locationResp.arrtime)/60));
  						if(locationResp.nodeid == myBookingInfo.dprtnode){
  							window.location.href='testSearch.jsp';
  						}

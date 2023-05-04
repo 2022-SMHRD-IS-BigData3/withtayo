@@ -42,6 +42,8 @@ public class AcceptanceCheckController extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		
 		out.print(result);
+		
+		out.flush();
 	}
 
 }

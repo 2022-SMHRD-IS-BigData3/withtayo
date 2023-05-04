@@ -411,6 +411,7 @@ body {
     			setInterval(function(){
     				// 조회시 리스트 길이가 늘어나있으면
         			if(prevListLength < bookingList.length){
+						console.log("New booker!!");
         				let theIterated = [];
         				let comparisonTarget = [];
         				// 겹치는 정류장 있는지 체크 (예약자 전체 - 방금 예약한사람)
@@ -418,8 +419,8 @@ body {
         					theIterated = generateSeries(bookedDprt[eff], bookedArrv[eff]);
         					comparisonTarget = generateSeries(bookedDprt[bookedDprt.length-1], bookedArrv[bookedArrv.length-1]);
         				}
-        				// 겹치면
-        				if(overlapCheck(theIterated, comparisonTarget)){
+        				// 겹치면, 2명이상이면
+        				if(overlapCheck(theIterated, comparisonTarget) && bookingList.length>1){
         					// 자동 거부, 예약정보 삭제, 내역으로 이동, 순번 트리오에서 지우기
         					console.log("Automatically rejected due to the fact that the passengers have overlapping shits with others.");
         					$.ajax({

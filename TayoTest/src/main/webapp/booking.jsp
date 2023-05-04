@@ -321,6 +321,8 @@
         // 양 방향 버스 분리
         let ascBuses = [];
         let descBuses = [];
+        // test
+        let buses = [];
         // 예약 신호 보낼 타겟 버스
         let targetBus = null;
 
@@ -375,11 +377,11 @@
                     allNodes = resp002;
                     allNodes.response.body.items.item.forEach(function (elem) {
                         if (elem.nodeid == iAmBabo.dprtnode) {
-                            dprtNodeOrder = elem.nodeord;
+                            dprtNodeOrder = parseInt(elem.nodeord);
                             // use try catch to break from the loop / PRIORITY : LOW
                         }
                         if(elem.nodeid == iAmBabo.arrvnode){
-                        	arrvNodeOrder = elem.nodeord;
+                        	arrvNodeOrder = parseInt(elem.nodeord);
                         }
                     });
                     
@@ -408,32 +410,48 @@
                     let distArr = []; // 거리 비교용
                     // 먼저 버스들 방향별로 추려내기
                     allBuses.forEach(function (elem) {
-                        if (numOfAllNodes / 2 < elem.nodeord) {
+                  /*      if (numOfAllNodes / 2 < parseInt(elem.nodeord)) {
                             ascBuses.push(elem);
                         } else {
                             descBuses.push(elem);
-                        }
-                     //   distArr.push(Math.abs(elem.nodeord - dprtNodeOrder)); 중복인듯 !! 수정코드!!!!
+                        }   */
+                    	distArr.push(Math.abs(parseInt(elem.nodeord) - dprtNodeOrder));
                     });
+                   	let targetIdx = distArr.indexOf(Math.min(...distArr));
+                   	console.log("Target Index: "+ targetIdx);
+           //       	allBuses.forEach(function (elem) {
+                   	if(parseInt(allBuses[targetIdx].nodeord) < dprtNodeOrder){
+                   		targetBus = allBuses[targetIdx];
+                 	} /* else if(dprtNodeDirection == "Descending" && parseInt(allBuses[targetIdx].nodeord) < dprtNodeOrder){
+                       	targetBus = descBuses[targetIdx];
+                       }*/  else{
+                     	console.log("버스가 지나간듯?");
+                  	}   
+                     //   distArr.push(Math.abs(elem.nodeord - dprtNodeOrder)); 중복인듯 !! 수정코드!!!!
+           //         });
                     // 출발지 정류장과 맞는 방향 버스들중에서 비교
-                    if (dprtNodeDirection == "Ascending") {
+                
+              /*      if (dprtNodeDirection == "Ascending") {
                         ascBuses.forEach(function (elem) {
-                            distArr.push(Math.abs(elem.nodeord - dprtNodeOrder));
+                            distArr.push(Math.abs(parseInt(elem.nodeord) - dprtNodeOrder));
                         });
                     } else if(dprtNodeDirection == "Descending"){
                         descBuses.forEach(function (elem) {
-                            distArr.push(Math.abs(elem.nodeord - dprtNodeOrder));
+                            distArr.push(Math.abs(parseInt(elem.nodeord) - dprtNodeOrder));
                         });
-                    }
+                    } */
 
                     // 최소값의 인덱스 구함 그럴거임 ㄴㄻㄴㅇㄻㄴㅇㄻㄴㅇㄹ
-                    let targetIdx = distArr.indexOf(Math.min(...distArr));
+                //    let targetIdx = distArr.indexOf(Math.min(...distArr));
                     // 대망으 그놈 ㅇㅎㅇㅎㅇㅎㄹㅇㅇㅎ
-                    if(dprtNodeDirection == "Ascending" && ascBuses[targetIdx] < dprtNodeOrder){
+                    console.log("방향:"+dprtNodeDirection);
+                /*    if(dprtNodeDirection == "Ascending" && parseInt(ascBuses[targetIdx].nodeord) < dprtNodeOrder){
 	                    targetBus = ascBuses[targetIdx];
-                    }else if(dprtNodeDirection == "Descending" && descBuses[targetIdx] < dprtNodeOrder){
+                    }else if(dprtNodeDirection == "Descending" && parseInt(descBuses[targetIdx].nodeord) < dprtNodeOrder){
                     	targetBus = descBuses[targetIdx];
-                    }
+                    }else{
+                    	console.log("버스가 지나간듯?");
+                    }*/
                     console.log("Target Bus Found!!!!" + targetBus);
                     console.log("4th procedure : send the vehicleno and booking info to a servlet for packaging and get redirected to the waiting area.");
                     return $.ajax({
