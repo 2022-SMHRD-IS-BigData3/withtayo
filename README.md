@@ -33,7 +33,7 @@
 #### 📌 ERD
 
 ## USER INTERFACE
-(IMAGE)
+(IMAGE) --화면 그림 삽입--
 BLA BLA BLA BLA
 (IMAGE)
 BLA BLA BLA BLA
