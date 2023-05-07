@@ -18,13 +18,14 @@
     - 기능5
 
 ## TECH STACK
--구분  |	내용
-사용언어| 	
-라이브러리| 	
-개발도구 	|
-서버환경 	|
-데이터베이스| 	
-협업도구 	| 
+|구분  |	내용|
+|---|---|
+|사용언어| 	|
+|라이브러리| 	|
+|개발도구 	||
+|서버환경 	||
+|데이터베이스| |	
+|협업도구 	| |
 
 ## SYSTEM ARCHITECTURE
 #### 📌 SERVICES ARCHITECTURE
@@ -40,9 +41,10 @@ BLA BLA BLA BLA
 일정/고객센터
 
 ## THE FAM
-- HC K |	DH S |	EH B |	DH K |	MC W
-Fullstack |	Fullstack |	Fullstack |	Fullstack |	Fullstack
-github |	github |	github |	github |	github
+| HC K |	DH S |	EH B |	DH K |	MC W|
+|---| ---|---|---|---|
+|Fullstack |	Fullstack |	Fullstack |	Fullstack |	Fullstack|
+|github |	github |	github |	github |	github|
 
 ## Assessment for posterity
 개념: 문제 해결을 위해 문제의 원인을 논리적이고 체계적으로 찾는 일이며 제품이나 프로세스의 운영을 재개 프로젝트 진행하는 동안 발생했던 이슈 중 가장 기억에 남았던 문제와 해결 프로세스 나열(2~5가지 정도)
