@@ -20,12 +20,12 @@
 ## TECH STACK
 |구분  |	내용|
 |---|---|
-|사용언어| 	|
-|라이브러리| 	|
-|개발도구 	||
-|서버환경 	||
-|데이터베이스| |	
-|협업도구 	| |
+|사용언어| xx	|
+|라이브러리| xx	|
+|개발도구 	| yy |
+|서버환경 	| yy |
+|데이터베이스| zz |	
+|협업도구 	| zz |
 
 ## SYSTEM ARCHITECTURE
 #### 📌 SERVICES ARCHITECTURE
