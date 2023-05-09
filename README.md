@@ -69,6 +69,8 @@
 ![image](https://user-images.githubusercontent.com/129911634/237023281-d58ba01d-6e50-4d20-b11e-88653c2d0898.png)
 <br>
 #### 📌 FLOW
+![image](https://user-images.githubusercontent.com/129911634/237023570-0c973e90-a454-4277-a772-1331417ccb2b.png)
+<br>
 #### 📌 ERD
 
 ## USER INTERFACE
