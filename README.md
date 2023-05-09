@@ -66,6 +66,8 @@
 
 ## SYSTEM ARCHITECTURE
 #### 📌 SERVICES ARCHITECTURE
+![image](https://user-images.githubusercontent.com/129911634/237023281-d58ba01d-6e50-4d20-b11e-88653c2d0898.png)
+<br>
 #### 📌 FLOW
 #### 📌 ERD
 
