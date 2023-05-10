@@ -13,7 +13,7 @@
 ## MAJOR FUNCTIONS
     - 노선정보검색 기능
     - 승객 예약 기능
-    - 기사 예약 기능
+    - 기사 예약 대기 기능
 
 ## TECH STACK
 
@@ -84,7 +84,7 @@ BLA BLA BLA BLA
 ## THE FAM
 | HC K |	DH S |	EH B |	DH K |	MC W|
 |---| ---|---|---|---|
-|Fullstack |	Fullstack |	Fullstack |	Fullstack |	Fullstack|
+|PM |	Backend |	Frontend |	Frontend |	DBA |
 |github |	github |	github |	github |	github|
 
 ## Assessment for posterity
