@@ -74,8 +74,8 @@
 #### 📌 ERD
 
 ## USER INTERFACE
-(IMAGE) --화면 그림 삽입--
-BLA BLA BLA BLA
+![승객예약](https://github.com/2022-SMHRD-IS-BigData3/withtayo/assets/129911634/d9adfadf-bf6b-4bb3-96b7-1ea4e8192110)
+
 (IMAGE)
 BLA BLA BLA BLA
 (IMAGE)
