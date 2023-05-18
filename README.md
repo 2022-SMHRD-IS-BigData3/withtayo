@@ -75,7 +75,9 @@
 
 ## USER INTERFACE
 ![승객예약](https://github.com/2022-SMHRD-IS-BigData3/withtayo/assets/129911634/d9adfadf-bf6b-4bb3-96b7-1ea4e8192110)
-
+<br>
+![예약성공](https://github.com/2022-SMHRD-IS-BigData3/withtayo/assets/129911634/2966b910-3c89-4c40-9a33-41fa75d61ef8)
+<br>
 (IMAGE)
 BLA BLA BLA BLA
 (IMAGE)
