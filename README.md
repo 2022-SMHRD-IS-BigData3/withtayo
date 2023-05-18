@@ -74,8 +74,9 @@
 #### 📌 ERD
 
 ## USER INTERFACE
-![승객예약](https://github.com/2022-SMHRD-IS-BigData3/withtayo/assets/129911634/d9adfadf-bf6b-4bb3-96b7-1ea4e8192110)
-![예약성공](https://github.com/2022-SMHRD-IS-BigData3/withtayo/assets/129911634/2966b910-3c89-4c40-9a33-41fa75d61ef8)
+![승객노선검색](https://github.com/2022-SMHRD-IS-BigData3/withtayo/assets/129911634/b90af5f7-b87e-45d9-854b-c3e70e22616a) ![노선검색2](https://github.com/2022-SMHRD-IS-BigData3/withtayo/assets/129911634/314fc777-42b6-4e0f-84ff-39047d8a3de1)
+
+
 <br>
 (IMAGE)
 BLA BLA BLA BLA
