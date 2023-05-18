@@ -74,7 +74,7 @@
 #### 📌 ERD
 
 ## USER INTERFACE
-![승객노선검색](https://github.com/2022-SMHRD-IS-BigData3/withtayo/assets/129911634/b90af5f7-b87e-45d9-854b-c3e70e22616a) ![노선검색2](https://github.com/2022-SMHRD-IS-BigData3/withtayo/assets/129911634/314fc777-42b6-4e0f-84ff-39047d8a3de1) ![노선검색3](https://github.com/2022-SMHRD-IS-BigData3/withtayo/assets/129911634/1ea603a4-6afe-41a8-b978-4e94948ef8a9)
+![승객노선검색](https://github.com/2022-SMHRD-IS-BigData3/withtayo/assets/129911634/b90af5f7-b87e-45d9-854b-c3e70e22616a) ![노선검색2](https://github.com/2022-SMHRD-IS-BigData3/withtayo/assets/129911634/314fc777-42b6-4e0f-84ff-39047d8a3de1)![노선검색3](https://github.com/2022-SMHRD-IS-BigData3/withtayo/assets/129911634/1ea603a4-6afe-41a8-b978-4e94948ef8a9)
 ![노선검색4](https://github.com/2022-SMHRD-IS-BigData3/withtayo/assets/129911634/a31f8de7-7751-40cd-ae30-699ad0a8e178) ![노선검색5](https://github.com/2022-SMHRD-IS-BigData3/withtayo/assets/129911634/3403f9ce-19cd-4b3f-8b65-4b6f917ad1af)
 
 
